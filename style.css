@@ -66,7 +66,7 @@ html, body {
   padding: 96px 20px 40px; /* top padding accounts for fixed topbar */
   background-image:
     linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.75)),
-    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80");
+    url("https://images.unsplash.com/photo-1544551763-ced2e4e8e5f3?auto=format&fit=crop&w=2400&q=80");
   background-size: cover;
   background-position: center;
 }
@@ -81,10 +81,10 @@ html, body {
 }
 
 h1 {
-  margin: 0 0 10px;
-  font-size: clamp(42px, 6vw, 78px);
-  line-height: 1.02;
-  letter-spacing: -0.5px;
+  margin: 0 0 12px;
+  font-size: clamp(56px, 8vw, 110px);
+  line-height: 1.0;
+  letter-spacing: -0.8px;
 }
 
 .subtitle {
