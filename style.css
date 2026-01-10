@@ -303,7 +303,7 @@ h1 {
 .cards-3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 14px;
 }
 
 .sol-card {
