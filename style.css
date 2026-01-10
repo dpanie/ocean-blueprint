@@ -275,7 +275,7 @@ h1 {
 .solutions-hero p {
   margin: 8px 0 0;
   color: rgba(255,255,255,0.78);
-  font-size: 14px;
+  font-size: 14px !important;
 }
 
 .section {
