@@ -385,4 +385,156 @@ h1 {
   }
 }
 
+/* TAKE ACTION PAGE */
+
+.action-hero{
+  margin-top: 72px; /* accounts for fixed topbar */
+  border-radius: 18px;
+  overflow: hidden;
+  min-height: 260px;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.70)),
+    url("assets/PLACEHOLDER-action-banner.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.action-hero-inner{
+  text-align: center;
+  padding: 40px 18px;
+}
+
+.action-hero h1{
+  font-size: clamp(44px, 7vw, 80px);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.6px;
+}
+
+.cta-wide{
+  display: inline-flex;
+  margin-top: 18px;
+  padding: 14px 22px;
+  min-width: min(900px, 78vw);
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.94);
+  color: #0b0b0b;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+}
+
+.cta-wide:hover{
+  transform: translateY(-1px);
+}
+
+.action-section{
+  margin-top: 26px;
+}
+
+.action-title{
+  font-size: clamp(28px, 3.2vw, 40px);
+  margin: 0 0 18px;
+}
+
+.action-title .you{
+  color: rgba(120, 190, 255, 0.95);
+}
+
+.action-grid{
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 14px 28px;
+  align-items: start;
+}
+
+.action-item h3{
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  margin: 0 0 6px;
+}
+
+.action-item p{
+  margin: 0 0 10px;
+  color: rgba(255,255,255,0.80);
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+.action-panels{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  margin-top: 12px;
+}
+
+.panel{
+  text-align: center;
+}
+
+.panel-img{
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+}
+
+.panel-heading{
+  margin: 14px 0 0;
+  font-size: 28px;
+  letter-spacing: -0.3px;
+}
+
+.panel-note{
+  margin: 8px auto 0;
+  max-width: 520px;
+  color: rgba(255,255,255,0.65);
+  font-size: 12px;
+}
+
+.panel-note code{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.donate-cards{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.donate-card{
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.donate-card h3{
+  margin: 0 0 8px;
+}
+
+.donate-card p{
+  margin: 0 0 10px;
+  color: rgba(255,255,255,0.78);
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .action-grid{ grid-template-columns: 1fr; }
+  .action-panels{ grid-template-columns: 1fr; }
+  .panel-img{ height: 280px; }
+  .donate-cards{ grid-template-columns: 1fr; }
+}
+
+
 
