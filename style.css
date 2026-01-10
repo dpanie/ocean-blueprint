@@ -317,8 +317,12 @@ h1 {
   height: 140px;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   border-bottom: 1px solid rgba(255,255,255,0.10);
+  filter: none;
+  opacity: 1;
 }
+
 
 .sol-body {
   padding: 14px 14px 16px;
