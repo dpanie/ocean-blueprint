@@ -3,7 +3,12 @@
   --muted: rgba(255,255,255,0.85);
   --glass: rgba(0,0,0,0.35);
   --glass-2: rgba(0,0,0,0.55);
+  
+  --ivory: #f6f2ea;
+  --ink: #1c1c1c;
+  --ink-muted: rgba(0,0,0,0.65);
 }
+
 
 * { box-sizing: border-box; }
 
@@ -256,4 +261,62 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== OA page ivory background ===== */
+.page {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+/* ===== OA banner ===== */
+.oa-banner {
+  position: relative;
+  height: 180px;
+  margin: 0 0 24px;
+  border-radius: 18px;
+  overflow: hidden;
+  background-image:
+    url("https://images.unsplash.com/photo-1587502537745-84e9fba86e98?auto=format&fit=crop&w=2400&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+.oa-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+.oa-banner-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.oa-banner-content h1 {
+  margin: 0;
+  color: white;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -0.6px;
+}
+
+.card {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.card-title,
+.oa-text,
+.eq,
+.eq-note {
+  color: var(--ink);
+}
+
+.oa-callout {
+  background: #faf7f1;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
 
