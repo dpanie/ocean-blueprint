@@ -303,7 +303,7 @@ h1 {
 .cards-3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 18px;
 }
 
 .sol-card {
@@ -314,7 +314,7 @@ h1 {
 }
 
 .sol-img {
-  height: 440px;
+  height: 250px;
   background-size: cover;
   background-position: center;
 }
@@ -385,10 +385,4 @@ h1 {
   }
 }
 
-/* DEBUG: force solution image height */
-.sol-card .sol-img {
-  height: 280px !important;
-  background-size: cover !important;
-  background-position: center !important;
-}
 
