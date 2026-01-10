@@ -314,13 +314,11 @@ h1 {
 }
 
 .sol-img {
-  height: 240px;
-  background-size: cover;
+  height: 220px;
+  background-size: contain;   /* ⬅ shows entire image */
   background-position: center;
   background-repeat: no-repeat;
-  border-bottom: 1px solid rgba(255,255,255,0.10);
-  filter: none;
-  opacity: 1;
+  background-color: #0b0b0b;  /* fills empty space */
 }
 
 
