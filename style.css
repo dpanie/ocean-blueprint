@@ -384,3 +384,11 @@ h1 {
     height: 170px;
   }
 }
+
+/* DEBUG: force solution image height */
+.sol-card .sol-img {
+  height: 280px !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
