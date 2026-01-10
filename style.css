@@ -126,3 +126,113 @@ h1 {
   border-top: 1px solid rgba(255,255,255,0.10);
   color: rgba(255,255,255,0.75);
 }
+
+
+/* ===== Ocean Acidification page ===== */
+.page {
+  min-height: 100vh;
+  padding: 96px 20px 40px; /* accounts for fixed topbar */
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-head {
+  margin-bottom: 18px;
+}
+
+.page-title {
+  margin: 0 0 8px;
+  font-size: clamp(34px, 4.5vw, 56px);
+  line-height: 1.06;
+  letter-spacing: -0.6px;
+}
+
+.page-subtitle {
+  margin: 0;
+  color: rgba(255,255,255,0.75);
+  font-size: clamp(16px, 2vw, 18px);
+}
+
+.oa-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.card-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: rgba(255,255,255,0.9);
+}
+
+.oa-diagram {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.oa-text {
+  margin: 0 0 12px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.55;
+}
+
+.oa-callout {
+  margin-top: 10px;
+  padding: 12px 12px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.9);
+}
+
+.eq-card {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.equations {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  padding: 6px 0 10px;
+}
+
+.eq {
+  width: min(780px, 100%);
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.92);
+  font-size: 18px;
+}
+
+.eq.subtle {
+  color: rgba(255,255,255,0.75);
+  font-size: 16px;
+}
+
+.eq-note {
+  margin: 6px 0 0;
+  color: rgba(255,255,255,0.70);
+  font-size: 14px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .oa-grid {
+    grid-template-columns: 1fr;
+  }
+}
