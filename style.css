@@ -245,31 +245,4 @@ h1 {
   }
 }
 
-/* ===== OA top banner (final) ===== */
-.oa-banner {
-  height: 160px;
-  border-radius: 18px;
-  overflow: hidden;
-
-  /* Put the image + dark overlay in ONE place */
-  background:
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url("https://images.unsplash.com/photo-1587502537745-84e9fba86e98?auto=format&fit=crop&w=2400&q=80");
-
-  background-size: cover;
-  background-position: center;
-
-  display: flex;
-  align-items: center;
-  padding: 18px 22px;
-  margin-bottom: 24px;
-}
-
-.oa-banner-title {
-  margin: 0;
-  color: #fff;
-  font-size: clamp(26px, 4vw, 42px);
-  letter-spacing: -0.6px;
-  font-weight: 800;
-}
 
