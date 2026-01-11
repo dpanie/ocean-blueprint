@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>New Page | Ocean Blueprint</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">Ocean Blueprint</div>
+    <nav class="nav">
+      <a class="nav-btn" href="index.html">Home</a>
+      <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
+      <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
+      <a class="nav-btn" href="solutions.html">Solutions</a>
+      <a class="nav-btn" href="take-action.html">Take action</a>
+      <!-- add your new page here -->
+      <a class="nav-btn" href="new-page.html">New page</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <!-- HERO / BANNER -->
+    <section class="action-hero" style='background:
+      linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.78)),
+      url("assets/PLACEHOLDER-new-banner.jpg");
+      background-size: cover;
+      background-position: center;'>
+      <div class="action-hero-inner">
+        <h1>New Page Title</h1>
+        <p style="margin:10px 0 0; color: rgba(255,255,255,0.78); font-size:14px;">
+          Short subheading goes here.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="section" style="margin-top: 18px;">
+      <div class="card" style="padding: 18px;">
+        <h2 class="card-title" style="margin:0 0 10px;">Section title</h2>
+        <p style="margin:0; color: rgba(255,255,255,0.82); line-height:1.6;">
+          Your content here.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Ocean Blueprint</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
