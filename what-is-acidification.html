@@ -20,27 +20,30 @@
   </header>
 
   <main class="page">
-
-    <!-- BANNER -->
-    <section class="oa-banner">
-      <h1 class="oa-banner-title">What is Ocean Acidification?</h1>
+    <!-- HERO (Act NOW style) -->
+    <section class="oa-hero">
+      <div class="oa-hero-inner">
+        <h1>What is Ocean Acidification?</h1>
+        <p>More CO₂ in seawater → more H⁺ → lower pH → less carbonate for shells.</p>
+      </div>
     </section>
 
-    <!-- TOP GRID -->
+    <!-- TWO-COLUMN CONTENT -->
     <section class="oa-grid">
-      <!-- LEFT: IMAGE DIAGRAM -->
-      <div class="card card-tight">
+      <!-- LEFT: IMAGE (local file you upload) -->
+      <div class="card">
         <img
-          class="oa-diagram-img"
+          class="oa-img"
           src="assets/images/oa-diagram.jpg"
           alt="Ocean acidification chemistry diagram"
+          loading="lazy"
         />
         <p class="oa-img-note">
-          Replace <code>assets/images/ocean-acidification.jpg</code> with your own file name.
+          Replace <code>assets/images/ocean-acidification.jpg</code> with your actual filename.
         </p>
       </div>
 
-      <!-- RIGHT: SHORT TEXT -->
+      <!-- RIGHT: TEXT -->
       <div class="card">
         <p class="oa-text">
           Ocean acidification is a chemical chain reaction triggered by excess carbon dioxide (CO₂).
@@ -60,9 +63,9 @@
       </div>
     </section>
 
-    <!-- EQUATIONS -->
+    <!-- REACTIONS -->
     <section class="card eq-card">
-      <h2 class="card-title">Key reactions</h2>
+      <h2 class="eq-title">Key reactions</h2>
 
       <div class="equations">
         <div class="eq">CO<sub>2</sub> + H<sub>2</sub>O ⇌ H<sub>2</sub>CO<sub>3</sub></div>
@@ -76,7 +79,6 @@
         These equilibria shift as CO₂ rises — increasing H⁺ and reducing available CO₃²⁻.
       </p>
     </section>
-
   </main>
 
   <footer class="footer">
