@@ -137,112 +137,74 @@ h1 {
 
 
 /* ===== Ocean Acidification page ===== */
-.page {
-  min-height: 100vh;
-  padding: 96px 20px 40px; /* accounts for fixed topbar */
-  max-width: 1100px;
-  margin: 0 auto;
-}
 
-.page-head {
-  margin-bottom: 18px;
-}
-
-.page-title {
-  margin: 0 0 8px;
-  font-size: clamp(34px, 4.5vw, 56px);
-  line-height: 1.06;
-  letter-spacing: -0.6px;
-}
-
-.page-subtitle {
-  margin: 0;
-  color: rgba(255,255,255,0.75);
-  font-size: clamp(16px, 2vw, 18px);
-}
-
-.oa-grid {
+.oa-grid{
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 16px;
   margin-top: 16px;
 }
 
-.card {
+.card{
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.14);
   border-radius: 18px;
   padding: 18px;
 }
 
-.card-title {
-  margin: 0 0 12px;
-  font-size: 18px;
-  color: rgba(255,255,255,0.9);
+.card-tight{
+  padding: 14px;
 }
 
-.oa-diagram {
+.oa-diagram-img{
   width: 100%;
-  height: auto;
+  height: 100%;
+  max-height: 520px;
+  object-fit: contain;   /* shows the ENTIRE image */
   display: block;
   border-radius: 14px;
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.22);
   border: 1px solid rgba(255,255,255,0.10);
 }
 
-.oa-text {
+.oa-img-note{
+  margin: 10px 2px 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+}
+
+.oa-img-note code{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.oa-text{
   margin: 0 0 12px;
   color: rgba(255,255,255,0.82);
   line-height: 1.55;
 }
 
-.oa-callout {
+.oa-callout{
   margin-top: 10px;
-  padding: 12px 12px;
+  padding: 12px;
   border-radius: 14px;
   background: rgba(0,0,0,0.30);
   border: 1px solid rgba(255,255,255,0.10);
   color: rgba(255,255,255,0.9);
 }
 
-.eq-card {
+/* equations (keep yours if already present) */
+.eq-card{
   margin-top: 16px;
   text-align: center;
 }
 
-.equations {
-  display: grid;
-  gap: 10px;
-  justify-items: center;
-  padding: 6px 0 10px;
-}
-
-.eq {
-  width: min(780px, 100%);
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(0,0,0,0.28);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.92);
-  font-size: 18px;
-}
-
-.eq.subtle {
-  color: rgba(255,255,255,0.75);
-  font-size: 16px;
-}
-
-.eq-note {
-  margin: 6px 0 0;
-  color: rgba(255,255,255,0.70);
-  font-size: 14px;
-}
-
 /* Mobile */
-@media (max-width: 900px) {
-  .oa-grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 900px){
+  .oa-grid{ grid-template-columns: 1fr; }
+  .oa-diagram-img{ max-height: 420px; }
 }
 
 
