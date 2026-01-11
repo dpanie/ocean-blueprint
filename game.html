@@ -3,8 +3,233 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>New Page | Ocean Blueprint</title>
+  <title>Quiz Game | Ocean Blueprint</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Page-specific styles (safe, scoped) -->
+  <style>
+    .quiz-hero{
+      margin-top: 72px; /* fixed topbar */
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.78)),
+        url("assets/PLACEHOLDER-quiz-banner.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .quiz-hero-inner{
+      text-align: center;
+      padding: 38px 18px;
+      max-width: 900px;
+    }
+
+    .quiz-hero h1{
+      margin: 0;
+      font-size: clamp(34px, 5vw, 64px);
+      letter-spacing: -0.8px;
+    }
+
+    .quiz-hero p{
+      margin: 10px 0 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .quiz-wrap{
+      margin-top: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .quiz-head{
+      display: grid;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .quiz-head h2{
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .quiz-head .note{
+      margin: 0;
+      color: rgba(255,255,255,0.70);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .quiz-section{
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .quiz-section-title{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      color: rgba(255,255,255,0.85);
+      text-transform: uppercase;
+    }
+
+    .q{
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.10);
+      margin-bottom: 12px;
+    }
+
+    .q-title{
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.4;
+    }
+
+    .answers{
+      display: grid;
+      gap: 8px;
+    }
+
+    .opt{
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      cursor: pointer;
+    }
+
+    .opt:hover{
+      border-color: rgba(120,190,255,0.45);
+    }
+
+    .opt input{
+      margin-top: 3px;
+      accent-color: rgba(120,190,255,0.95);
+    }
+
+    .opt span{
+      font-size: 13px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.45;
+    }
+
+    .quiz-actions{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn:hover{
+      border-color: rgba(120,190,255,0.55);
+    }
+
+    .btn-primary{
+      background: rgba(255,255,255,0.92);
+      color: #0b0b0b;
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .btn-primary:hover{
+      transform: translateY(-1px);
+    }
+
+    .result{
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.35);
+      display: none;
+    }
+
+    .result.show{
+      display: block;
+    }
+
+    .result-top{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: baseline;
+    }
+
+    .score{
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+
+    .badge{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.85);
+    }
+
+    .result p{
+      margin: 10px 0 0;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.55;
+      font-size: 13px;
+    }
+
+    .warn{
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.82);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .small{
+      margin-top: 10px;
+      color: rgba(255,255,255,0.60);
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px){
+      .quiz-wrap{ padding: 14px; }
+      .q{ padding: 12px; }
+    }
+  </style>
 </head>
 
 <body>
@@ -16,35 +241,227 @@
       <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
       <a class="nav-btn" href="solutions.html">Solutions</a>
       <a class="nav-btn" href="take-action.html">Take action</a>
-      <!-- add your new page here -->
-      <a class="nav-btn" href="new-page.html">New page</a>
+      <a class="nav-btn" href="game.html">Game</a>
     </nav>
   </header>
 
   <main class="page">
-    <!-- HERO / BANNER -->
-    <section class="action-hero" style='background:
-      linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.78)),
-      url("assets/PLACEHOLDER-new-banner.jpg");
-      background-size: cover;
-      background-position: center;'>
-      <div class="action-hero-inner">
-        <h1>New Page Title</h1>
-        <p style="margin:10px 0 0; color: rgba(255,255,255,0.78); font-size:14px;">
-          Short subheading goes here.
+
+    <section class="quiz-hero">
+      <div class="quiz-hero-inner">
+        <h1>How Much Do <span style="color: rgba(120,190,255,0.95);">YOU</span> Contribute to Ocean Acidification?</h1>
+        <p>
+          Choose one answer per question. Add up your points.
+          Don’t rationalize. Pick what you actually do.
         </p>
       </div>
     </section>
 
-    <!-- CONTENT -->
-    <section class="section" style="margin-top: 18px;">
-      <div class="card" style="padding: 18px;">
-        <h2 class="card-title" style="margin:0 0 10px;">Section title</h2>
-        <p style="margin:0; color: rgba(255,255,255,0.82); line-height:1.6;">
-          Your content here.
+    <section class="quiz-wrap">
+      <div class="quiz-head">
+        <h2>Quick reality check</h2>
+        <p class="note">
+          This isn’t about guilt. It’s about honesty → then action.
+          If you leave questions blank, you’re not “busy,” you’re dodging.
         </p>
       </div>
+
+      <form id="quiz">
+
+        <!-- Transportation -->
+        <div class="quiz-section">
+          <div class="quiz-section-title">Transportation (biggest personal CO₂ driver)</div>
+
+          <div class="q" data-q="q1">
+            <p class="q-title">1. How do you usually commute short distances (&lt;3 miles)?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q1" value="0"><span>A. Walk / bike (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q1" value="1"><span>B. Public transport (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q1" value="2"><span>C. Car with others (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q1" value="3"><span>D. Car alone (3 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q2">
+            <p class="q-title">2. How many flights do you take per year?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q2" value="0"><span>A. 0–1 (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q2" value="2"><span>B. 2–3 (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q2" value="3"><span>C. 4–6 (3 pts)</span></label>
+              <label class="opt"><input type="radio" name="q2" value="4"><span>D. 7+ (4 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q3">
+            <p class="q-title">3. What type of car do you mostly ride in?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q3" value="0"><span>A. No car / EV (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q3" value="1"><span>B. Hybrid (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q3" value="2"><span>C. Small gas car (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q3" value="3"><span>D. SUV / truck (3 pts)</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diet -->
+        <div class="quiz-section">
+          <div class="quiz-section-title">Diet (direct CO₂ + indirect ocean impact)</div>
+
+          <div class="q" data-q="q4">
+            <p class="q-title">4. How often do you eat red meat?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q4" value="0"><span>A. Never (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q4" value="1"><span>B. 1–2× / week (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q4" value="2"><span>C. 3–5× / week (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q4" value="3"><span>D. Daily (3 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q5">
+            <p class="q-title">5. How often do you eat seafood?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q5" value="0"><span>A. Sustainably sourced only (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q5" value="1"><span>B. Occasionally, unsure source (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q5" value="2"><span>C. Often, no attention to source (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q5" value="3"><span>D. Rarely think about it at all (3 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q6">
+            <p class="q-title">6. How much food do you waste?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q6" value="0"><span>A. Almost none (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q6" value="1"><span>B. Some leftovers weekly (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q6" value="2"><span>C. Throw food away often (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q6" value="3"><span>D. Don’t track it at all (3 pts)</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Energy & Consumption -->
+        <div class="quiz-section">
+          <div class="quiz-section-title">Energy &amp; consumption</div>
+
+          <div class="q" data-q="q7">
+            <p class="q-title">7. How is your home powered?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q7" value="0"><span>A. Renewable electricity (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q7" value="1"><span>B. Partial renewable mix (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q7" value="2"><span>C. Mostly fossil fuel (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q7" value="3"><span>D. I don’t know / don’t care (3 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q8">
+            <p class="q-title">8. How often do you buy new clothes?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q8" value="0"><span>A. Rarely / secondhand (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q8" value="1"><span>B. Seasonally (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q8" value="2"><span>C. Monthly (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q8" value="3"><span>D. Fast fashion regularly (3 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q9">
+            <p class="q-title">9. How long are your showers?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q9" value="0"><span>A. &lt;5 minutes (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q9" value="1"><span>B. 5–10 minutes (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q9" value="2"><span>C. 10–20 minutes (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q9" value="3"><span>D. I lose track of time (3 pts)</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Waste & Pollution -->
+        <div class="quiz-section">
+          <div class="quiz-section-title">Waste &amp; pollution</div>
+
+          <div class="q" data-q="q10">
+            <p class="q-title">10. How consistently do you recycle correctly?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q10" value="0"><span>A. Always (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q10" value="1"><span>B. Usually (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q10" value="2"><span>C. Sometimes (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q10" value="3"><span>D. Rarely / never (3 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q11">
+            <p class="q-title">11. What do you do with chemicals (paint, cleaners, oil)?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q11" value="0"><span>A. Proper disposal (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q11" value="1"><span>B. Try to be careful (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q11" value="2"><span>C. Occasionally down the drain (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q11" value="3"><span>D. Down the drain / trash (3 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q12">
+            <p class="q-title">12. How often do you use single-use plastics?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q12" value="0"><span>A. Almost never (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q12" value="1"><span>B. Sometimes (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q12" value="2"><span>C. Often (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q12" value="3"><span>D. Constantly (3 pts)</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Awareness & Action -->
+        <div class="quiz-section">
+          <div class="quiz-section-title">Awareness &amp; action</div>
+
+          <div class="q" data-q="q13">
+            <p class="q-title">13. How often do you think about ocean acidification?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q13" value="0"><span>A. Regularly (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q13" value="1"><span>B. Occasionally (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q13" value="2"><span>C. Rarely (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q13" value="3"><span>D. Never (3 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q14">
+            <p class="q-title">14. Have you ever taken action to reduce your CO₂ footprint?</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q14" value="0"><span>A. Multiple actions (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q14" value="1"><span>B. One or two (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q14" value="2"><span>C. Thought about it (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q14" value="3"><span>D. No (3 pts)</span></label>
+            </div>
+          </div>
+
+          <div class="q" data-q="q15">
+            <p class="q-title">15. When faced with climate information, your reaction is:</p>
+            <div class="answers">
+              <label class="opt"><input type="radio" name="q15" value="0"><span>A. Change behavior (0 pts)</span></label>
+              <label class="opt"><input type="radio" name="q15" value="1"><span>B. Share / talk about it (1 pt)</span></label>
+              <label class="opt"><input type="radio" name="q15" value="2"><span>C. Feel concerned but passive (2 pts)</span></label>
+              <label class="opt"><input type="radio" name="q15" value="3"><span>D. Ignore / dismiss (3 pts)</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-actions">
+          <button class="btn btn-primary" type="button" id="calc">Calculate score</button>
+          <button class="btn" type="button" id="reset">Reset</button>
+          <button class="btn" type="button" id="share" disabled>Share score</button>
+        </div>
+
+        <div class="result" id="result">
+          <div class="result-top">
+            <div class="score" id="scoreText">Score: 0</div>
+            <div class="badge" id="badgeText">—</div>
+          </div>
+          <p id="msg"></p>
+          <div class="warn" id="nextStep"></div>
+          <div class="small" id="meta"></div>
+        </div>
+
+      </form>
     </section>
+
   </main>
 
   <footer class="footer">
@@ -53,6 +470,124 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const quiz = document.getElementById("quiz");
+    const calcBtn = document.getElementById("calc");
+    const resetBtn = document.getElementById("reset");
+    const shareBtn = document.getElementById("share");
+
+    const result = document.getElementById("result");
+    const scoreText = document.getElementById("scoreText");
+    const badgeText = document.getElementById("badgeText");
+    const msg = document.getElementById("msg");
+    const nextStep = document.getElementById("nextStep");
+    const meta = document.getElementById("meta");
+
+    const questionNames = Array.from({length: 15}, (_, i) => `q${i+1}`);
+
+    function getScore() {
+      let total = 0;
+      const missing = [];
+
+      for (const name of questionNames) {
+        const chosen = quiz.querySelector(`input[name="${name}"]:checked`);
+        if (!chosen) {
+          missing.push(name);
+          continue;
+        }
+        total += Number(chosen.value);
+      }
+
+      return { total, missing };
+    }
+
+    function rating(total){
+      if (total <= 10) {
+        return {
+          badge: "Ocean Ally (0–10)",
+          text: "You’re actively reducing acidification pressure. Keep going — and lead others.",
+          step: "Next step: pick ONE thing you’ll change this week (transport, diet, energy, waste). Make it measurable."
+        };
+      }
+      if (total <= 20) {
+        return {
+          badge: "Silent Contributor (11–20)",
+          text: "You’re part of the problem more than you think. Fixable. Start now.",
+          step: "Next step: choose 2 high-impact swaps: fewer flights / fewer car trips / less red meat. Stop pretending it’s complicated."
+        };
+      }
+      if (total <= 30) {
+        return {
+          badge: "High-Impact Polluter (21–30)",
+          text: "Your lifestyle directly accelerates ocean chemistry collapse.",
+          step: "Next step: make a real cut: reduce flights, reduce red meat, and stop fast fashion. Anything else is cosmetic."
+        };
+      }
+      return {
+        badge: "Acidification Accelerator (31+)",
+        text: "Your choices actively worsen ocean conditions. No excuses left.",
+        step: "Next step: you need structural change (transport + diet + consumption). Start with the biggest lever you control today."
+      };
+    }
+
+    calcBtn.addEventListener("click", () => {
+      const { total, missing } = getScore();
+
+      // harsh but useful: don’t allow scoring if they skipped
+      if (missing.length) {
+        result.classList.add("show");
+        scoreText.textContent = "Score: —";
+        badgeText.textContent = "Incomplete";
+        msg.textContent = "You skipped questions. That makes your score meaningless.";
+        nextStep.textContent = "Finish all 15. If you can’t commit to 60 seconds of honesty, you’re not ready for “solutions.”";
+        meta.textContent = `Missing: ${missing.join(", ")}`;
+        shareBtn.disabled = true;
+
+        // scroll to first missing question
+        const first = document.querySelector(`.q[data-q="${missing[0]}"]`);
+        if (first) first.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
+      const r = rating(total);
+      result.classList.add("show");
+      scoreText.textContent = `Score: ${total}`;
+      badgeText.textContent = r.badge;
+      msg.textContent = r.text;
+      nextStep.textContent = r.step;
+      meta.textContent = "Be honest: your score reflects habits, not your intentions.";
+      shareBtn.disabled = false;
+
+      // scroll result into view
+      result.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    resetBtn.addEventListener("click", () => {
+      quiz.reset();
+      result.classList.remove("show");
+      shareBtn.disabled = true;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    shareBtn.addEventListener("click", async () => {
+      const { total, missing } = getScore();
+      if (missing.length) return;
+
+      const r = rating(total);
+      const text = `I scored ${total} on the Ocean Acidification quiz: ${r.badge}. Take it: ${window.location.href}`;
+
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: "Ocean Acidification Quiz", text, url: window.location.href });
+        } else {
+          await navigator.clipboard.writeText(text);
+          shareBtn.textContent = "Copied!";
+          setTimeout(() => shareBtn.textContent = "Share score", 1200);
+        }
+      } catch (e) {
+        // ignore
+      }
+    });
   </script>
 </body>
 </html>
