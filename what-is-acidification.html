@@ -1,108 +1,90 @@
-/* ===== Ocean Acidification page ===== */
-.page {
-  min-height: 100vh;
-  padding: 96px 20px 40px; /* accounts for fixed topbar */
-  max-width: 1100px;
-  margin: 0 auto;
-}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What is Ocean Acidification? | Ocean Blueprint</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-.page-head {
-  margin-bottom: 18px;
-}
+<body>
+  <header class="topbar">
+    <div class="brand">Ocean Blueprint</div>
+    <nav class="nav">
+      <a class="nav-btn" href="index.html">Home</a>
+      <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
+      <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
+      <a class="nav-btn" href="solutions.html">Solutions</a>
+      <a class="nav-btn" href="take-action.html">Take action</a>
+    </nav>
+  </header>
 
-.page-title {
-  margin: 0 0 8px;
-  font-size: clamp(34px, 4.5vw, 56px);
-  line-height: 1.06;
-  letter-spacing: -0.6px;
-}
+  <main class="page">
 
-.page-subtitle {
-  margin: 0;
-  color: rgba(255,255,255,0.75);
-  font-size: clamp(16px, 2vw, 18px);
-}
+    <!-- BANNER -->
+    <section class="oa-banner">
+      <h1 class="oa-banner-title">What is Ocean Acidification?</h1>
+    </section>
 
-.oa-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 16px;
-  margin-top: 16px;
-}
+    <!-- TOP GRID -->
+    <section class="oa-grid">
+      <!-- LEFT: IMAGE DIAGRAM -->
+      <div class="card card-tight">
+        <img
+          class="oa-diagram-img"
+          src="assets/images/oa-diagram.jpg"
+          alt="Ocean acidification chemistry diagram"
+        />
+        <p class="oa-img-note">
+          Replace <code>assets/images/oa-diagram.jpg</code> with your own file name.
+        </p>
+      </div>
 
-.card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 18px;
-  padding: 18px;
-}
+      <!-- RIGHT: SHORT TEXT -->
+      <div class="card">
+        <p class="oa-text">
+          Ocean acidification is a chemical chain reaction triggered by excess carbon dioxide (CO₂).
+          When CO₂ dissolves into seawater, it forms carbonic acid, which releases hydrogen ions (H⁺).
+          More H⁺ means a lower pH.
+        </p>
 
-.card-title {
-  margin: 0 0 12px;
-  font-size: 18px;
-  color: rgba(255,255,255,0.9);
-}
+        <p class="oa-text">
+          The real damage isn’t just “lower pH.” Those extra H⁺ ions reduce carbonate (CO₃²⁻),
+          the building block many organisms need to make calcium carbonate shells and skeletons
+          (oysters, clams, corals, some plankton).
+        </p>
 
-.oa-diagram {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.25);
-  border: 1px solid rgba(255,255,255,0.10);
-}
+        <div class="oa-callout">
+          <strong>Bottom line:</strong> More CO₂ → more H⁺ → less CO₃²⁻ → weaker shell-building conditions.
+        </div>
+      </div>
+    </section>
 
-.oa-text {
-  margin: 0 0 12px;
-  color: rgba(255,255,255,0.82);
-  line-height: 1.55;
-}
+    <!-- EQUATIONS -->
+    <section class="card eq-card">
+      <h2 class="card-title">Key reactions</h2>
 
-.oa-callout {
-  margin-top: 10px;
-  padding: 12px 12px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.30);
-  border: 1px solid rgba(255,255,255,0.10);
-  color: rgba(255,255,255,0.9);
-}
+      <div class="equations">
+        <div class="eq">CO<sub>2</sub> + H<sub>2</sub>O ⇌ H<sub>2</sub>CO<sub>3</sub></div>
+        <div class="eq">H<sub>2</sub>CO<sub>3</sub> ⇌ H<sup>+</sup> + HCO<sub>3</sub><sup>−</sup></div>
+        <div class="eq">HCO<sub>3</sub><sup>−</sup> ⇌ H<sup>+</sup> + CO<sub>3</sub><sup>2−</sup></div>
+        <div class="eq subtle">Net: CO<sub>2</sub> + H<sub>2</sub>O ⇌ H<sup>+</sup> + HCO<sub>3</sub><sup>−</sup></div>
+        <div class="eq">CaCO<sub>3</sub> + H<sup>+</sup> ⇌ Ca<sup>2+</sup> + HCO<sub>3</sub><sup>−</sup></div>
+      </div>
 
-.eq-card {
-  margin-top: 16px;
-  text-align: center;
-}
+      <p class="eq-note">
+        These equilibria shift as CO₂ rises — increasing H⁺ and reducing available CO₃²⁻.
+      </p>
+    </section>
 
-.equations {
-  display: grid;
-  gap: 10px;
-  justify-items: center;
-  padding: 6px 0 10px;
-}
+  </main>
 
-.eq {
-  width: min(780px, 100%);
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(0,0,0,0.28);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.92);
-  font-size: 18px;
-}
+  <footer class="footer">
+    <p>© <span id="year"></span> Ocean Blueprint</p>
+  </footer>
 
-.eq.subtle {
-  color: rgba(255,255,255,0.75);
-  font-size: 16px;
-}
-
-.eq-note {
-  margin: 6px 0 0;
-  color: rgba(255,255,255,0.70);
-  font-size: 14px;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-  .oa-grid {
-    grid-template-columns: 1fr;
-  }
-}
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
