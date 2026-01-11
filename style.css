@@ -421,93 +421,266 @@ body{
 
 .badge strong{ color: rgba(255,255,255,0.95); }
 
-/* ===============================
-   WHAT IS OA PAGE
-   =============================== */
+:root{
+  --text: rgba(255,255,255,0.94);
+  --muted: rgba(255,255,255,0.72);
+  --line: rgba(255,255,255,0.14);
+  --glass: rgba(8,12,18,0.50);
+  --glass2: rgba(8,12,18,0.72);
+  --card: rgba(255,255,255,0.06);
+  --card2: rgba(255,255,255,0.04);
+  --accent: rgba(120,190,255,0.95);
+  --accent2: rgba(120,190,255,0.18);
+  --shadow: 0 24px 70px rgba(0,0,0,0.55);
+}
 
-.oa-hero{
-  padding: 26px 22px;
+*{ box-sizing: border-box; }
+html, body{ height: 100%; margin: 0; padding: 0; }
+
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: #06070a;
+}
+
+/* ===== Topbar ===== */
+
+.topbar{
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+}
+
+.brand{
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  color: rgba(255,255,255,0.95);
+}
+
+.nav{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.nav-btn{
+  text-decoration: none;
+  color: rgba(255,255,255,0.92);
+  padding: 8px 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px;
+  font-size: 14px;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+.nav-btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(120,190,255,0.55);
+}
+
+/* ===== Layout ===== */
+
+.page{
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 92px 0 56px; /* topbar space */
+}
+
+.section{
+  margin-top: 18px;
+  padding: 18px;
   border-radius: 22px;
-  border: 1px solid var(--soft);
-  background:
-    linear-gradient(to bottom, rgba(0,0,0,0.20), rgba(0,0,0,0.70)),
-    url("assets/PLACEHOLDER-oa-banner.jpg");
-  background-size: cover;
-  background-position: center;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.28);
+  backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
 }
 
+.grid{ display: grid; gap: 16px; }
+.grid-2{ grid-template-columns: 1.1fr 0.9fr; }
+@media (max-width: 900px){ .page{ width: calc(100% - 28px);} .grid-2{ grid-template-columns: 1fr; } }
+
+/* ===== Typography ===== */
+
+.h1{
+  margin: 0;
+  font-size: clamp(36px, 5vw, 62px);
+  line-height: 1.05;
+  letter-spacing: -0.9px;
+  font-weight: 950;
+}
+.h2{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+.p{
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 14.5px;
+}
+
+.kicker{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(120,190,255,0.35);
+  background: rgba(120,190,255,0.10);
+  color: rgba(255,255,255,0.92);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.kicker-dot{
+  width: 8px; height: 8px; border-radius: 999px;
+  background: var(--accent);
+}
+
+/* ===== Buttons ===== */
+
+.btn-row{ display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+.btn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(120,190,255,0.55);
+  background: rgba(120,190,255,0.10);
+}
+.btn-primary{
+  background: rgba(255,255,255,0.92);
+  color: #0b0b0b;
+  border-color: rgba(255,255,255,0.28);
+}
+.btn-primary:hover{ background: rgba(255,255,255,0.96); }
+
+/* ===== Cards ===== */
+
+.card{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  padding: 16px;
+}
+.card-title{
+  margin: 0;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: -0.2px;
+}
+.card-text{
+  margin: 8px 0 0;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.65;
+  font-size: 13.5px;
+}
+
+/* ===== WHAT IS OA: Cinematic Hero ===== */
+
+.oa-hero{
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: var(--shadow);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.82) 75%),
+    radial-gradient(900px 500px at 70% 20%, rgba(120,190,255,0.18), transparent 55%),
+    url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
 .oa-hero-inner{
+  padding: 44px 22px 28px;
+  text-align: center;
   max-width: 980px;
   margin: 0 auto;
-  text-align: center;
-  padding: 18px 0;
 }
 
 .oa-hero-sub{
-  margin-top: 10px;
-  color: rgba(255,255,255,0.78);
-  font-size: 15px;
-  line-height: 1.6;
+  margin: 12px auto 0;
+  max-width: 860px;
+  color: rgba(255,255,255,0.84);
+  font-size: 16px;
+  line-height: 1.65;
 }
 
-.oa-hero .accent{
-  color: var(--accent);
-}
+.oa-hero .accent{ color: var(--accent); }
 
 .oa-quick{
-  margin-top: 18px;
+  margin: 22px auto 0;
+  max-width: 980px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+  padding: 0 18px 26px;
 }
-
 @media (max-width: 900px){
-  .oa-quick{ grid-template-columns: 1fr; }
+  .oa-quick{ grid-template-columns: 1fr; padding: 0 18px 22px; }
 }
 
-.oa-quick .card{
-  background: rgba(0,0,0,0.30);
-}
+/* ===== Visual block ===== */
 
-.oa-figure{
-  width: 100%;
-  border-radius: 18px;
-  border: 1px solid var(--soft);
-  background: rgba(0,0,0,0.18);
+.figure{
+  border-radius: 22px;
   overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.22);
 }
 
-.oa-figure img{
+.figure img{
   width: 100%;
   height: auto;
   display: block;
 }
 
-.oa-figure-caption{
+.figure-cap{
   padding: 10px 12px 12px;
+  border-top: 1px solid rgba(255,255,255,0.10);
   color: rgba(255,255,255,0.65);
   font-size: 12px;
   line-height: 1.5;
-  border-top: 1px solid rgba(255,255,255,0.10);
 }
 
-.eq-stack{
-  display: grid;
-  gap: 10px;
-  margin-top: 12px;
-}
+/* ===== Equations ===== */
+
+.eq-stack{ display: grid; gap: 10px; margin-top: 12px; }
 
 .eq{
   padding: 12px 14px;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.26);
-  color: rgba(255,255,255,0.92);
-  font-size: 16px;
+  background: rgba(0,0,0,0.22);
   text-align: center;
+  font-size: 16px;
+  color: rgba(255,255,255,0.92);
 }
-
 .eq small{
   display: block;
   margin-top: 4px;
@@ -515,36 +688,26 @@ body{
   font-size: 12px;
 }
 
+/* ===== Callout ===== */
+
 .callout{
   margin-top: 14px;
   padding: 14px 14px;
   border-radius: 18px;
   border: 1px solid rgba(120,190,255,0.25);
   background: rgba(120,190,255,0.10);
-  color: rgba(255,255,255,0.86);
-  line-height: 1.6;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.65;
   font-size: 13.5px;
 }
 
-.split{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-@media (max-width: 900px){
-  .split{ grid-template-columns: 1fr; }
-}
-
-/* ===============================
-   FOOTER
-   =============================== */
+/* ===== Footer ===== */
 
 .footer{
   text-align: center;
   padding: 18px 12px;
-  margin-top: 20px;
-  border-top: 1px solid var(--soft);
+  margin-top: 22px;
+  border-top: 1px solid rgba(255,255,255,0.12);
   color: rgba(255,255,255,0.70);
 }
 
