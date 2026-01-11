@@ -522,7 +522,7 @@ h1 {
 }
 
 .panel-img {
-  width: 100%;
+  width: 85%;
   height: 380px;          /* ↑ taller = less wide-looking */
   object-fit: cover;
   border-radius: 14px;
