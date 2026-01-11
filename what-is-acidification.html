@@ -16,69 +16,173 @@
       <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
       <a class="nav-btn" href="solutions.html">Solutions</a>
       <a class="nav-btn" href="take-action.html">Take action</a>
+      <a class="nav-btn" href="game.html">Game</a>
     </nav>
   </header>
 
   <main class="page">
-    <!-- HERO (Act NOW style) -->
-    <section class="oa-hero">
+
+    <!-- HERO -->
+    <section class="oa-hero" aria-label="What is ocean acidification">
       <div class="oa-hero-inner">
-        <h1>What is Ocean Acidification?</h1>
-        <p>More CO₂ in seawater → more H⁺ → lower pH → less carbonate for shells.</p>
-      </div>
-    </section>
-
-    <!-- TWO-COLUMN CONTENT -->
-    <section class="oa-grid">
-      <!-- LEFT: IMAGE (local file you upload) -->
-      <div class="card">
-        <img
-          class="oa-img"
-          src="assets/images/ocean-acidification.jpg"
-          alt="Ocean acidification chemistry diagram"
-          loading="lazy"
-        />
-        <p class="oa-img-note">
-          Replace <code>assets/images/ocean-acidification.jpg</code> with your actual filename.
-        </p>
-      </div>
-
-      <!-- RIGHT: TEXT -->
-      <div class="card">
-        <p class="oa-text">
-          Ocean acidification is a chemical chain reaction triggered by excess carbon dioxide (CO₂).
-          When CO₂ dissolves into seawater, it forms carbonic acid, which releases hydrogen ions (H⁺).
-          More H⁺ means a lower pH.
+        <div class="kicker"><span class="kicker-dot"></span> Chemistry, made simple</div>
+        <h1 class="h1" style="margin-top: 14px;">What is <span class="accent">Ocean Acidification</span>?</h1>
+        <p class="oa-hero-sub">
+          Ocean acidification happens when the ocean absorbs extra carbon dioxide (CO₂) from the air.
+          That CO₂ changes seawater chemistry, increasing hydrogen ions (H⁺) and making it harder for many organisms to build shells and skeletons.
         </p>
 
-        <p class="oa-text">
-          The real damage isn’t just “lower pH.” Those extra H⁺ ions reduce carbonate (CO₃²⁻),
-          the building block many organisms need to make calcium carbonate shells and skeletons
-          (oysters, clams, corals, some plankton).
-        </p>
+        <div class="oa-quick">
+          <div class="card">
+            <p class="card-title">The trigger</p>
+            <p class="card-text">
+              More CO₂ in the atmosphere → more CO₂ dissolving into seawater.
+            </p>
+            <div class="badges">
+              <span class="badge"><strong>Cause:</strong> excess CO₂</span>
+              <span class="badge"><strong>Where:</strong> surface ocean</span>
+            </div>
+          </div>
 
-        <div class="oa-callout">
-          <strong>Bottom line:</strong> More CO₂ → more H⁺ → less CO₃²⁻ → weaker shell-building conditions.
+          <div class="card">
+            <p class="card-title">The chemistry shift</p>
+            <p class="card-text">
+              Dissolved CO₂ forms carbonic acid, which releases H⁺. More H⁺ means lower pH.
+            </p>
+            <div class="badges">
+              <span class="badge"><strong>↑</strong> H⁺ ions</span>
+              <span class="badge"><strong>↓</strong> pH</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="card-title">The real consequence</p>
+            <p class="card-text">
+              Extra H⁺ reduces carbonate ions (CO₃²⁻), a key building block for calcium carbonate (CaCO₃) shells.
+            </p>
+            <div class="badges">
+              <span class="badge"><strong>↓</strong> CO₃²⁻</span>
+              <span class="badge"><strong>Harder</strong> to calcify</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- REACTIONS -->
-    <section class="card eq-card">
-      <h2 class="eq-title">Key reactions</h2>
+    <!-- EXPLAINER GRID -->
+    <section class="section" aria-label="Ocean acidification explainer">
+      <div class="grid grid-2">
+        <!-- LEFT: FIGURE -->
+        <div class="oa-figure">
+          <!-- Replace the src with your real image file if you have one -->
+          <img src="assets/images/ocean-acidification.jpg" alt="Infographic explaining ocean acidification" />
+          <div class="oa-figure-caption">
+            Tip: if your image file name is different, update the <strong>src</strong>.
+            Keep it in <code>assets/images/</code> to stay organized.
+          </div>
+        </div>
 
-      <div class="equations">
-        <div class="eq">CO<sub>2</sub> + H<sub>2</sub>O ⇌ H<sub>2</sub>CO<sub>3</sub></div>
-        <div class="eq">H<sub>2</sub>CO<sub>3</sub> ⇌ H<sup>+</sup> + HCO<sub>3</sub><sup>−</sup></div>
-        <div class="eq">HCO<sub>3</sub><sup>−</sup> ⇌ H<sup>+</sup> + CO<sub>3</sub><sup>2−</sup></div>
-        <div class="eq subtle">Net: CO<sub>2</sub> + H<sub>2</sub>O ⇌ H<sup>+</sup> + HCO<sub>3</sub><sup>−</sup></div>
-        <div class="eq">CaCO<sub>3</sub> + H<sup>+</sup> ⇌ Ca<sup>2+</sup> + HCO<sub>3</sub><sup>−</sup></div>
+        <!-- RIGHT: EXPLANATION -->
+        <div class="grid" style="align-content: start;">
+          <div class="card">
+            <p class="card-title">In one sentence</p>
+            <p class="card-text">
+              Ocean acidification is a long-term change in seawater chemistry caused by extra CO₂,
+              leading to lower pH and less carbonate available for shell-building organisms.
+            </p>
+          </div>
+
+          <div class="card">
+            <p class="card-title">Why “lower pH” isn’t the whole story</p>
+            <p class="card-text">
+              The biggest biological problem is carbonate loss (CO₃²⁻). Many organisms use carbonate to form CaCO₃.
+              When carbonate becomes less available, shells can grow more slowly, become weaker, or even dissolve under certain conditions.
+            </p>
+          </div>
+
+          <div class="callout">
+            <strong>Key idea:</strong> The ocean is still slightly basic overall—but it’s becoming
+            <strong>less</strong> basic. Small pH changes can produce meaningful chemical and biological impacts.
+          </div>
+
+          <div class="btn-row">
+            <a class="btn btn-primary" href="why-it-matters.html">Why it matters</a>
+            <a class="btn" href="solutions.html">Solutions</a>
+          </div>
+        </div>
       </div>
-
-      <p class="eq-note">
-        These equilibria shift as CO₂ rises — increasing H⁺ and reducing available CO₃²⁻.
-      </p>
     </section>
+
+    <!-- KEY REACTIONS -->
+    <section class="section" aria-label="Key chemical reactions">
+      <div class="grid">
+        <h2 class="h2">Key reactions (the short, useful version)</h2>
+        <p class="p">
+          These equilibria explain why extra CO₂ increases H⁺ and reduces carbonate (CO₃²⁻).
+          You do not need to memorize them—just understand the direction of change.
+        </p>
+
+        <div class="eq-stack">
+          <div class="eq">
+            CO₂ + H₂O ⇌ H₂CO₃
+            <small>CO₂ dissolves and forms carbonic acid</small>
+          </div>
+          <div class="eq">
+            H₂CO₃ ⇌ H⁺ + HCO₃⁻
+            <small>carbonic acid releases hydrogen ions (H⁺)</small>
+          </div>
+          <div class="eq">
+            HCO₃⁻ ⇌ H⁺ + CO₃²⁻
+            <small>more H⁺ pushes the system away from carbonate</small>
+          </div>
+          <div class="eq">
+            CaCO₃ + H⁺ ⇌ Ca²⁺ + HCO₃⁻
+            <small>acid conditions can promote shell dissolution</small>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Bottom line:</strong> more CO₂ → more H⁺ → lower pH → less CO₃²⁻ → tougher conditions for shell-building.
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACTS -->
+    <section class="section" aria-label="Who is affected and why">
+      <div class="grid">
+        <h2 class="h2">Who is affected first?</h2>
+        <p class="p">
+          Ocean acidification doesn’t affect every organism equally. The biggest risk is for organisms
+          that build shells or skeletons from calcium carbonate (CaCO₃)—especially during early life stages.
+        </p>
+
+        <div class="split">
+          <div class="card">
+            <p class="card-title">Biological impacts</p>
+            <p class="card-text">
+              • Shellfish (oysters, clams, mussels): weaker shells, slower growth<br/>
+              • Corals: reduced calcification, harder reef-building<br/>
+              • Plankton (some species): changes in survival and food webs
+            </p>
+          </div>
+
+          <div class="card">
+            <p class="card-title">Human impacts</p>
+            <p class="card-text">
+              • Fisheries and aquaculture: higher risk for shellfish hatcheries<br/>
+              • Coastal economies: jobs tied to seafood and tourism<br/>
+              • Ecosystems: reefs and shellfish beds protect shorelines and support biodiversity
+            </p>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn-primary" href="take-action.html">Take action</a>
+          <a class="btn" href="game.html">Try the quiz game</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
