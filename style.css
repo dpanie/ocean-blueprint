@@ -727,7 +727,7 @@ body{
   background: rgba(120,190,255,0.10);
   color: rgba(255,255,255,0.88);
   line-height: 1.65;
-  font-size: 13.5px;
+  font-size: 16px; /*here*/
 }
 
 /* ===== Footer ===== */
