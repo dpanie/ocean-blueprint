@@ -4,109 +4,447 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Take action | Ocean Blueprint</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ===============================
+       THEME + GLOBAL (matches OA page)
+       =============================== */
+    :root{
+      --bg: #071018;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.78);
+      --muted2: rgba(255,255,255,0.70);
+      --line: rgba(255,255,255,0.12);
+      --accent: #78beff;
+      --accent2: rgba(120,190,255,0.18);
+      --shadow: 0 22px 70px rgba(0,0,0,0.45);
+      --shadow2: 0 10px 26px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 900px at 70% 10%, rgba(120,190,255,0.14), transparent 55%),
+        radial-gradient(900px 700px at 20% 80%, rgba(120,190,255,0.08), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a{ color:inherit; }
+    a:focus-visible{
+      outline: 3px solid rgba(120,190,255,0.55);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    /* ===== Topbar ===== */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      height: 72px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 18px;
+      background: rgba(7,16,24,0.74);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .brand{
+      font-weight: 750;
+      letter-spacing: 0.2px;
+      font-size: 16px;
+      white-space: nowrap;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .brand-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent2);
+    }
+
+    .nav{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-btn{
+      text-decoration:none;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.90);
+      font-size: 14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .nav-btn:hover{
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
+    }
+
+    /* ===== Page container ===== */
+    .page{
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 18px 0 42px;
+    }
+
+    /* ===== Kicker (OA style) ===== */
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color: rgba(255,255,255,0.82);
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .kicker-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent2);
+    }
+
+    /* =========================
+       TAKE ACTION PAGE
+       ========================= */
+
+    /* HERO — full-bleed cinematic banner like OA/Solutions */
+    .action-hero{
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.88) 82%),
+        radial-gradient(1000px 520px at 70% 18%, rgba(120,190,255,0.18), transparent 60%),
+        url("assets/images/solution_background.jpg"); /* keep your file */
+      background-size: cover;
+      background-position: center;
+    }
+
+    .action-hero-inner{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 44px 22px 28px;
+    }
+
+    .action-hero h1{
+      margin: 14px 0 0;
+      font-size: clamp(44px, 7vw, 84px);
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      text-shadow: 0 8px 30px rgba(0,0,0,0.55);
+    }
+
+    .hero-blurb{
+      margin: 18px auto 0;
+      max-width: 980px;
+      color: rgba(255,255,255,0.90);
+      font-size: clamp(20px, 2.2vw, 26px);
+      line-height: 1.7;
+      font-weight: 520;
+    }
+
+    /* Big CTA button */
+    .cta-wide{
+      display: inline-flex;
+      margin-top: 18px;
+      padding: 14px 22px;
+
+      width: min(900px, 78vw);
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 14px;
+      background: rgba(255,255,255,0.94);
+      color: #0b0b0b;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-decoration: none;
+
+      transition: transform 140ms ease, background 140ms ease;
+    }
+
+    .cta-wide:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.98);
+    }
+
+    /* CONTENT */
+    .action-section{
+      margin-top: 28px;
+    }
+
+    .action-title{
+      font-size: clamp(28px, 3.2vw, 40px);
+      margin: 0 0 18px;
+      letter-spacing: -0.2px;
+    }
+
+    .action-title .you{
+      color: rgba(120, 190, 255, 0.95);
+    }
+
+    .action-grid{
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 14px 28px;
+      align-items: start;
+    }
+
+    .action-item {
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow2);
+    }
+
+    .action-item h3{
+      font-size: 16px;
+      letter-spacing: 0.1px;
+      margin: 0 0 8px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .action-item p{
+      margin: 0;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.65;
+      font-size: 16.5px;
+    }
+
+    /* PANELS (images + headings) */
+    .action-panels{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      margin-top: 28px;
+    }
+
+    .panel{
+      text-align: center;
+    }
+
+    .panel-img {
+      width: 85%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      box-shadow: var(--shadow2);
+    }
+
+    .panel-heading{
+      margin: 14px 0 0;
+      font-size: 28px;
+      letter-spacing: -0.3px;
+    }
+
+    /* Donation cards section */
+    .donate-cards{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .donate-card{
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: var(--shadow2);
+    }
+
+    .donate-card h3{
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .donate-card p{
+      margin: 0 0 10px;
+      color: rgba(255,255,255,0.78);
+      font-size: 16.5px;
+      line-height: 1.6;
+    }
+
+    /* Reuse the same button style from Solutions page */
+    .sol-link{
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255,255,255,0.92);
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(0,0,0,0.22);
+      font-size: 14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+
+    .sol-link:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.35);
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+    .footer{
+      text-align: center;
+      padding: 18px 12px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.70);
+      background: rgba(7,16,24,0.5);
+      backdrop-filter: blur(8px);
+      margin-top: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .action-grid{ grid-template-columns: 1fr; }
+      .action-panels{ grid-template-columns: 1fr; }
+      .panel-img{ height: 280px; width: 100%; }
+      .donate-cards{ grid-template-columns: 1fr; }
+      .cta-wide{ width: min(900px, 90vw); }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .nav-btn, .cta-wide, .sol-link{ transition: none; }
+    }
+  </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand">Ocean Blueprint</div>
+    <div class="brand"><span class="brand-dot" aria-hidden="true"></span>Ocean Blueprint</div>
     <nav class="nav">
       <a class="nav-btn" href="index.html">Home</a>
       <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
       <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
       <a class="nav-btn" href="solutions.html">Solutions</a>
-      <a class="nav-btn" href="take-action.html">Take action</a>
+      <a class="nav-btn" href="take-action.html" aria-current="page">Take action</a>
+      <a class="nav-btn" href="game.html">Game</a>
     </nav>
   </header>
 
+  <!-- FULL-BLEED HERO -->
+  <section class="action-hero" aria-label="Take action hero">
+    <div class="action-hero-inner">
+      <div class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Steps that help</div>
+      <h1>Take action</h1>
+
+      <p class="hero-blurb">
+        Ocean acidification is driven by excess CO₂. Actions that reduce emissions, protect coastal ecosystems,
+        and support monitoring and restoration can make a measurable difference.
+      </p>
+
+      <a class="cta-wide"
+         href="https://oceanfdn.org/ocean-acidification/?form=TOFDonation"
+         target="_blank"
+         rel="noopener">
+        Donate to support ocean acidification work
+      </a>
+    </div>
+  </section>
+
   <main class="page">
-
-  <section class="action-hero">
-  <div class="action-hero-overlay"></div>
-
-  <div class="action-hero-inner">
-    <h1>Act NOW!</h1>
-
-    <a class="cta-wide"
-       href="https://oceanfdn.org/ocean-acidification/?form=TOFDonation"
-       target="_blank"
-       rel="noopener">
-      DONATE NOW
-    </a>
-  </div>
-</section>
-
-
     <!-- WHAT CAN YOU DO -->
-    <section class="section action-section">
-      <h2 class="action-title">What can <span class="you">YOU</span> do?</h2>
+    <section class="action-section" aria-label="What you can do">
+      <h2 class="action-title">What can <span class="you">you</span> do?</h2>
 
       <div class="action-grid">
         <div class="action-item">
           <h3>Reduce carbon emissions</h3>
           <p>
-            Walk, bike, carpool, or use public transport when possible. Cut home energy use and support cleaner electricity.
+            Walk, bike, carpool, or use public transport when possible. At home, reduce energy use and support cleaner electricity.
           </p>
         </div>
 
         <div class="action-item">
           <h3>Be careful what you drain or dump</h3>
           <p>
-            Avoid pouring chemicals, paint, or fertilizer down drains. Runoff and pollution can amplify acidification in coastal waters.
+            Avoid pouring chemicals, paint, or fertilizer down drains. Runoff and pollution can add stress to coastal waters.
           </p>
         </div>
 
         <div class="action-item">
-          <h3>Support carbon-reducing ecosystems</h3>
+          <h3>Support carbon-storing ecosystems</h3>
           <p>
-            Restore seagrass, salt marshes, and mangroves. These “blue carbon” ecosystems can capture CO₂ and improve local water chemistry.
+            Protect and restore seagrass and salt marshes. These “blue carbon” habitats can capture CO₂ and support local water quality.
           </p>
         </div>
 
         <div class="action-item">
           <h3>Support shellfish and ocean restoration projects</h3>
           <p>
-            Donate or volunteer with projects restoring oysters, reefs, and seagrass—local action with measurable outcomes.
+            Donate or volunteer with projects restoring oysters, reefs, and seagrass—local efforts with measurable outcomes.
           </p>
         </div>
 
         <div class="action-item">
           <h3>Learn and share the science</h3>
           <p>
-            Most people have never heard of ocean acidification. Share a clear infographic, a short video, or a trusted source.
+            Many people have not heard of ocean acidification. Sharing a short explainer or trusted source helps build awareness.
           </p>
         </div>
 
         <div class="action-item">
-          <h3>Advocate for climate policy</h3>
+          <h3>Support effective climate policy</h3>
           <p>
-            Encourage leaders to cut CO₂ emissions and protect coastal ecosystems. Local action builds national momentum.
+            Encourage decision-makers to reduce CO₂ emissions and protect coastal ecosystems. Local initiatives can scale into broader action.
           </p>
         </div>
       </div>
     </section>
 
     <!-- TWO IMAGE PANELS -->
-    <section class="section action-panels">
+    <section class="action-panels" aria-label="Initiatives and map">
       <div class="panel">
-        <!-- Replace the filename when you upload your image -->
         <img class="panel-img" src="assets/images/initiatives.jpg" alt="Find an initiative near you" />
-        <h3 class="panel-heading">Find an initiative near you!</h3>
-        
+        <h3 class="panel-heading">Find an initiative near you</h3>
       </div>
 
       <div class="panel">
-        <!-- Replace the filename when you upload your image -->
         <img class="panel-img" src="assets/images/map.jpg" alt="Map of ocean acidification initiatives" />
         <h3 class="panel-heading">Map (add links)</h3>
       </div>
     </section>
 
     <!-- DONATE SECTION -->
-    <section class="section donate" id="donate">
-      <h2 class="section-title">Donate</h2>
-      <p class="section-subtitle">
-        Pick one high-impact local group and support it consistently. Random one-off giving feels good and changes nothing.
+    <section class="section donate" id="donate" style="margin-top:38px;" aria-label="Donate">
+      <h2 class="section-title" style="margin:0 0 8px; font-size:26px;">Donate</h2>
+      <p class="section-subtitle" style="margin:0 0 18px; color:rgba(255,255,255,0.72); font-size:18px; line-height:1.7; max-width:900px;">
+        If you choose to donate, consider supporting one high-impact organization consistently to help sustain long-term work.
       </p>
 
       <div class="donate-cards">
@@ -118,18 +456,17 @@
 
         <article class="donate-card">
           <h3>Science + monitoring</h3>
-          <p>Fund long-term pH monitoring and research. Data drives action and accountability.</p>
+          <p>Fund long-term pH monitoring and research. Data supports action and accountability.</p>
           <a class="sol-link" href="#" target="_blank" rel="noopener">Add your link</a>
         </article>
 
         <article class="donate-card">
           <h3>Policy + advocacy</h3>
-          <p>Support groups pushing for CO₂ cuts and coastal protections.</p>
+          <p>Support groups working on CO₂ reductions and coastal protections.</p>
           <a class="sol-link" href="#" target="_blank" rel="noopener">Add your link</a>
         </article>
       </div>
     </section>
-
   </main>
 
   <footer class="footer">
