@@ -4,54 +4,182 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quiz Game | Ocean Blueprint</title>
-  <link rel="stylesheet" href="style.css" />
-
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiz Game | Ocean Blueprint</title>
-  <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* ===== Page-specific styles (scoped) ===== */
-    .quiz-hero{
-      margin-top: 72px; /* fixed topbar */
-      border-radius: 18px;
-      overflow: hidden;
-      min-height: 220px;
-      display: grid;
-      place-items: center;
+    /* ===============================
+       THEME + GLOBAL (matches OA page)
+       =============================== */
+    :root{
+      --bg: #071018;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.78);
+      --muted2: rgba(255,255,255,0.70);
+      --line: rgba(255,255,255,0.12);
+      --accent: #78beff;
+      --accent2: rgba(120,190,255,0.18);
+      --shadow: 0 22px 70px rgba(0,0,0,0.45);
+      --shadow2: 0 10px 26px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       background:
-        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.78)),
+        radial-gradient(1200px 900px at 70% 10%, rgba(120,190,255,0.14), transparent 55%),
+        radial-gradient(900px 700px at 20% 80%, rgba(120,190,255,0.08), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a{ color:inherit; }
+    a:focus-visible{
+      outline: 3px solid rgba(120,190,255,0.55);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    /* ===== Topbar ===== */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      height: 72px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 18px;
+      background: rgba(7,16,24,0.74);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .brand{
+      font-weight: 750;
+      letter-spacing: 0.2px;
+      font-size: 16px;
+      white-space: nowrap;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .brand-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent2);
+    }
+
+    .nav{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-btn{
+      text-decoration:none;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.90);
+      font-size: 14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .nav-btn:hover{
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
+    }
+
+    /* ===== Page container ===== */
+    .page{
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 18px 0 42px;
+    }
+
+    /* ===== Kicker ===== */
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color: rgba(255,255,255,0.82);
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .kicker-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent2);
+    }
+
+    /* ===============================
+       QUIZ HERO (full-bleed like OA, keep your image)
+       =============================== */
+    .quiz-hero{
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.88) 82%),
+        radial-gradient(1000px 520px at 70% 18%, rgba(120,190,255,0.18), transparent 60%),
         url("assets/images/game-bg.jpg");
       background-size: cover;
       background-position: center;
     }
+
     .quiz-hero-inner{
       text-align: center;
-      padding: 34px 18px;
-      max-width: 1000px;
-    }
-    .quiz-hero h1{
-      margin: 0;
-      font-size: clamp(30px, 4.6vw, 58px);
-      letter-spacing: -0.8px;
-    }
-    .quiz-hero p{
-      margin: 10px 0 0;
-      color: rgba(255,255,255,0.78);
-      font-size: 14px;
-      line-height: 1.5;
+      padding: 44px 22px 28px;
+      max-width: 980px;
+      margin: 0 auto;
     }
 
+    .quiz-hero h1{
+      margin: 14px 0 0;
+      font-size: clamp(40px, 5.2vw, 78px);
+      letter-spacing: -0.8px;
+      line-height: 1.05;
+    }
+
+    .quiz-hero p{
+      margin: 18px auto 0;
+      max-width: 980px;
+      color: rgba(255,255,255,0.90);
+      font-size: clamp(18px, 2.0vw, 24px);
+      line-height: 1.7;
+      font-weight: 520;
+    }
+
+    /* ===== Wrap ===== */
     .quiz-wrap{
       margin-top: 18px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 18px;
       padding: 18px;
+      box-shadow: var(--shadow2);
     }
 
     .quiz-head{
@@ -61,13 +189,14 @@
     }
     .quiz-head h2{
       margin: 0;
-      font-size: 20px;
+      font-size: 22px;
+      letter-spacing: -0.2px;
     }
     .quiz-head .note{
       margin: 0;
-      color: rgba(255,255,255,0.70);
-      font-size: 13px;
-      line-height: 1.55;
+      color: rgba(255,255,255,0.72);
+      font-size: 16.5px;
+      line-height: 1.6;
     }
 
     /* ===== One-question layout ===== */
@@ -92,9 +221,10 @@
       margin-bottom: 8px;
     }
     .quiz-progress-title{
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: -0.2px;
       color: rgba(255,255,255,0.92);
+      font-size: 18px;
     }
     .quiz-progress-mini{
       font-size: 12px;
@@ -116,10 +246,9 @@
       transition: width 220ms ease;
     }
 
-    /* The big card that fills the page */
+    /* Main card */
     .quiz-card{
-      min-height: calc(100vh - 72px - 220px - 18px - 18px - 24px); 
-      /* topbar + hero + wrap padding + gaps: rough but works */
+      min-height: calc(100vh - 72px - 220px - 18px - 18px - 24px);
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(0,0,0,0.30);
@@ -131,7 +260,7 @@
 
     .q-title{
       margin: 0;
-      font-size: clamp(18px, 2.2vw, 28px);
+      font-size: clamp(20px, 2.2vw, 30px);
       font-weight: 900;
       letter-spacing: -0.4px;
       color: rgba(255,255,255,0.95);
@@ -165,7 +294,7 @@
       accent-color: rgba(120,190,255,0.95);
     }
     .opt span{
-      font-size: clamp(13px, 1.2vw, 16px);
+      font-size: clamp(15px, 1.2vw, 18px);
       color: rgba(255,255,255,0.86);
       line-height: 1.45;
     }
@@ -188,10 +317,11 @@
       background: rgba(255,255,255,0.06);
       color: rgba(255,255,255,0.92);
       text-decoration: none;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.2px;
       cursor: pointer;
       user-select: none;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
     }
     .btn:hover{
       border-color: rgba(120,190,255,0.55);
@@ -215,7 +345,7 @@
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.10);
       color: rgba(255,255,255,0.82);
-      font-size: 13px;
+      font-size: 16px;
       line-height: 1.55;
       display: none;
     }
@@ -239,7 +369,7 @@
       align-items: baseline;
     }
     .score{
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 900;
       letter-spacing: -0.4px;
     }
@@ -256,8 +386,8 @@
     .result p{
       margin: 10px 0 0;
       color: rgba(255,255,255,0.80);
-      line-height: 1.55;
-      font-size: 13px;
+      line-height: 1.6;
+      font-size: 16.5px;
     }
     .warn{
       margin-top: 10px;
@@ -265,102 +395,115 @@
       border-radius: 14px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.82);
-      font-size: 13px;
-      line-height: 1.55;
+      color: rgba(255,255,255,0.84);
+      font-size: 16.5px;
+      line-height: 1.6;
     }
     .small{
       margin-top: 10px;
       color: rgba(255,255,255,0.60);
-      font-size: 12px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    /* Footer */
+    .footer{
+      text-align: center;
+      padding: 18px 12px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.70);
+      background: rgba(7,16,24,0.5);
+      backdrop-filter: blur(8px);
+      margin-top: 10px;
     }
 
     @media (max-width: 900px){
       .quiz-wrap{ padding: 14px; }
       .quiz-card{ min-height: calc(100vh - 72px - 220px - 14px - 14px - 24px); }
     }
+
+    @media (prefers-reduced-motion: reduce){
+      .nav-btn, .btn, .quiz-progress-fill{ transition: none; }
+    }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand">Ocean Blueprint</div>
-    <nav class="nav">
+    <div class="brand"><span class="brand-dot" aria-hidden="true"></span>Ocean Blueprint</div>
+    <nav class="nav" aria-label="Primary navigation">
       <a class="nav-btn" href="index.html">Home</a>
       <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
       <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
       <a class="nav-btn" href="solutions.html">Solutions</a>
       <a class="nav-btn" href="take-action.html">Take action</a>
-      <a class="nav-btn" href="game.html">Game</a>
+      <a class="nav-btn" href="game.html" aria-current="page">Game</a>
     </nav>
   </header>
 
-  <main class="page">
-
-    <section class="quiz-hero">
+  <main>
+    <section class="quiz-hero" aria-label="Quiz introduction">
       <div class="quiz-hero-inner">
-        <h1>How Much Do <span style="color: rgba(120,190,255,0.95);">YOU</span> Contribute to Ocean Acidification?</h1>
+        <div class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Interactive quiz</div>
+        <h1>How do everyday choices connect to ocean acidification?</h1>
         <p>
-          Choose one answer per question. Add up your points.
-          Don’t rationalize. Pick what you actually do.
+          Choose one answer per question. At the end, you’ll see a score and a few practical next steps.
         </p>
       </div>
     </section>
 
-    <section class="quiz-wrap">
-      <div class="quiz-head">
-        <h2>Quick reality check</h2>
-        <p class="note">
-          This isn’t about guilt. It’s about honesty → then action.
-          If you skip, you’re not “busy,” you’re dodging.
-        </p>
-      </div>
-
-      <form id="quiz" class="quiz-one">
-
-        <div class="quiz-progress">
-          <div class="quiz-progress-top">
-            <div class="quiz-progress-title">Question <span id="qNum">1</span> / 15</div>
-            <div class="quiz-progress-mini" id="qCat">—</div>
-          </div>
-          <div class="quiz-progress-bar">
-            <div class="quiz-progress-fill" id="progressFill"></div>
-          </div>
+    <section class="page">
+      <section class="quiz-wrap">
+        <div class="quiz-head">
+          <h2>Quick check-in</h2>
+          <p class="note">
+            This quiz is a simple way to reflect on habits that affect emissions and ocean chemistry. It’s not a judgment—just a starting point.
+          </p>
         </div>
 
-        <section class="quiz-card" aria-live="polite">
-          <h3 class="q-title" id="questionText">—</h3>
-          <div class="answers" id="answersWrap"></div>
-
-          <div class="inline-warn" id="inlineWarn">
-            Pick an answer. You’re not allowed to “next” your way out of accountability.
-          </div>
-
-          <div class="quiz-actions">
-            <button class="btn" type="button" id="back">Back</button>
-            <button class="btn btn-primary" type="button" id="next">Next</button>
-            <button class="btn" type="button" id="reset">Reset</button>
-          </div>
-
-          <div class="result" id="result">
-            <div class="result-top">
-              <div class="score" id="scoreText">Score: 0</div>
-              <div class="badge" id="badgeText">—</div>
+        <form id="quiz" class="quiz-one">
+          <div class="quiz-progress">
+            <div class="quiz-progress-top">
+              <div class="quiz-progress-title">Question <span id="qNum">1</span> / 15</div>
+              <div class="quiz-progress-mini" id="qCat">—</div>
             </div>
-            <p id="msg"></p>
-            <div class="warn" id="nextStep"></div>
-            <div class="small" id="meta"></div>
-
-            <div class="quiz-actions" style="margin-top: 12px;">
-              <button class="btn btn-primary" type="button" id="share">Share score</button>
-              <button class="btn" type="button" id="restart">Restart quiz</button>
+            <div class="quiz-progress-bar">
+              <div class="quiz-progress-fill" id="progressFill"></div>
             </div>
           </div>
-        </section>
 
-      </form>
+          <section class="quiz-card" aria-live="polite">
+            <h3 class="q-title" id="questionText">—</h3>
+            <div class="answers" id="answersWrap"></div>
+
+            <div class="inline-warn" id="inlineWarn">
+              Please choose one option to continue.
+            </div>
+
+            <div class="quiz-actions">
+              <button class="btn" type="button" id="back">Back</button>
+              <button class="btn btn-primary" type="button" id="next">Next</button>
+              <button class="btn" type="button" id="reset">Reset</button>
+            </div>
+
+            <div class="result" id="result">
+              <div class="result-top">
+                <div class="score" id="scoreText">Score: 0</div>
+                <div class="badge" id="badgeText">—</div>
+              </div>
+              <p id="msg"></p>
+              <div class="warn" id="nextStep"></div>
+              <div class="small" id="meta"></div>
+
+              <div class="quiz-actions" style="margin-top: 12px;">
+                <button class="btn btn-primary" type="button" id="share">Share score</button>
+                <button class="btn" type="button" id="restart">Restart quiz</button>
+              </div>
+            </div>
+          </section>
+        </form>
+      </section>
     </section>
-
   </main>
 
   <footer class="footer">
@@ -370,7 +513,7 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ===== Questions (edit text here) =====
+    // ===== Questions =====
     const QUESTIONS = [
       { id: "q1",  cat: "Transportation", text: "1. How do you usually commute short distances (<3 miles)?",
         opts: [
@@ -499,7 +642,6 @@
     ];
 
     // ===== DOM =====
-    const quizEl = document.getElementById("quiz");
     const qNumEl = document.getElementById("qNum");
     const qCatEl = document.getElementById("qCat");
     const progressFill = document.getElementById("progressFill");
@@ -530,28 +672,28 @@
       if (total <= 10) {
         return {
           badge: "Ocean Ally (0–10)",
-          text: "You’re actively reducing acidification pressure. Keep going — and lead others.",
-          step: "Next step: pick ONE thing you’ll change this week (transport, diet, energy, waste). Make it measurable."
+          text: "You’re already making choices that reduce pressure on ocean chemistry. Keep it up—and consider sharing one idea with someone else.",
+          step: "Next step: choose one habit to reinforce this week (e.g., a car-free trip, a lower-waste meal, or a power-saving change). Make it specific."
         };
       }
       if (total <= 20) {
         return {
-          badge: "Silent Contributor (11–20)",
-          text: "You’re part of the problem more than you think. Fixable. Start now.",
-          step: "Next step: choose 2 high-impact swaps: fewer flights / fewer car trips / less red meat. Stop pretending it’s complicated."
+          badge: "On the Path (11–20)",
+          text: "You’re doing some helpful things, and there’s room to improve. A couple of targeted changes can make a real difference.",
+          step: "Next step: pick two high-impact moves you can sustain (e.g., fewer solo car trips, fewer flights, less red meat, or less fast fashion)."
         };
       }
       if (total <= 30) {
         return {
-          badge: "High-Impact Polluter (21–30)",
-          text: "Your lifestyle directly accelerates ocean chemistry collapse.",
-          step: "Next step: make a real cut: reduce flights, reduce red meat, and stop fast fashion. Anything else is cosmetic."
+          badge: "High Impact (21–30)",
+          text: "Your current habits likely contribute noticeably to emissions. The good news: you can lower impact with a few consistent shifts.",
+          step: "Next step: choose one major lever to work on first (transport, diet, or consumption) and make one concrete plan for this month."
         };
       }
       return {
-        badge: "Acidification Accelerator (31+)",
-        text: "Your choices actively worsen ocean conditions. No excuses left.",
-        step: "Next step: you need structural change (transport + diet + consumption). Start with the biggest lever you control today."
+        badge: "Very High Impact (31+)",
+        text: "Your score suggests a higher footprint. If you want to lower it, focus on the biggest levers rather than small tweaks.",
+        step: "Next step: start with one structural change you can maintain (transport + diet + consumption), then add a second once it feels routine."
       };
     }
 
@@ -568,7 +710,6 @@
       progressFill.style.width = `${pct}%`;
 
       questionText.textContent = q.text;
-
       answersWrap.innerHTML = "";
 
       q.opts.forEach((opt, idx) => {
@@ -584,7 +725,6 @@
         input.id = id;
         input.value = String(opt.pts);
 
-        // restore selection
         if (answers[q.id] !== undefined && Number(input.value) === answers[q.id]) {
           input.checked = true;
         }
@@ -592,11 +732,7 @@
         input.addEventListener("change", () => {
           answers[q.id] = Number(input.value);
           inlineWarn.classList.remove("show");
-
-          // auto-enable Next wording for last step
-          if (currentIndex === QUESTIONS.length - 1) {
-            nextBtn.textContent = "Finish";
-          }
+          if (currentIndex === QUESTIONS.length - 1) nextBtn.textContent = "Finish";
         });
 
         const span = document.createElement("span");
@@ -608,23 +744,18 @@
       });
 
       backBtn.disabled = currentIndex === 0;
-
-      // Next button label
       nextBtn.textContent = (currentIndex === QUESTIONS.length - 1) ? "Finish" : "Next";
     }
 
     function computeTotal(){
       let total = 0;
-      for (const q of QUESTIONS) {
-        total += Number(answers[q.id] ?? 0);
-      }
+      for (const q of QUESTIONS) total += Number(answers[q.id] ?? 0);
       return total;
     }
 
     function firstMissingIndex(){
       for (let i = 0; i < QUESTIONS.length; i++) {
-        const qid = QUESTIONS[i].id;
-        if (answers[qid] === undefined) return i;
+        if (answers[QUESTIONS[i].id] === undefined) return i;
       }
       return -1;
     }
@@ -640,13 +771,11 @@
       badgeText.textContent = r.badge;
       msg.textContent = r.text;
       nextStep.textContent = r.step;
-      meta.textContent = "Be honest: your score reflects habits, not your intentions.";
+      meta.textContent = "Note: this quiz is a simplified reflection tool—it’s not a scientific footprint calculator.";
 
-      // lock nav buttons
       backBtn.disabled = true;
       nextBtn.disabled = true;
 
-      // scroll result into view
       result.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
@@ -660,7 +789,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // ===== Events =====
     backBtn.addEventListener("click", () => {
       inlineWarn.classList.remove("show");
       if (currentIndex > 0) currentIndex--;
@@ -669,22 +797,17 @@
 
     nextBtn.addEventListener("click", () => {
       const q = QUESTIONS[currentIndex];
-
-      // don’t let them proceed without answering current question
       if (answers[q.id] === undefined) {
         inlineWarn.classList.add("show");
         return;
       }
 
-      // last question -> validate all answered -> show results
       if (currentIndex === QUESTIONS.length - 1) {
         const missing = firstMissingIndex();
         if (missing !== -1) {
-          // This should not happen because we gate each step,
-          // but keep it harsh + safe.
           currentIndex = missing;
           renderQuestion();
-          inlineWarn.textContent = "You skipped something. Fix it. No shortcuts.";
+          inlineWarn.textContent = "Please answer this question to continue.";
           inlineWarn.classList.add("show");
           return;
         }
@@ -696,12 +819,9 @@
       renderQuestion();
     });
 
-    resetBtn.addEventListener("click", () => {
-      resetQuiz();
-    });
+    resetBtn.addEventListener("click", () => resetQuiz());
 
     restartBtn.addEventListener("click", () => {
-      // unlock nav buttons
       backBtn.disabled = false;
       nextBtn.disabled = false;
       resetQuiz();
@@ -712,7 +832,7 @@
       if (missing !== -1) {
         currentIndex = missing;
         renderQuestion();
-        inlineWarn.textContent = "Finish the quiz first. Sharing half-done work is embarrassing.";
+        inlineWarn.textContent = "Please finish the quiz before sharing your score.";
         inlineWarn.classList.add("show");
         return;
       }
@@ -729,471 +849,9 @@
           shareBtn.textContent = "Copied!";
           setTimeout(() => shareBtn.textContent = "Share score", 1200);
         }
-      } catch (e) {
-        // ignore
-      }
+      } catch (e) {}
     });
 
-    // ===== Init =====
-    renderQuestion();
-  </script>
-</body>
-</html>
-</head>
-
-<body>
-  <header class="topbar">
-    <div class="brand">Ocean Blueprint</div>
-    <nav class="nav">
-      <a class="nav-btn" href="index.html">Home</a>
-      <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
-      <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
-      <a class="nav-btn" href="solutions.html">Solutions</a>
-      <a class="nav-btn" href="take-action.html">Take action</a>
-      <a class="nav-btn" href="game.html">Game</a>
-    </nav>
-  </header>
-
-  <main class="page">
-
-    <section class="quiz-hero">
-      <div class="quiz-hero-inner">
-        <h1>How Much Do <span style="color: rgba(120,190,255,0.95);">YOU</span> Contribute to Ocean Acidification?</h1>
-        <p>
-          Choose one answer per question. Add up your points.
-          Don’t rationalize. Pick what you actually do.
-        </p>
-      </div>
-    </section>
-
-    <section class="quiz-wrap">
-      <div class="quiz-head">
-        <h2>Quick reality check</h2>
-        <p class="note">
-          This isn’t about guilt. It’s about honesty → then action.
-          If you skip, you’re not “busy,” you’re dodging.
-        </p>
-      </div>
-
-      <form id="quiz" class="quiz-one">
-
-        <div class="quiz-progress">
-          <div class="quiz-progress-top">
-            <div class="quiz-progress-title">Question <span id="qNum">1</span> / 15</div>
-            <div class="quiz-progress-mini" id="qCat">—</div>
-          </div>
-          <div class="quiz-progress-bar">
-            <div class="quiz-progress-fill" id="progressFill"></div>
-          </div>
-        </div>
-
-        <section class="quiz-card" aria-live="polite">
-          <h3 class="q-title" id="questionText">—</h3>
-          <div class="answers" id="answersWrap"></div>
-
-          <div class="inline-warn" id="inlineWarn">
-            Pick an answer. You’re not allowed to “next” your way out of accountability.
-          </div>
-
-          <div class="quiz-actions">
-            <button class="btn" type="button" id="back">Back</button>
-            <button class="btn btn-primary" type="button" id="next">Next</button>
-            <button class="btn" type="button" id="reset">Reset</button>
-          </div>
-
-          <div class="result" id="result">
-            <div class="result-top">
-              <div class="score" id="scoreText">Score: 0</div>
-              <div class="badge" id="badgeText">—</div>
-            </div>
-            <p id="msg"></p>
-            <div class="warn" id="nextStep"></div>
-            <div class="small" id="meta"></div>
-
-            <div class="quiz-actions" style="margin-top: 12px;">
-              <button class="btn btn-primary" type="button" id="share">Share score</button>
-              <button class="btn" type="button" id="restart">Restart quiz</button>
-            </div>
-          </div>
-        </section>
-
-      </form>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>© <span id="year"></span> Ocean Blueprint</p>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // ===== Questions (edit text here) =====
-    const QUESTIONS = [
-      { id: "q1",  cat: "Transportation", text: "1. How do you usually commute short distances (<3 miles)?",
-        opts: [
-          { label: "A. Walk / bike (0 pts)", pts: 0 },
-          { label: "B. Public transport (1 pt)", pts: 1 },
-          { label: "C. Car with others (2 pts)", pts: 2 },
-          { label: "D. Car alone (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q2",  cat: "Transportation", text: "2. How many flights do you take per year?",
-        opts: [
-          { label: "A. 0–1 (0 pts)", pts: 0 },
-          { label: "B. 2–3 (2 pts)", pts: 2 },
-          { label: "C. 4–6 (3 pts)", pts: 3 },
-          { label: "D. 7+ (4 pts)", pts: 4 },
-        ]
-      },
-      { id: "q3",  cat: "Transportation", text: "3. What type of car do you mostly ride in?",
-        opts: [
-          { label: "A. No car / EV (0 pts)", pts: 0 },
-          { label: "B. Hybrid (1 pt)", pts: 1 },
-          { label: "C. Small gas car (2 pts)", pts: 2 },
-          { label: "D. SUV / truck (3 pts)", pts: 3 },
-        ]
-      },
-
-      { id: "q4",  cat: "Diet", text: "4. How often do you eat red meat?",
-        opts: [
-          { label: "A. Never (0 pts)", pts: 0 },
-          { label: "B. 1–2× / week (1 pt)", pts: 1 },
-          { label: "C. 3–5× / week (2 pts)", pts: 2 },
-          { label: "D. Daily (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q5",  cat: "Diet", text: "5. How often do you eat seafood?",
-        opts: [
-          { label: "A. Sustainably sourced only (0 pts)", pts: 0 },
-          { label: "B. Occasionally, unsure source (1 pt)", pts: 1 },
-          { label: "C. Often, no attention to source (2 pts)", pts: 2 },
-          { label: "D. Rarely think about it at all (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q6",  cat: "Diet", text: "6. How much food do you waste?",
-        opts: [
-          { label: "A. Almost none (0 pts)", pts: 0 },
-          { label: "B. Some leftovers weekly (1 pt)", pts: 1 },
-          { label: "C. Throw food away often (2 pts)", pts: 2 },
-          { label: "D. Don’t track it at all (3 pts)", pts: 3 },
-        ]
-      },
-
-      { id: "q7",  cat: "Energy & Consumption", text: "7. How is your home powered?",
-        opts: [
-          { label: "A. Renewable electricity (0 pts)", pts: 0 },
-          { label: "B. Partial renewable mix (1 pt)", pts: 1 },
-          { label: "C. Mostly fossil fuel (2 pts)", pts: 2 },
-          { label: "D. I don’t know / don’t care (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q8",  cat: "Energy & Consumption", text: "8. How often do you buy new clothes?",
-        opts: [
-          { label: "A. Rarely / secondhand (0 pts)", pts: 0 },
-          { label: "B. Seasonally (1 pt)", pts: 1 },
-          { label: "C. Monthly (2 pts)", pts: 2 },
-          { label: "D. Fast fashion regularly (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q9",  cat: "Energy & Consumption", text: "9. How long are your showers?",
-        opts: [
-          { label: "A. <5 minutes (0 pts)", pts: 0 },
-          { label: "B. 5–10 minutes (1 pt)", pts: 1 },
-          { label: "C. 10–20 minutes (2 pts)", pts: 2 },
-          { label: "D. I lose track of time (3 pts)", pts: 3 },
-        ]
-      },
-
-      { id: "q10", cat: "Waste & Pollution", text: "10. How consistently do you recycle correctly?",
-        opts: [
-          { label: "A. Always (0 pts)", pts: 0 },
-          { label: "B. Usually (1 pt)", pts: 1 },
-          { label: "C. Sometimes (2 pts)", pts: 2 },
-          { label: "D. Rarely / never (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q11", cat: "Waste & Pollution", text: "11. What do you do with chemicals (paint, cleaners, oil)?",
-        opts: [
-          { label: "A. Proper disposal (0 pts)", pts: 0 },
-          { label: "B. Try to be careful (1 pt)", pts: 1 },
-          { label: "C. Occasionally down the drain (2 pts)", pts: 2 },
-          { label: "D. Down the drain / trash (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q12", cat: "Waste & Pollution", text: "12. How often do you use single-use plastics?",
-        opts: [
-          { label: "A. Almost never (0 pts)", pts: 0 },
-          { label: "B. Sometimes (1 pt)", pts: 1 },
-          { label: "C. Often (2 pts)", pts: 2 },
-          { label: "D. Constantly (3 pts)", pts: 3 },
-        ]
-      },
-
-      { id: "q13", cat: "Awareness & Action", text: "13. How often do you think about ocean acidification?",
-        opts: [
-          { label: "A. Regularly (0 pts)", pts: 0 },
-          { label: "B. Occasionally (1 pt)", pts: 1 },
-          { label: "C. Rarely (2 pts)", pts: 2 },
-          { label: "D. Never (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q14", cat: "Awareness & Action", text: "14. Have you ever taken action to reduce your CO₂ footprint?",
-        opts: [
-          { label: "A. Multiple actions (0 pts)", pts: 0 },
-          { label: "B. One or two (1 pt)", pts: 1 },
-          { label: "C. Thought about it (2 pts)", pts: 2 },
-          { label: "D. No (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q15", cat: "Awareness & Action", text: "15. When faced with climate information, your reaction is:",
-        opts: [
-          { label: "A. Change behavior (0 pts)", pts: 0 },
-          { label: "B. Share / talk about it (1 pt)", pts: 1 },
-          { label: "C. Feel concerned but passive (2 pts)", pts: 2 },
-          { label: "D. Ignore / dismiss (3 pts)", pts: 3 },
-        ]
-      },
-    ];
-
-    // ===== DOM =====
-    const quizEl = document.getElementById("quiz");
-    const qNumEl = document.getElementById("qNum");
-    const qCatEl = document.getElementById("qCat");
-    const progressFill = document.getElementById("progressFill");
-
-    const questionText = document.getElementById("questionText");
-    const answersWrap = document.getElementById("answersWrap");
-
-    const backBtn = document.getElementById("back");
-    const nextBtn = document.getElementById("next");
-    const resetBtn = document.getElementById("reset");
-
-    const inlineWarn = document.getElementById("inlineWarn");
-
-    const result = document.getElementById("result");
-    const scoreText = document.getElementById("scoreText");
-    const badgeText = document.getElementById("badgeText");
-    const msg = document.getElementById("msg");
-    const nextStep = document.getElementById("nextStep");
-    const meta = document.getElementById("meta");
-    const shareBtn = document.getElementById("share");
-    const restartBtn = document.getElementById("restart");
-
-    // ===== State =====
-    let currentIndex = 0;
-    const answers = {}; // { qid: pts }
-
-    function rating(total){
-      if (total <= 10) {
-        return {
-          badge: "Ocean Ally (0–10)",
-          text: "You’re actively reducing acidification pressure. Keep going — and lead others.",
-          step: "Next step: pick ONE thing you’ll change this week (transport, diet, energy, waste). Make it measurable."
-        };
-      }
-      if (total <= 20) {
-        return {
-          badge: "Silent Contributor (11–20)",
-          text: "You’re part of the problem more than you think. Fixable. Start now.",
-          step: "Next step: choose 2 high-impact swaps: fewer flights / fewer car trips / less red meat. Stop pretending it’s complicated."
-        };
-      }
-      if (total <= 30) {
-        return {
-          badge: "High-Impact Polluter (21–30)",
-          text: "Your lifestyle directly accelerates ocean chemistry collapse.",
-          step: "Next step: make a real cut: reduce flights, reduce red meat, and stop fast fashion. Anything else is cosmetic."
-        };
-      }
-      return {
-        badge: "Acidification Accelerator (31+)",
-        text: "Your choices actively worsen ocean conditions. No excuses left.",
-        step: "Next step: you need structural change (transport + diet + consumption). Start with the biggest lever you control today."
-      };
-    }
-
-    function renderQuestion(){
-      inlineWarn.classList.remove("show");
-      result.classList.remove("show");
-
-      const q = QUESTIONS[currentIndex];
-
-      qNumEl.textContent = String(currentIndex + 1);
-      qCatEl.textContent = q.cat;
-
-      const pct = ((currentIndex) / QUESTIONS.length) * 100;
-      progressFill.style.width = `${pct}%`;
-
-      questionText.textContent = q.text;
-
-      answersWrap.innerHTML = "";
-
-      q.opts.forEach((opt, idx) => {
-        const id = `${q.id}_opt_${idx}`;
-
-        const label = document.createElement("label");
-        label.className = "opt";
-        label.setAttribute("for", id);
-
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = q.id;
-        input.id = id;
-        input.value = String(opt.pts);
-
-        // restore selection
-        if (answers[q.id] !== undefined && Number(input.value) === answers[q.id]) {
-          input.checked = true;
-        }
-
-        input.addEventListener("change", () => {
-          answers[q.id] = Number(input.value);
-          inlineWarn.classList.remove("show");
-
-          // auto-enable Next wording for last step
-          if (currentIndex === QUESTIONS.length - 1) {
-            nextBtn.textContent = "Finish";
-          }
-        });
-
-        const span = document.createElement("span");
-        span.textContent = opt.label;
-
-        label.appendChild(input);
-        label.appendChild(span);
-        answersWrap.appendChild(label);
-      });
-
-      backBtn.disabled = currentIndex === 0;
-
-      // Next button label
-      nextBtn.textContent = (currentIndex === QUESTIONS.length - 1) ? "Finish" : "Next";
-    }
-
-    function computeTotal(){
-      let total = 0;
-      for (const q of QUESTIONS) {
-        total += Number(answers[q.id] ?? 0);
-      }
-      return total;
-    }
-
-    function firstMissingIndex(){
-      for (let i = 0; i < QUESTIONS.length; i++) {
-        const qid = QUESTIONS[i].id;
-        if (answers[qid] === undefined) return i;
-      }
-      return -1;
-    }
-
-    function showResults(){
-      const total = computeTotal();
-      const r = rating(total);
-
-      progressFill.style.width = "100%";
-
-      result.classList.add("show");
-      scoreText.textContent = `Score: ${total}`;
-      badgeText.textContent = r.badge;
-      msg.textContent = r.text;
-      nextStep.textContent = r.step;
-      meta.textContent = "Be honest: your score reflects habits, not your intentions.";
-
-      // lock nav buttons
-      backBtn.disabled = true;
-      nextBtn.disabled = true;
-
-      // scroll result into view
-      result.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-
-    function resetQuiz(){
-      currentIndex = 0;
-      for (const k of Object.keys(answers)) delete answers[k];
-      backBtn.disabled = true;
-      nextBtn.disabled = false;
-      nextBtn.textContent = "Next";
-      renderQuestion();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    // ===== Events =====
-    backBtn.addEventListener("click", () => {
-      inlineWarn.classList.remove("show");
-      if (currentIndex > 0) currentIndex--;
-      renderQuestion();
-    });
-
-    nextBtn.addEventListener("click", () => {
-      const q = QUESTIONS[currentIndex];
-
-      // don’t let them proceed without answering current question
-      if (answers[q.id] === undefined) {
-        inlineWarn.classList.add("show");
-        return;
-      }
-
-      // last question -> validate all answered -> show results
-      if (currentIndex === QUESTIONS.length - 1) {
-        const missing = firstMissingIndex();
-        if (missing !== -1) {
-          // This should not happen because we gate each step,
-          // but keep it harsh + safe.
-          currentIndex = missing;
-          renderQuestion();
-          inlineWarn.textContent = "You skipped something. Fix it. No shortcuts.";
-          inlineWarn.classList.add("show");
-          return;
-        }
-        showResults();
-        return;
-      }
-
-      currentIndex++;
-      renderQuestion();
-    });
-
-    resetBtn.addEventListener("click", () => {
-      resetQuiz();
-    });
-
-    restartBtn.addEventListener("click", () => {
-      // unlock nav buttons
-      backBtn.disabled = false;
-      nextBtn.disabled = false;
-      resetQuiz();
-    });
-
-    shareBtn.addEventListener("click", async () => {
-      const missing = firstMissingIndex();
-      if (missing !== -1) {
-        currentIndex = missing;
-        renderQuestion();
-        inlineWarn.textContent = "Finish the quiz first. Sharing half-done work is embarrassing.";
-        inlineWarn.classList.add("show");
-        return;
-      }
-
-      const total = computeTotal();
-      const r = rating(total);
-      const text = `I scored ${total} on the Ocean Acidification quiz: ${r.badge}. Take it: ${window.location.href}`;
-
-      try {
-        if (navigator.share) {
-          await navigator.share({ title: "Ocean Acidification Quiz", text, url: window.location.href });
-        } else {
-          await navigator.clipboard.writeText(text);
-          shareBtn.textContent = "Copied!";
-          setTimeout(() => shareBtn.textContent = "Share score", 1200);
-        }
-      } catch (e) {
-        // ignore
-      }
-    });
-
-    // ===== Init =====
     renderQuestion();
   </script>
 </body>
