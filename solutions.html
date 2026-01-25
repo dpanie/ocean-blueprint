@@ -6,10 +6,14 @@
   <title>Solutions | Ocean Blueprint</title>
 
   <style>
+    /* ===============================
+       THEME + GLOBAL (matches OA page)
+       =============================== */
     :root{
       --bg: #071018;
       --text: rgba(255,255,255,0.92);
       --muted: rgba(255,255,255,0.78);
+      --muted2: rgba(255,255,255,0.70);
       --line: rgba(255,255,255,0.12);
       --accent: #78beff;
       --accent2: rgba(120,190,255,0.18);
@@ -23,7 +27,7 @@
 
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       background:
         radial-gradient(1200px 900px at 70% 10%, rgba(120,190,255,0.14), transparent 55%),
         radial-gradient(900px 700px at 20% 80%, rgba(120,190,255,0.08), transparent 55%),
@@ -31,9 +35,18 @@
       color: var(--text);
       font-size: 18px;
       line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* ===== Topbar ===== */
+    a{ color:inherit; }
+    a:focus-visible{
+      outline: 3px solid rgba(120,190,255,0.55);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    /* ===== Topbar (shared across site) ===== */
     .topbar{
       position: sticky;
       top: 0;
@@ -42,24 +55,26 @@
       display:flex;
       align-items:center;
       justify-content: space-between;
+      gap: 14px;
       padding: 0 18px;
       background: rgba(7,16,24,0.74);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
     }
 
     .brand{
       font-weight: 750;
+      letter-spacing: 0.2px;
       font-size: 16px;
+      white-space: nowrap;
       display:flex;
       align-items:center;
       gap: 10px;
     }
-
     .brand-dot{
       width: 10px;
       height: 10px;
-      border-radius: 50%;
+      border-radius: 999px;
       background: var(--accent);
       box-shadow: 0 0 0 4px var(--accent2);
     }
@@ -68,23 +83,34 @@
       display:flex;
       gap: 8px;
       flex-wrap: wrap;
+      justify-content: flex-end;
     }
-
     .nav-btn{
       text-decoration:none;
-      color: var(--text);
-      font-size: 14px;
       padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.90);
+      font-size: 14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-
     .nav-btn:hover{
-      background: rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
     }
 
-    /* ===== Large hero (matches OA page) ===== */
+    /* ===== Page container (from OA page) ===== */
+    .page{
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 18px 0 42px;
+    }
+
+    /* ===============================
+       SOLUTIONS HERO (large, like OA page)
+       =============================== */
     .solutions-hero{
       width: 100vw;
       margin-left: calc(50% - 50vw);
@@ -92,69 +118,73 @@
       min-height: calc(100vh - 72px);
       display: grid;
       align-items: center;
-      text-align: center;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+
+      /* Uses the OA image first; keeps your original image name as a fallback layer */
       background:
-        linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.88)),
+        linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.88) 82%),
         radial-gradient(1000px 520px at 70% 18%, rgba(120,190,255,0.18), transparent 60%),
+        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=80"),
         url("assets/images/solution_background.jpg");
       background-size: cover;
       background-position: center;
-      box-shadow: var(--shadow);
     }
 
     .solutions-hero-inner{
+      padding: 44px 22px 28px;
+      text-align: center;
       max-width: 980px;
       margin: 0 auto;
-      padding: 44px 22px 28px;
     }
 
     .kicker{
       display:inline-flex;
       align-items:center;
       gap:10px;
+      color: rgba(255,255,255,0.82);
       font-size: 13px;
       letter-spacing: 0.4px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.82);
     }
-
     .kicker-dot{
       width: 10px;
       height: 10px;
-      border-radius: 50%;
+      border-radius: 999px;
       background: var(--accent);
       box-shadow: 0 0 0 4px var(--accent2);
     }
 
     .solutions-hero h1{
       margin: 14px 0 0;
-      font-size: clamp(42px, 6vw, 72px);
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.02;
       letter-spacing: -0.8px;
     }
 
     .solutions-hero p{
       margin: 18px auto 0;
-      max-width: 900px;
+      max-width: 980px;
+      color: rgba(255,255,255,0.90);
       font-size: clamp(20px, 2.2vw, 26px);
       line-height: 1.7;
-      color: var(--muted);
+      font-weight: 520;
     }
 
-    /* ===== Page container ===== */
-    .page{
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 38px 0 42px;
-    }
+    /* ===============================
+       YOUR ORIGINAL SOLUTIONS CSS (kept, just scaled for readability)
+       =============================== */
+    .section { margin-top: 10px; }
+    .section-spaced { margin-top: 38px; }
 
-    /* ===== Sections ===== */
-    .section-title{
+    .section-title {
       margin: 0 0 8px;
       font-size: 26px;
       color: rgba(255,255,255,0.92);
+      letter-spacing: -0.2px;
     }
 
-    .section-subtitle{
+    .section-subtitle {
       margin: 0 0 18px;
       color: rgba(255,255,255,0.72);
       font-size: 18px;
@@ -162,17 +192,13 @@
       max-width: 900px;
     }
 
-    .section-spaced{
-      margin-top: 38px;
-    }
-
-    .cards-3{
-      display:grid;
+    .cards-3 {
+      display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .sol-card{
+    .sol-card {
       border-radius: 18px;
       overflow: hidden;
       background: rgba(255,255,255,0.06);
@@ -180,117 +206,217 @@
       box-shadow: var(--shadow2);
     }
 
-    .sol-img{
+    .sol-img {
       height: 300px;
       background-size: cover;
       background-position: center;
     }
 
-    .sol-body{
-      padding: 14px 14px 16px;
-    }
+    .sol-body { padding: 14px 14px 16px; }
 
-    .sol-body h3{
+    .sol-body h3 {
       margin: 0 0 6px;
       font-size: 20px;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: -0.1px;
     }
 
-    .sol-tag{
+    .sol-tag {
       margin: 0 0 10px;
       font-size: 14px;
       color: rgba(255,255,255,0.65);
     }
 
-    .sol-body p{
+    .sol-body p {
       margin: 0 0 12px;
-      font-size: 16.5px;
-      line-height: 1.65;
       color: rgba(255,255,255,0.80);
+      line-height: 1.65;
+      font-size: 16.5px;
     }
 
-    .sol-links{
-      display:flex;
+    .sol-links {
+      display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    .sol-link{
-      text-decoration:none;
+    .sol-link {
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255,255,255,0.92);
       padding: 10px 12px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.20);
       background: rgba(0,0,0,0.22);
       font-size: 14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
 
-    .sol-link:hover{
+    .sol-link:hover {
       background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.35);
+      transform: translateY(-1px);
     }
 
-    @media (max-width: 980px){
-      .cards-3{ grid-template-columns: 1fr; }
-      .sol-img{ height: 170px; }
+    /* Responsive */
+    @media (max-width: 980px) {
+      .cards-3 { grid-template-columns: 1fr; }
+      .sol-img { height: 170px; }
     }
 
+    /* ===== Footer (matches OA page) ===== */
     .footer{
-      text-align:center;
+      text-align: center;
       padding: 18px 12px;
-      border-top: 1px solid var(--line);
+      border-top: 1px solid rgba(255,255,255,0.12);
       color: rgba(255,255,255,0.70);
       background: rgba(7,16,24,0.5);
+      backdrop-filter: blur(8px);
+      margin-top: 10px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .nav-btn, .sol-link{ transition: none; }
     }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand"><span class="brand-dot"></span>Ocean Blueprint</div>
-    <nav class="nav">
+    <div class="brand"><span class="brand-dot" aria-hidden="true"></span>Ocean Blueprint</div>
+    <nav class="nav" aria-label="Primary navigation">
       <a class="nav-btn" href="index.html">Home</a>
       <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
       <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
-      <a class="nav-btn" href="solutions.html">Solutions</a>
+      <a class="nav-btn" href="solutions.html" aria-current="page">Solutions</a>
       <a class="nav-btn" href="take-action.html">Take action</a>
       <a class="nav-btn" href="game.html">Game</a>
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="solutions-hero">
+  <!-- LARGE HERO -->
+  <section class="solutions-hero" aria-label="Solutions hero">
     <div class="solutions-hero-inner">
-      <div class="kicker"><span class="kicker-dot"></span>Responses to acidification</div>
+      <div class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Responses and innovations</div>
       <h1>Solutions</h1>
       <p>
-        Approaches that aim to reduce exposure, increase resilience, or address the underlying chemistry of ocean acidification.
-        Some are already in use; others are still being tested.
+        Solutions range from proven local actions to emerging technologies. This page highlights what is used today
+        and what is being tested for the future.
       </p>
     </div>
   </section>
 
   <main class="page">
-    <!-- EXISTING CONTENT UNCHANGED -->
     <!-- SECTION 1 -->
-    <section>
+    <section class="section" aria-label="Current, proven solutions">
       <h2 class="section-title">Current, proven solutions</h2>
       <p class="section-subtitle">
         Practical approaches that protect coastal ecosystems and reduce harm to shell-building species today.
       </p>
 
       <div class="cards-3">
-        <!-- cards unchanged -->
-        <!-- ... -->
+        <!-- Card 1 -->
+        <article class="sol-card">
+          <div class="sol-img" style='background-image:url("assets/images/eelgrass.jpg");'></div>
+          <div class="sol-body">
+            <h3>Eelgrass beds</h3>
+            <p class="sol-tag">Natural pH buffer • habitat restoration</p>
+            <p>
+              Seagrass meadows can locally shift carbonate chemistry by drawing down CO₂ during photosynthesis,
+              improving conditions for nearby shellfish—especially during daytime.
+            </p>
+            <div class="sol-links">
+              <a class="sol-link" href="https://spj.science.org/doi/10.34133/olar.0023" target="_blank" rel="noopener">Read the paper</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="sol-card">
+          <div class="sol-img" style='background-image:url("assets/images/hatchery.jpg");'></div>
+          <div class="sol-body">
+            <h3>Hatchery water treatment</h3>
+            <p class="sol-tag">Local alkalinity control • resilience for oysters</p>
+            <p>
+              Hatcheries can monitor intake water chemistry and adjust treatment to protect larvae during
+              vulnerable stages—reducing losses during corrosive events.
+            </p>
+            <div class="sol-links">
+              <a class="sol-link" href="https://www.nrdc.org/stories/great-oyster-crash" target="_blank" rel="noopener">Read the explainer</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="sol-card">
+          <div class="sol-img" style='background-image:url("assets/images/kelp-farm.jpg");'></div>
+          <div class="sol-body">
+            <h3>Kelp co-farming</h3>
+            <p class="sol-tag">Biological carbon uptake • co-benefits for aquaculture</p>
+            <p>
+              Seaweed can take up dissolved inorganic carbon, potentially raising local pH and supporting
+              nearby shellfish—when farm layout, flow, and timing are designed correctly.
+            </p>
+            <div class="sol-links">
+              <a class="sol-link" href="https://aslopubs.onlinelibrary.wiley.com/doi/pdf/10.1002/lno.10608" target="_blank" rel="noopener">Read the study (PDF)</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="section-spaced">
+    <!-- SECTION 2 -->
+    <section class="section section-spaced" aria-label="Emerging innovations">
       <h2 class="section-title">Emerging, promising innovations</h2>
       <p class="section-subtitle">
-        Larger-scale ideas that are actively researched, but still require careful testing and evaluation.
+        Bigger bets that may help at scale—worth watching, but not “magic fixes.”
       </p>
 
       <div class="cards-3">
-        <!-- cards unchanged -->
-        <!-- ... -->
+        <article class="sol-card">
+          <div class="sol-img" style='background-image:url("assets/images/electrochemical.jpg");'></div>
+          <div class="sol-body">
+            <h3>Electrochemical alkalinity</h3>
+            <p class="sol-tag">Ocean chemistry engineering • pilot stage</p>
+            <p>
+              Uses electrochemical processes to increase alkalinity (and/or remove CO₂). Promising in theory,
+              hard in practice: energy, cost, monitoring, and ecological risk all matter.
+            </p>
+            <div class="sol-links">
+              <a class="sol-link" href="take-action.html">Learn more</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="sol-card">
+          <div class="sol-img" style='background-image:url("assets/images/mineral.jpg");'></div>
+          <div class="sol-body">
+            <h3>Mineral ocean alkalinity enhancement</h3>
+            <p class="sol-tag">Crushed minerals • careful evaluation needed</p>
+            <p>
+              Adding minerals that dissolve and neutralize acidity could increase buffering capacity, but requires
+              strict controls to avoid unintended impacts.
+            </p>
+            <div class="sol-links">
+              <a class="sol-link" href="take-action.html">Learn more</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="sol-card">
+          <div class="sol-img" style='background-image:url("assets/images/seaweed.jpg");'></div>
+          <div class="sol-body">
+            <h3>Carbon removal via seaweed sinking</h3>
+            <p class="sol-tag">CDR concept • verification is the bottleneck</p>
+            <p>
+              Some approaches propose growing seaweed fast and transporting carbon to depth. The hard part is
+              proving permanence and avoiding ecosystem disruption.
+            </p>
+            <div class="sol-links">
+              <a class="sol-link" href="take-action.html">Learn more</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
   </main>
