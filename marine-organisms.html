@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Organisms Most Affected | Ocean Blueprint</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #071018;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.6;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(7,16,24,0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .topbar .brand { font-weight: 700; font-size: 16px; }
+    .nav { display: flex; gap: 8px; }
+    .nav-btn {
+      text-decoration: none;
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.90);
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.08); }
+
+    .hero {
+      height: 280px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.75)),
+        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80");
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 28px;
+    }
+    .hero h1 { font-size: clamp(32px, 5vw, 60px); margin: 0; }
+    .hero p { font-size: 18px; color: rgba(255,255,255,0.78); margin-top: 8px; }
+
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+    .organism {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .organism img {
+      width: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+      max-height: 220px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .organism h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+    .organism p {
+      margin: 0 0 6px;
+      color: rgba(255,255,255,0.80);
+      font-size: 16px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.70);
+      margin-top: 28px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">Ocean Blueprint</div>
+    <nav class="nav">
+      <a class="nav-btn" href="index.html">Home</a>
+      <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
+      <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
+      <a class="nav-btn" href="solutions.html">Solutions</a>
+      <a class="nav-btn" href="take-action.html">Take action</a>
+      <a class="nav-btn" href="organisms.html" aria-current="page">Affected organisms</a>
+    </nav>
+  </header>
+
+  <!-- Page Banner -->
+  <section class="hero">
+    <div>
+      <h1>Organisms Most Affected</h1>
+      <p>Learn which marine life is especially vulnerable to ocean acidification</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Oyster / Shellfish -->
+    <div class="organism">
+      <img src="https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg" alt="Oysters in shells">
+      <div>
+        <h2>Oysters & Shellfish</h2>
+        <p>Shellfish that build calcium carbonate shells — such as oysters, clams, and scallops — rely on carbonate ions that become less available in acidified waters. This can slow growth or reduce survival. :contentReference[oaicite:0]{index=0}</p>
+      </div>
+    </div>
+
+    <!-- Pteropods -->
+    <div class="organism">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Pteropod.jpg" alt="Pteropod sea butterfly">
+      <div>
+        <h2>Pteropods (Sea Butterflies)</h2>
+        <p>These tiny planktonic snails have thin aragonite shells that are especially vulnerable to dissolution in lower pH water. They are key food for many fish species, so impacts can ripple through food webs. :contentReference[oaicite:1]{index=1}</p>
+      </div>
+    </div>
+
+    <!-- Corals -->
+    <div class="organism">
+      <img src="https://images.pexels.com/photos/247600/pexels-photo-247600.jpeg" alt="Coral reef">
+      <div>
+        <h2>Coral Reefs</h2>
+        <p>Corals build massive calcium carbonate structures that form reef habitat. Acidification reduces their ability to grow and maintain skeletons, weakening reefs that support diverse marine life. :contentReference[oaicite:2]{index=2}</p>
+      </div>
+    </div>
+
+    <!-- Coccolithophores -->
+    <div class="organism">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Emiliania_huxleyi.jpg" alt="Emiliania huxleyi coccolithophore">
+      <div>
+        <h2>Coccolithophores</h2>
+        <p>These tiny calcifying phytoplankton help form marine carbon cycles. Acidification can reduce their calcification, altering biogeochemical processes and food availability for higher trophic levels. :contentReference[oaicite:3]{index=3}</p>
+      </div>
+    </div>
+
+    <!-- Sea Urchins -->
+    <div class="organism">
+      <img src="https://images.pexels.com/photos/14013416/pexels-photo-14013416.jpeg" alt="Sea urchin">
+      <div>
+        <h2>Sea Urchins & Echinoderms</h2>
+        <p>Sea urchins and similar species rely on calcified structures. Acidic conditions can slow skeletal formation and reduce larval survival, affecting their populations. :contentReference[oaicite:4]{index=4}</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Ocean Blueprint
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
