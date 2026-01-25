@@ -3,48 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ocean Blueprint | Home</title>
+  <title>Ocean Blueprint</title>
 
   <style>
     :root{
       --bg: #071018;
-      --panel: rgba(255,255,255,0.06);
-      --panel2: rgba(0,0,0,0.22);
       --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.72);
-      --muted2: rgba(255,255,255,0.62);
+      --muted: rgba(255,255,255,0.78);
       --line: rgba(255,255,255,0.12);
       --accent: #78beff;
-      --accent2: rgba(120,190,255,0.18);
+      --accent-soft: rgba(120,190,255,0.18);
       --shadow: 0 22px 70px rgba(0,0,0,0.45);
-      --shadow2: 0 10px 26px rgba(0,0,0,0.35);
-      --radius: 18px;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+
     body{
       margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       background:
         radial-gradient(1200px 900px at 70% 10%, rgba(120,190,255,0.14), transparent 55%),
         radial-gradient(900px 700px at 20% 80%, rgba(120,190,255,0.08), transparent 55%),
         var(--bg);
       color: var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       font-size: 18px;
       line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
     }
 
-    a{ color:inherit; }
-    a:focus-visible{
-      outline: 3px solid rgba(120,190,255,0.55);
-      outline-offset: 3px;
-      border-radius: 10px;
-    }
-
-    /* ===== Topbar (matches OA page) ===== */
+    /* ===== Topbar (shared with OA page) ===== */
     .topbar{
       position: sticky;
       top: 0;
@@ -53,228 +40,105 @@
       display:flex;
       align-items:center;
       justify-content: space-between;
-      gap: 14px;
       padding: 0 18px;
       background: rgba(7,16,24,0.74);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.10);
+      border-bottom: 1px solid var(--line);
     }
+
     .brand{
       font-weight: 750;
-      letter-spacing: 0.2px;
       font-size: 16px;
-      white-space: nowrap;
       display:flex;
       align-items:center;
       gap: 10px;
     }
-    .brand-mark{
+
+    .brand-dot{
       width: 10px;
       height: 10px;
-      border-radius: 999px;
+      border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent2);
+      box-shadow: 0 0 0 4px var(--accent-soft);
     }
+
     .nav{
       display:flex;
       gap: 8px;
       flex-wrap: wrap;
-      justify-content: flex-end;
     }
+
     .nav-btn{
       text-decoration:none;
+      color: var(--text);
+      font-size: 14px;
       padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.90);
-      font-size: 14px;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .nav-btn:hover{
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,255,255,0.26);
-      transform: translateY(-1px);
     }
 
-    /* ===== FULL-BLEED HOME HERO (same vibe as OA hero) ===== */
+    .nav-btn:hover{
+      background: rgba(255,255,255,0.10);
+    }
+
+    /* ===== Minimal Home Hero ===== */
     .home-hero{
       width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
       min-height: calc(100vh - 72px);
       display: grid;
-      align-items: center;
-      overflow: hidden;
-      box-shadow: var(--shadow);
+      place-items: center;
+      text-align: center;
       background:
-        linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.88) 82%),
-        radial-gradient(1000px 520px at 70% 18%, rgba(120,190,255,0.18), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.85)),
         url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80");
       background-size: cover;
       background-position: center;
+      box-shadow: var(--shadow);
     }
 
-    .home-hero-inner{
-      padding: 52px 22px 18px;
-      text-align: center;
-      max-width: 1020px;
-      margin: 0 auto;
-    }
-
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      color: rgba(255,255,255,0.82);
-      font-size: 13px;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-    }
-    .kicker-dot{
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent2);
+    .home-inner{
+      max-width: 900px;
+      padding: 40px 22px;
     }
 
     .home-title{
-      margin: 14px 0 0;
-      font-size: clamp(54px, 7vw, 110px);
-      line-height: 0.95;
-      letter-spacing: -1.1px;
-      font-weight: 900;
-    }
-
-    .accent{ color: var(--accent); }
-
-    .home-sub{
-      margin: 18px auto 0;
-      max-width: 900px;
-      color: rgba(255,255,255,0.88);
-      font-size: clamp(20px, 2.3vw, 30px);
-      line-height: 1.75;
-      font-weight: 520;
-    }
-
-    .badge-row{
-      display:flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 16px;
-    }
-    .badge{
-      font-size: 13.5px;
-      color: rgba(255,255,255,0.86);
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.06);
-      padding: 8px 12px;
-      border-radius: 999px;
-      backdrop-filter: blur(6px);
-    }
-    .badge strong{ color: rgba(255,255,255,0.95); }
-
-    /* ===== CTA buttons (styled like OA buttons, but bigger) ===== */
-    .btn-row{
-      display:flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 22px;
-    }
-    .btn{
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 14px 18px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.22);
-      background: rgba(0,0,0,0.22);
-      color: rgba(255,255,255,0.92);
-      font-size: 16px;
-      font-weight: 750;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .btn:hover{
-      background: rgba(255,255,255,0.10);
-      border-color: rgba(255,255,255,0.35);
-      transform: translateY(-1px);
-    }
-    .btn-primary{
-      border-color: rgba(120,190,255,0.45);
-      background: rgba(120,190,255,0.14);
-    }
-
-    /* ===== Quick cards (matches OA hero quick cards) ===== */
-    .card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.06);
-      box-shadow: var(--shadow2);
-      padding: 16px 16px 18px;
-    }
-    .card-title{
-      margin: 0 0 8px;
-      color: rgba(255,255,255,0.92);
-      font-weight: 800;
-      font-size: 15px;
-      letter-spacing: 0.1px;
-    }
-    .card-text{
       margin: 0;
-      color: rgba(255,255,255,0.80);
-      font-size: 16.5px;
-      line-height: 1.65;
+      font-size: clamp(56px, 7vw, 110px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -1px;
     }
 
-    .home-quick{
-      margin: 18px auto 0;
-      max-width: 1040px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      padding: 0 18px 30px;
-    }
-    @media (max-width: 950px){
-      .home-quick{ grid-template-columns: 1fr; }
+    .home-subtitle{
+      margin-top: 18px;
+      font-size: clamp(22px, 2.4vw, 30px);
+      color: var(--muted);
+      line-height: 1.7;
     }
 
-    /* ===== Footer (matches OA page) ===== */
+    /* ===== Footer ===== */
     .footer{
       text-align: center;
       padding: 18px 12px;
-      margin-top: 0;
-      border-top: 1px solid rgba(255,255,255,0.12);
+      border-top: 1px solid var(--line);
       color: rgba(255,255,255,0.70);
       background: rgba(7,16,24,0.5);
-      backdrop-filter: blur(10px);
-    }
-
-    /* ===== Reduced motion ===== */
-    @media (prefers-reduced-motion: reduce){
-      .nav-btn, .btn{ transition: none; }
-    }
-
-    /* ===== Small screens ===== */
-    @media (max-width: 700px){
-      body{ font-size: 17px; }
-      .home-title{ font-size: clamp(44px, 11vw, 72px); }
-      .home-sub{ font-size: 20px; }
-      .btn{ font-size: 15px; padding: 13px 16px; }
-      .badge{ font-size: 13px; }
-      .card-text{ font-size: 16px; }
+      backdrop-filter: blur(8px);
     }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Ocean Blueprint</div>
-    <nav class="nav" aria-label="Primary navigation">
-      <a class="nav-btn" href="index.html" aria-current="page">Home</a>
+    <div class="brand">
+      <span class="brand-dot"></span>
+      Ocean Blueprint
+    </div>
+    <nav class="nav">
+      <a class="nav-btn" href="index.html">Home</a>
       <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
       <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
       <a class="nav-btn" href="solutions.html">Solutions</a>
@@ -284,49 +148,12 @@
   </header>
 
   <main>
-    <section class="home-hero" aria-label="Ocean Blueprint home hero">
-      <div class="home-hero-inner">
-        <div class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Learn • Explore • Act</div>
-
-        <h1 class="home-title">Ocean <span class="accent">Blueprint</span></h1>
-
-        <p class="home-sub">
-          A clear, student-friendly guide to ocean acidification—what it is, why it matters, and what people can do next.
+    <section class="home-hero" aria-label="Ocean Blueprint home">
+      <div class="home-inner">
+        <h1 class="home-title">Ocean Blueprint</h1>
+        <p class="home-subtitle">
+          A student-led ocean acidification awareness campaign
         </p>
-
-        <div class="badge-row" aria-label="Site highlights">
-          <div class="badge"><strong>Start</strong>: definitions & core chemistry</div>
-          <div class="badge"><strong>Then</strong>: impacts on ecosystems & people</div>
-          <div class="badge"><strong>Next</strong>: solutions & action steps</div>
-        </div>
-
-        <div class="btn-row" aria-label="Primary calls to action">
-          <a class="btn btn-primary" href="what-is-acidification.html">Start here: What is OA?</a>
-          <a class="btn" href="take-action.html">Take action</a>
-        </div>
-      </div>
-
-      <div class="home-quick" aria-label="Quick navigation cards">
-        <div class="card">
-          <p class="card-title">1) Build the foundation</p>
-          <p class="card-text">
-            Learn the definition, the pH concept, and the carbonate-system shift—without jumping straight to impacts.
-          </p>
-        </div>
-
-        <div class="card">
-          <p class="card-title">2) See why it matters</p>
-          <p class="card-text">
-            Connect the chemistry to real outcomes for marine life, fisheries, and coastal communities.
-          </p>
-        </div>
-
-        <div class="card">
-          <p class="card-title">3) Explore solutions</p>
-          <p class="card-text">
-            Compare approaches—from cutting CO₂ emissions to local monitoring, restoration, and mitigation ideas.
-          </p>
-        </div>
       </div>
     </section>
   </main>
