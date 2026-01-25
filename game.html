@@ -127,7 +127,7 @@
     }
 
     /* ===============================
-       QUIZ HERO (full-bleed like OA, keep your image)
+       QUIZ HERO (full-bleed)
        =============================== */
     .quiz-hero{
       width: 100vw;
@@ -445,9 +445,9 @@
     <section class="quiz-hero" aria-label="Quiz introduction">
       <div class="quiz-hero-inner">
         <div class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Interactive quiz</div>
-        <h1>How do everyday choices connect to ocean acidification?</h1>
+        <h1>What choices most affect your ocean impact?</h1>
         <p>
-          Choose one answer per question. At the end, you’ll see a score and a few practical next steps.
+          Ten quick questions. No math required. At the end, you’ll get a score and a few high-impact next steps.
         </p>
       </div>
     </section>
@@ -455,16 +455,16 @@
     <section class="page">
       <section class="quiz-wrap">
         <div class="quiz-head">
-          <h2>Quick check-in</h2>
+          <h2>How it works</h2>
           <p class="note">
-            This quiz is a simple way to reflect on habits that affect emissions and ocean chemistry. It’s not a judgment—just a starting point.
+            Pick the answer that matches what you do most of the time. The scoring is hidden so people focus on choices, not gaming the result.
           </p>
         </div>
 
         <form id="quiz" class="quiz-one">
           <div class="quiz-progress">
             <div class="quiz-progress-top">
-              <div class="quiz-progress-title">Question <span id="qNum">1</span> / 15</div>
+              <div class="quiz-progress-title">Question <span id="qNum">1</span> / <span id="qTotal">10</span></div>
               <div class="quiz-progress-mini" id="qCat">—</div>
             </div>
             <div class="quiz-progress-bar">
@@ -513,136 +513,125 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ===== Questions =====
+    // =========================================================
+    // 10 QUESTIONS — POINTS HIDDEN (labels show NO numbers)
+    // =========================================================
     const QUESTIONS = [
-      { id: "q1",  cat: "Transportation", text: "1. How do you usually commute short distances (<3 miles)?",
+      {
+        id: "q1",
+        cat: "Transportation",
+        text: "1. For most short trips (under ~3 miles), what do you usually do?",
         opts: [
-          { label: "A. Walk / bike (0 pts)", pts: 0 },
-          { label: "B. Public transport (1 pt)", pts: 1 },
-          { label: "C. Car with others (2 pts)", pts: 2 },
-          { label: "D. Car alone (3 pts)", pts: 3 },
+          { label: "Walk or bike", pts: 0 },
+          { label: "Public transit", pts: 1 },
+          { label: "Carpool or shared ride", pts: 2 },
+          { label: "Drive alone", pts: 3 },
         ]
       },
-      { id: "q2",  cat: "Transportation", text: "2. How many flights do you take per year?",
+      {
+        id: "q2",
+        cat: "Transportation",
+        text: "2. About how many flights do you take in a typical year?",
         opts: [
-          { label: "A. 0–1 (0 pts)", pts: 0 },
-          { label: "B. 2–3 (2 pts)", pts: 2 },
-          { label: "C. 4–6 (3 pts)", pts: 3 },
-          { label: "D. 7+ (4 pts)", pts: 4 },
+          { label: "0–1", pts: 0 },
+          { label: "2–3", pts: 2 },
+          { label: "4–6", pts: 3 },
+          { label: "7+", pts: 4 },
         ]
       },
-      { id: "q3",  cat: "Transportation", text: "3. What type of car do you mostly ride in?",
+      {
+        id: "q3",
+        cat: "Home energy",
+        text: "3. What best describes your home electricity plan or source?",
         opts: [
-          { label: "A. No car / EV (0 pts)", pts: 0 },
-          { label: "B. Hybrid (1 pt)", pts: 1 },
-          { label: "C. Small gas car (2 pts)", pts: 2 },
-          { label: "D. SUV / truck (3 pts)", pts: 3 },
+          { label: "Mostly renewable (or a green-energy plan)", pts: 0 },
+          { label: "A mix (some renewables, not sure how much)", pts: 1 },
+          { label: "Mostly fossil-based", pts: 2 },
+          { label: "I don’t know and haven’t checked", pts: 3 },
         ]
       },
-
-      { id: "q4",  cat: "Diet", text: "4. How often do you eat red meat?",
+      {
+        id: "q4",
+        cat: "Home energy",
+        text: "4. In winter or summer, how do you handle heating/cooling most of the time?",
         opts: [
-          { label: "A. Never (0 pts)", pts: 0 },
-          { label: "B. 1–2× / week (1 pt)", pts: 1 },
-          { label: "C. 3–5× / week (2 pts)", pts: 2 },
-          { label: "D. Daily (3 pts)", pts: 3 },
+          { label: "I use efficient settings (layering, moderate thermostat, fans)", pts: 0 },
+          { label: "Somewhat careful, but not consistent", pts: 1 },
+          { label: "I keep it very warm/cool for comfort", pts: 2 },
+          { label: "I rarely think about it at all", pts: 3 },
         ]
       },
-      { id: "q5",  cat: "Diet", text: "5. How often do you eat seafood?",
+      {
+        id: "q5",
+        cat: "Food",
+        text: "5. How often do you eat beef or lamb (the highest-impact meats)?",
         opts: [
-          { label: "A. Sustainably sourced only (0 pts)", pts: 0 },
-          { label: "B. Occasionally, unsure source (1 pt)", pts: 1 },
-          { label: "C. Often, no attention to source (2 pts)", pts: 2 },
-          { label: "D. Rarely think about it at all (3 pts)", pts: 3 },
+          { label: "Never or almost never", pts: 0 },
+          { label: "1–2 times a week", pts: 1 },
+          { label: "3–5 times a week", pts: 2 },
+          { label: "Most days", pts: 3 },
         ]
       },
-      { id: "q6",  cat: "Diet", text: "6. How much food do you waste?",
+      {
+        id: "q6",
+        cat: "Food",
+        text: "6. How much food do you throw away in a normal week?",
         opts: [
-          { label: "A. Almost none (0 pts)", pts: 0 },
-          { label: "B. Some leftovers weekly (1 pt)", pts: 1 },
-          { label: "C. Throw food away often (2 pts)", pts: 2 },
-          { label: "D. Don’t track it at all (3 pts)", pts: 3 },
+          { label: "Almost none (I plan meals / use leftovers)", pts: 0 },
+          { label: "A little (some leftovers go bad)", pts: 1 },
+          { label: "A noticeable amount", pts: 2 },
+          { label: "I don’t track it", pts: 3 },
         ]
       },
-
-      { id: "q7",  cat: "Energy & Consumption", text: "7. How is your home powered?",
+      {
+        id: "q7",
+        cat: "Consumption",
+        text: "7. When you need something (clothes, tech, accessories), what do you usually do first?",
         opts: [
-          { label: "A. Renewable electricity (0 pts)", pts: 0 },
-          { label: "B. Partial renewable mix (1 pt)", pts: 1 },
-          { label: "C. Mostly fossil fuel (2 pts)", pts: 2 },
-          { label: "D. I don’t know / don’t care (3 pts)", pts: 3 },
+          { label: "Repair / borrow / buy secondhand", pts: 0 },
+          { label: "Mix of secondhand and new", pts: 1 },
+          { label: "Usually buy new, but not often", pts: 2 },
+          { label: "Buy new frequently", pts: 3 },
         ]
       },
-      { id: "q8",  cat: "Energy & Consumption", text: "8. How often do you buy new clothes?",
+      {
+        id: "q8",
+        cat: "Waste",
+        text: "8. How often do you use single-use items (bottles, cups, bags, utensils)?",
         opts: [
-          { label: "A. Rarely / secondhand (0 pts)", pts: 0 },
-          { label: "B. Seasonally (1 pt)", pts: 1 },
-          { label: "C. Monthly (2 pts)", pts: 2 },
-          { label: "D. Fast fashion regularly (3 pts)", pts: 3 },
+          { label: "Rarely (I carry reusables)", pts: 0 },
+          { label: "Sometimes", pts: 1 },
+          { label: "Often", pts: 2 },
+          { label: "Most days", pts: 3 },
         ]
       },
-      { id: "q9",  cat: "Energy & Consumption", text: "9. How long are your showers?",
+      {
+        id: "q9",
+        cat: "Water & chemicals",
+        text: "9. What happens to chemicals around your home (cleaners, paint, oil, fertilizer)?",
         opts: [
-          { label: "A. <5 minutes (0 pts)", pts: 0 },
-          { label: "B. 5–10 minutes (1 pt)", pts: 1 },
-          { label: "C. 10–20 minutes (2 pts)", pts: 2 },
-          { label: "D. I lose track of time (3 pts)", pts: 3 },
+          { label: "Careful: proper disposal and minimal use", pts: 0 },
+          { label: "I try to be careful, but I’m not always sure", pts: 1 },
+          { label: "Sometimes they end up in trash/drains/runoff", pts: 2 },
+          { label: "I don’t really think about it", pts: 3 },
         ]
       },
-
-      { id: "q10", cat: "Waste & Pollution", text: "10. How consistently do you recycle correctly?",
+      {
+        id: "q10",
+        cat: "Action",
+        text: "10. In the past 6 months, which best describes your climate/ocean action?",
         opts: [
-          { label: "A. Always (0 pts)", pts: 0 },
-          { label: "B. Usually (1 pt)", pts: 1 },
-          { label: "C. Sometimes (2 pts)", pts: 2 },
-          { label: "D. Rarely / never (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q11", cat: "Waste & Pollution", text: "11. What do you do with chemicals (paint, cleaners, oil)?",
-        opts: [
-          { label: "A. Proper disposal (0 pts)", pts: 0 },
-          { label: "B. Try to be careful (1 pt)", pts: 1 },
-          { label: "C. Occasionally down the drain (2 pts)", pts: 2 },
-          { label: "D. Down the drain / trash (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q12", cat: "Waste & Pollution", text: "12. How often do you use single-use plastics?",
-        opts: [
-          { label: "A. Almost never (0 pts)", pts: 0 },
-          { label: "B. Sometimes (1 pt)", pts: 1 },
-          { label: "C. Often (2 pts)", pts: 2 },
-          { label: "D. Constantly (3 pts)", pts: 3 },
-        ]
-      },
-
-      { id: "q13", cat: "Awareness & Action", text: "13. How often do you think about ocean acidification?",
-        opts: [
-          { label: "A. Regularly (0 pts)", pts: 0 },
-          { label: "B. Occasionally (1 pt)", pts: 1 },
-          { label: "C. Rarely (2 pts)", pts: 2 },
-          { label: "D. Never (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q14", cat: "Awareness & Action", text: "14. Have you ever taken action to reduce your CO₂ footprint?",
-        opts: [
-          { label: "A. Multiple actions (0 pts)", pts: 0 },
-          { label: "B. One or two (1 pt)", pts: 1 },
-          { label: "C. Thought about it (2 pts)", pts: 2 },
-          { label: "D. No (3 pts)", pts: 3 },
-        ]
-      },
-      { id: "q15", cat: "Awareness & Action", text: "15. When faced with climate information, your reaction is:",
-        opts: [
-          { label: "A. Change behavior (0 pts)", pts: 0 },
-          { label: "B. Share / talk about it (1 pt)", pts: 1 },
-          { label: "C. Feel concerned but passive (2 pts)", pts: 2 },
-          { label: "D. Ignore / dismiss (3 pts)", pts: 3 },
+          { label: "I made a concrete change and stuck with it", pts: 0 },
+          { label: "I tried one change but it didn’t last", pts: 1 },
+          { label: "I’ve mostly learned/read, but not changed habits", pts: 2 },
+          { label: "I haven’t done anything specific", pts: 3 },
         ]
       },
     ];
 
     // ===== DOM =====
     const qNumEl = document.getElementById("qNum");
+    const qTotalEl = document.getElementById("qTotal");
     const qCatEl = document.getElementById("qCat");
     const progressFill = document.getElementById("progressFill");
 
@@ -668,32 +657,35 @@
     let currentIndex = 0;
     const answers = {}; // { qid: pts }
 
+    qTotalEl.textContent = String(QUESTIONS.length);
+
     function rating(total){
-      if (total <= 10) {
+      // For 10 questions (max ~31), keep ranges simple and readable.
+      if (total <= 8) {
         return {
-          badge: "Ocean Ally (0–10)",
-          text: "You’re already making choices that reduce pressure on ocean chemistry. Keep it up—and consider sharing one idea with someone else.",
-          step: "Next step: choose one habit to reinforce this week (e.g., a car-free trip, a lower-waste meal, or a power-saving change). Make it specific."
+          badge: "Low Impact",
+          text: "Your choices are already aligned with lower emissions. That matters for ocean chemistry.",
+          step: "Next step: pick one lever to strengthen (transport, food, or energy) and make it consistent for 2 weeks."
         };
       }
-      if (total <= 20) {
+      if (total <= 16) {
         return {
-          badge: "On the Path (11–20)",
-          text: "You’re doing some helpful things, and there’s room to improve. A couple of targeted changes can make a real difference.",
-          step: "Next step: pick two high-impact moves you can sustain (e.g., fewer solo car trips, fewer flights, less red meat, or less fast fashion)."
+          badge: "Moderate Impact",
+          text: "You’re doing some good things, but there are a few high-impact upgrades available.",
+          step: "Next step: choose two changes that are realistic to sustain (for example: fewer flights + less beef, or fewer solo drives + less new buying)."
         };
       }
-      if (total <= 30) {
+      if (total <= 24) {
         return {
-          badge: "High Impact (21–30)",
-          text: "Your current habits likely contribute noticeably to emissions. The good news: you can lower impact with a few consistent shifts.",
-          step: "Next step: choose one major lever to work on first (transport, diet, or consumption) and make one concrete plan for this month."
+          badge: "High Impact",
+          text: "Your habits likely contribute noticeably to emissions. The biggest wins come from a few major categories.",
+          step: "Next step: choose ONE category to tackle first (transport, food, or home energy) and make a specific plan for this month."
         };
       }
       return {
-        badge: "Very High Impact (31+)",
+        badge: "Very High Impact",
         text: "Your score suggests a higher footprint. If you want to lower it, focus on the biggest levers rather than small tweaks.",
-        step: "Next step: start with one structural change you can maintain (transport + diet + consumption), then add a second once it feels routine."
+        step: "Next step: start with one structural change you can maintain (e.g., fewer flights or less beef) and add a second once it becomes routine."
       };
     }
 
@@ -736,6 +728,7 @@
         });
 
         const span = document.createElement("span");
+        // IMPORTANT: label shows NO point values.
         span.textContent = opt.label;
 
         label.appendChild(input);
@@ -771,7 +764,7 @@
       badgeText.textContent = r.badge;
       msg.textContent = r.text;
       nextStep.textContent = r.step;
-      meta.textContent = "Note: this quiz is a simplified reflection tool—it’s not a scientific footprint calculator.";
+      meta.textContent = "This is a simplified reflection tool, not a precise footprint calculator.";
 
       backBtn.disabled = true;
       nextBtn.disabled = true;
@@ -839,11 +832,11 @@
 
       const total = computeTotal();
       const r = rating(total);
-      const text = `I scored ${total} on the Ocean Acidification quiz: ${r.badge}. Take it: ${window.location.href}`;
+      const text = `I got "${r.badge}" on the Ocean Blueprint quiz (score: ${total}). Try it: ${window.location.href}`;
 
       try {
         if (navigator.share) {
-          await navigator.share({ title: "Ocean Acidification Quiz", text, url: window.location.href });
+          await navigator.share({ title: "Ocean Blueprint Quiz", text, url: window.location.href });
         } else {
           await navigator.clipboard.writeText(text);
           shareBtn.textContent = "Copied!";
