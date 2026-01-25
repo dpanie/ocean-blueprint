@@ -1,161 +1,446 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Organisms Most Affected | Ocean Blueprint</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Most Affected Organisms | Ocean Blueprint</title>
 
   <style>
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #071018;
-      color: rgba(255,255,255,0.92);
-      line-height: 1.6;
+    :root{
+      --bg: #071018;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.78);
+      --muted2: rgba(255,255,255,0.70);
+      --line: rgba(255,255,255,0.12);
+      --accent: #78beff;
+      --accent2: rgba(120,190,255,0.18);
+      --shadow: 0 22px 70px rgba(0,0,0,0.45);
+      --shadow2: 0 10px 26px rgba(0,0,0,0.35);
+      --radius: 18px;
     }
-    .topbar {
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 900px at 70% 10%, rgba(120,190,255,0.14), transparent 55%),
+        radial-gradient(900px 700px at 20% 80%, rgba(120,190,255,0.08), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a{ color:inherit; }
+    a:focus-visible{
+      outline: 3px solid rgba(120,190,255,0.55);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    /* ===== Topbar ===== */
+    .topbar{
       position: sticky;
       top: 0;
-      display: flex;
+      z-index: 30;
+      height: 72px;
+      display:flex;
+      align-items:center;
       justify-content: space-between;
-      padding: 14px 18px;
-      background: rgba(7,16,24,0.8);
+      gap: 14px;
+      padding: 0 18px;
+      background: rgba(7,16,24,0.74);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.10);
     }
-    .topbar .brand { font-weight: 700; font-size: 16px; }
-    .nav { display: flex; gap: 8px; }
-    .nav-btn {
-      text-decoration: none;
-      padding: 8px 12px;
-      font-size: 14px;
-      border: 1px solid rgba(255,255,255,0.14);
+    .brand{
+      font-weight: 750;
+      letter-spacing: 0.2px;
+      font-size: 16px;
+      white-space: nowrap;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .brand-dot{
+      width: 10px;
+      height: 10px;
       border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent2);
+    }
+    .nav{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-btn{
+      text-decoration:none;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.04);
       color: rgba(255,255,255,0.90);
+      font-size: 14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    .nav-btn:hover { background: rgba(255,255,255,0.08); }
+    .nav-btn:hover{
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
+    }
 
-    .hero {
-      height: 280px;
+    /* ===== Page container ===== */
+    .page{
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 18px 0 42px;
+    }
+
+    /* ===== Full-bleed hero (like OA page) ===== */
+    .hero{
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      min-height: clamp(420px, 70vh, 760px);
       display: grid;
-      place-items: center;
-      text-align: center;
+      align-items: end;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+
       background:
-        linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.75)),
-        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80");
+        linear-gradient(180deg, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.86) 78%),
+        radial-gradient(1000px 520px at 70% 20%, rgba(120,190,255,0.18), transparent 60%),
+        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=80");
       background-size: cover;
       background-position: center;
-      margin-bottom: 28px;
     }
-    .hero h1 { font-size: clamp(32px, 5vw, 60px); margin: 0; }
-    .hero p { font-size: 18px; color: rgba(255,255,255,0.78); margin-top: 8px; }
 
-    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .hero-inner{
+      padding: 56px 22px 32px;
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-    .organism {
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color: rgba(255,255,255,0.86);
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .kicker-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(120,190,255,0.18);
+    }
+
+    h1{
+      margin: 14px 0 0;
+      font-size: clamp(40px, 5.2vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.9px;
+    }
+
+    .hero-sub{
+      margin: 16px auto 0;
+      max-width: 960px;
+      color: rgba(255,255,255,0.90);
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    /* ===== Section text ===== */
+    .section-spaced{ margin-top: 38px; }
+    .h2{
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.2px;
+      color: rgba(255,255,255,0.94);
+    }
+    .p{
+      margin: 12px 0 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 18px;
+      max-width: 980px;
+    }
+
+    /* ===== Two-column organism rows ===== */
+    .org-list{
+      margin-top: 18px;
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 18px;
-      padding: 22px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
+      gap: 16px;
     }
-    .organism img {
-      width: 100%;
-      border-radius: 14px;
-      object-fit: cover;
-      max-height: 220px;
+
+    .org{
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 16px;
+      border-radius: 22px;
+      overflow: hidden;
       border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      box-shadow: var(--shadow2);
     }
-    .organism h2 {
-      margin: 0 0 8px;
-      font-size: 24px;
+
+    .org-media{
+      position: relative;
+      min-height: 280px;
+      background: rgba(0,0,0,0.20);
     }
-    .organism p {
-      margin: 0 0 6px;
+
+    .org-media img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .org-body{
+      padding: 18px 18px 18px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+    }
+
+    .org-title{
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.2px;
+      color: rgba(255,255,255,0.95);
+      line-height: 1.2;
+    }
+
+    .org-meta{
+      margin: 0;
+      color: rgba(255,255,255,0.70);
+      font-size: 14px;
+      letter-spacing: 0.2px;
+    }
+
+    .org-desc{
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .org-bullets{
+      margin: 6px 0 0;
+      padding-left: 18px;
       color: rgba(255,255,255,0.80);
       font-size: 16px;
+      line-height: 1.6;
     }
+    .org-bullets li{ margin: 6px 0; }
 
-    footer {
+    /* ===== Footer ===== */
+    .footer{
       text-align: center;
-      padding: 18px;
+      padding: 18px 12px;
       border-top: 1px solid rgba(255,255,255,0.12);
       color: rgba(255,255,255,0.70);
-      margin-top: 28px;
+      background: rgba(7,16,24,0.5);
+      backdrop-filter: blur(8px);
+      margin-top: 10px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px){
+      .org{
+        grid-template-columns: 1fr;
+      }
+      .org-media{
+        min-height: 220px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .nav-btn{ transition: none; }
     }
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand">Ocean Blueprint</div>
-    <nav class="nav">
+    <div class="brand"><span class="brand-dot" aria-hidden="true"></span>Ocean Blueprint</div>
+    <nav class="nav" aria-label="Primary navigation">
       <a class="nav-btn" href="index.html">Home</a>
       <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
       <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
       <a class="nav-btn" href="solutions.html">Solutions</a>
       <a class="nav-btn" href="take-action.html">Take action</a>
-      <a class="nav-btn" href="organisms.html" aria-current="page">Affected organisms</a>
+      <a class="nav-btn" href="game.html">Game</a>
     </nav>
   </header>
 
-  <!-- Page Banner -->
-  <section class="hero">
-    <div>
-      <h1>Organisms Most Affected</h1>
-      <p>Learn which marine life is especially vulnerable to ocean acidification</p>
+  <!-- Full-bleed banner -->
+  <section class="hero" aria-label="Organisms most affected by ocean acidification">
+    <div class="hero-inner">
+      <div class="kicker"><span class="kicker-dot"></span> Marine life</div>
+      <h1>Which organisms are affected the most?</h1>
+      <p class="hero-sub">
+        Ocean acidification reduces carbonate ions in seawater, making it harder for many organisms to build and maintain shells or skeletons.
+        The groups below are especially sensitive because their structures are made of calcium carbonate.
+      </p>
     </div>
   </section>
 
-  <main class="container">
-    <!-- Oyster / Shellfish -->
-    <div class="organism">
-      <img src="https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg" alt="Oysters in shells">
-      <div>
-        <h2>Oysters & Shellfish</h2>
-        <p>Shellfish that build calcium carbonate shells — such as oysters, clams, and scallops — rely on carbonate ions that become less available in acidified waters. This can slow growth or reduce survival. :contentReference[oaicite:0]{index=0}</p>
-      </div>
-    </div>
+  <main class="page">
+    <section class="section-spaced" aria-label="Organisms list">
+      <h2 class="h2">High-sensitivity groups</h2>
+      <p class="p">
+        This page focuses on organisms where acidification directly interferes with calcification (shell/skeleton building) or early-life development.
+        Sensitivity still depends on local conditions like temperature, oxygen, food supply, and water mixing.
+      </p>
 
-    <!-- Pteropods -->
-    <div class="organism">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Pteropod.jpg" alt="Pteropod sea butterfly">
-      <div>
-        <h2>Pteropods (Sea Butterflies)</h2>
-        <p>These tiny planktonic snails have thin aragonite shells that are especially vulnerable to dissolution in lower pH water. They are key food for many fish species, so impacts can ripple through food webs. :contentReference[oaicite:1]{index=1}</p>
-      </div>
-    </div>
+      <div class="org-list">
 
-    <!-- Corals -->
-    <div class="organism">
-      <img src="https://images.pexels.com/photos/247600/pexels-photo-247600.jpeg" alt="Coral reef">
-      <div>
-        <h2>Coral Reefs</h2>
-        <p>Corals build massive calcium carbonate structures that form reef habitat. Acidification reduces their ability to grow and maintain skeletons, weakening reefs that support diverse marine life. :contentReference[oaicite:2]{index=2}</p>
-      </div>
-    </div>
+        <!-- 1) Pteropods -->
+        <article class="org">
+          <div class="org-media">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/LimacinaHelicinaNOAA.jpg?width=1400"
+              alt="A pelagic pteropod (sea butterfly) photographed by NOAA" />
+          </div>
+          <div class="org-body">
+            <h3 class="org-title">Pteropods (sea butterflies)</h3>
+            <p class="org-meta">Thin shells • important in cold-water food webs</p>
+            <p class="org-desc">
+              Pteropods are tiny swimming snails with very thin calcium-carbonate shells. When seawater becomes more corrosive,
+              their shells can dissolve or become harder to build—especially in high-latitude oceans where acidification can show up sooner.
+            </p>
+            <ul class="org-bullets">
+              <li>Shell dissolution risk increases in low-carbonate waters.</li>
+              <li>They’re a key prey item for fish and other animals in some regions.</li>
+            </ul>
+          </div>
+        </article>
 
-    <!-- Coccolithophores -->
-    <div class="organism">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Emiliania_huxleyi.jpg" alt="Emiliania huxleyi coccolithophore">
-      <div>
-        <h2>Coccolithophores</h2>
-        <p>These tiny calcifying phytoplankton help form marine carbon cycles. Acidification can reduce their calcification, altering biogeochemical processes and food availability for higher trophic levels. :contentReference[oaicite:3]{index=3}</p>
-      </div>
-    </div>
+        <!-- 2) Oysters -->
+        <article class="org">
+          <div class="org-media">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Oyster_reefs_(5687793456).jpg?width=1600"
+              alt="Oyster reef habitat" />
+          </div>
+          <div class="org-body">
+            <h3 class="org-title">Oysters</h3>
+            <p class="org-meta">Larvae are especially vulnerable • reef builders</p>
+            <p class="org-desc">
+              Oyster larvae need stable carbonate chemistry to form their first shells. Acidification can reduce survival and slow growth,
+              which matters both for ecosystems (reef habitat) and for aquaculture.
+            </p>
+            <ul class="org-bullets">
+              <li>Early life stages often show the strongest sensitivity.</li>
+              <li>Healthy reefs also support water filtration and coastal biodiversity.</li>
+            </ul>
+          </div>
+        </article>
 
-    <!-- Sea Urchins -->
-    <div class="organism">
-      <img src="https://images.pexels.com/photos/14013416/pexels-photo-14013416.jpeg" alt="Sea urchin">
-      <div>
-        <h2>Sea Urchins & Echinoderms</h2>
-        <p>Sea urchins and similar species rely on calcified structures. Acidic conditions can slow skeletal formation and reduce larval survival, affecting their populations. :contentReference[oaicite:4]{index=4}</p>
+        <!-- 3) Mussels -->
+        <article class="org">
+          <div class="org-media">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Mytilus_edulis_(live).jpg?width=1600"
+              alt="Blue mussels (Mytilus edulis) in an aquarium photograph" />
+          </div>
+          <div class="org-body">
+            <h3 class="org-title">Mussels</h3>
+            <p class="org-meta">Shell formation • growth and strength can change</p>
+            <p class="org-desc">
+              Mussels build shells from calcium carbonate. Under acidified conditions, they may spend more energy on maintaining shell material,
+              leaving less energy for growth and reproduction—especially when combined with other stressors like warming and low oxygen.
+            </p>
+            <ul class="org-bullets">
+              <li>Shell thickness and mechanical strength can be affected.</li>
+              <li>Impacts often depend on food availability and local water chemistry.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 4) Corals -->
+        <article class="org">
+          <div class="org-media">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Balanophyllia_elegans_-_stony-coral-close-up.jpg?width=1600"
+              alt="Close-up of a stony coral" />
+          </div>
+          <div class="org-body">
+            <h3 class="org-title">Stony corals</h3>
+            <p class="org-meta">Calcium-carbonate skeletons • reef structure</p>
+            <p class="org-desc">
+              Many reef-building corals deposit calcium-carbonate skeletons. Acidification can reduce calcification rates, which can weaken reef growth
+              and resilience—especially when heat stress is already causing bleaching.
+            </p>
+            <ul class="org-bullets">
+              <li>Lower carbonate availability can slow skeleton building.</li>
+              <li>Reefs protect coastlines and provide habitat for diverse marine life.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 5) Sea urchins -->
+        <article class="org">
+          <div class="org-media">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Sea_urchin_(29728247).jpg?width=1600"
+              alt="Sea urchin underwater" />
+          </div>
+          <div class="org-body">
+            <h3 class="org-title">Sea urchins</h3>
+            <p class="org-meta">Calcified structures • development can be sensitive</p>
+            <p class="org-desc">
+              Sea urchins have calcified parts and early life stages that can be sensitive to carbonate chemistry.
+              Acidification can alter larval development and may affect growth and survival depending on the species and conditions.
+            </p>
+            <ul class="org-bullets">
+              <li>Larval stages can be a bottleneck for population success.</li>
+              <li>Effects vary widely across species and habitats.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 6) Coccolithophores -->
+        <article class="org">
+          <div class="org-media">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Emiliania_huxleyi_coccolithophore_(PLoS).png?width=1400"
+              alt="Emiliania huxleyi coccolithophore (microscopy image)" />
+          </div>
+          <div class="org-body">
+            <h3 class="org-title">Coccolithophores (calcifying phytoplankton)</h3>
+            <p class="org-meta">Microscopic calcifiers • important in carbon cycling</p>
+            <p class="org-desc">
+              Coccolithophores are phytoplankton that produce tiny calcium-carbonate plates (coccoliths).
+              Their response to changing chemistry is complex and species-specific, but shifts can matter because these organisms influence ocean carbon cycling.
+            </p>
+            <ul class="org-bullets">
+              <li>Responses differ by species, nutrients, and light conditions.</li>
+              <li>They play a role in marine food webs and biogeochemistry.</li>
+            </ul>
+          </div>
+        </article>
+
       </div>
-    </div>
+    </section>
   </main>
 
-  <footer>
-    © <span id="year"></span> Ocean Blueprint
+  <footer class="footer">
+    <p>© <span id="year"></span> Ocean Blueprint</p>
   </footer>
 
   <script>
