@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,13 +7,13 @@
 
   <style>
     /* ===============================
-       THEME + GLOBAL (matches OA site)
+       THEME + GLOBAL (matches OA pages)
        =============================== */
     :root{
       --bg: #071018;
       --text: rgba(255,255,255,0.92);
       --muted: rgba(255,255,255,0.78);
-      --muted2: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.68);
       --line: rgba(255,255,255,0.12);
       --accent: #78beff;
       --accent2: rgba(120,190,255,0.18);
@@ -40,7 +39,7 @@
       text-rendering: optimizeLegibility;
     }
 
-    a{ color:inherit; }
+    a{ color: inherit; }
     a:focus-visible{
       outline: 3px solid rgba(120,190,255,0.55);
       outline-offset: 3px;
@@ -109,32 +108,7 @@
       padding: 18px 0 42px;
     }
 
-    /* ===============================
-       FULL-BLEED HERO BANNER
-       =============================== */
-    .why-hero{
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      min-height: 520px;
-      display: grid;
-      align-items: end;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.86) 82%),
-        radial-gradient(1000px 520px at 70% 18%, rgba(120,190,255,0.18), transparent 60%),
-        url("assets/images/why-bg.jpg");
-      background-size: cover;
-      background-position: center;
-    }
-
-    .why-hero-inner{
-      padding: 44px 22px 34px;
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
+    /* ===== Kicker ===== */
     .kicker{
       display:inline-flex;
       align-items:center;
@@ -152,18 +126,47 @@
       box-shadow: 0 0 0 4px var(--accent2);
     }
 
-    .why-hero h1{
+    /* ===============================
+       HERO (full-bleed, OA-style)
+       =============================== */
+    .impact-hero{
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+
+      /* Swap the image if you want, but this matches your OA cinematic look */
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.88) 82%),
+        radial-gradient(1000px 520px at 70% 18%, rgba(120,190,255,0.18), transparent 60%),
+        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2400&q=80");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .impact-hero-inner{
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 44px 22px 28px;
+    }
+
+    .impact-hero h1{
       margin: 14px 0 0;
-      font-size: clamp(40px, 5vw, 78px);
-      letter-spacing: -0.9px;
+      font-size: clamp(42px, 5.4vw, 84px);
+      letter-spacing: -0.8px;
       line-height: 1.05;
     }
 
-    .why-hero p{
-      margin: 16px 0 0;
-      max-width: 980px;
+    .impact-hero p{
+      margin: 18px auto 0;
+      max-width: 920px;
       color: rgba(255,255,255,0.90);
-      font-size: clamp(18px, 2vw, 24px);
+      font-size: clamp(18px, 2.0vw, 24px);
       line-height: 1.7;
       font-weight: 520;
     }
@@ -172,186 +175,106 @@
        CONTENT SECTIONS
        =============================== */
     .section{
-      margin-top: 26px;
+      margin-top: 18px;
+    }
+
+    .block{
+      margin-top: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        radial-gradient(900px 520px at 20% 10%, rgba(120,190,255,0.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.26));
+      padding: clamp(18px, 3vw, 30px);
+      box-shadow: var(--shadow2);
     }
 
     .section-title{
       margin: 0 0 10px;
-      font-size: clamp(26px, 3vw, 38px);
+      font-size: clamp(26px, 3vw, 40px);
       letter-spacing: -0.4px;
     }
 
     .section-subtitle{
-      margin: 0 0 18px;
-      color: rgba(255,255,255,0.74);
-      max-width: 920px;
-      font-size: 18px;
-      line-height: 1.75;
-    }
-
-    .callout{
-      margin-top: 16px;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background:
-        radial-gradient(900px 520px at 20% 10%, rgba(120,190,255,0.14), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.26));
-      padding: 18px 18px;
-      box-shadow: var(--shadow2);
-    }
-    .callout strong{ color: rgba(255,255,255,0.95); }
-    .callout p{
       margin: 0;
-      color: rgba(255,255,255,0.84);
-      font-size: 18px;
-      line-height: 1.7;
+      color: rgba(255,255,255,0.78);
+      font-size: 18.5px;
+      line-height: 1.75;
+      max-width: 920px;
     }
 
-    .cards{
+    /* ===== Grid cards ===== */
+    .grid-3{
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 14px;
+      gap: 14px;
+      margin-top: 16px;
     }
 
     .card{
       border-radius: 18px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: var(--shadow2);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
       padding: 16px 16px 18px;
     }
-
     .card h3{
       margin: 0 0 8px;
-      font-size: 20px;
+      font-size: 18px;
       letter-spacing: -0.2px;
+      color: rgba(255,255,255,0.93);
     }
-
     .card p{
       margin: 0;
       color: rgba(255,255,255,0.80);
       font-size: 16.5px;
-      line-height: 1.7;
-    }
-
-    .pillrow{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(0,0,0,0.22);
-      color: rgba(255,255,255,0.86);
-      font-weight: 800;
-      letter-spacing: 0.2px;
-      font-size: 14px;
-    }
-    .pill-dot{
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: rgba(120,190,255,0.95);
-      box-shadow: 0 0 0 4px rgba(120,190,255,0.14);
-    }
-
-    /* ===== Simple “What changes?” grid ===== */
-    .two-col{
-      display:grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 16px;
-      align-items: start;
-      margin-top: 14px;
-    }
-
-    .box{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.05);
-      padding: 16px;
-    }
-
-    .box h3{
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: -0.2px;
-      color: rgba(255,255,255,0.92);
-    }
-
-    .box ul{
-      margin: 0;
-      padding-left: 18px;
-      color: rgba(255,255,255,0.82);
-      font-size: 16.5px;
-      line-height: 1.75;
-    }
-
-    .box li{ margin: 8px 0; }
-
-    /* ===== CTA strip ===== */
-    .cta-strip{
-      margin-top: 26px;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background:
-        radial-gradient(800px 420px at 80% 20%, rgba(120,190,255,0.16), transparent 55%),
-        rgba(0,0,0,0.26);
-      padding: 18px;
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-      box-shadow: var(--shadow2);
-    }
-    .cta-strip .txt{
-      max-width: 720px;
-    }
-    .cta-strip h3{
-      margin: 0 0 6px;
-      font-size: 20px;
-      letter-spacing: -0.2px;
-    }
-    .cta-strip p{
-      margin: 0;
-      color: rgba(255,255,255,0.78);
-      font-size: 16.5px;
       line-height: 1.65;
     }
 
-    .cta-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+    /* ===== Callout ===== */
+    .callout{
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.82);
+      font-size: 16.5px;
+      line-height: 1.7;
+    }
+    .callout strong{ color: rgba(255,255,255,0.95); }
+
+    /* ===== Buttons ===== */
+    .cta-row{
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cta{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 12px 14px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.92);
-      color: #0b0b0b;
-      font-weight: 900;
-      letter-spacing: 0.2px;
-      text-decoration: none;
-      transition: transform .12s ease, opacity .12s ease;
-      min-width: 180px;
-    }
-    .cta-btn:hover{
-      transform: translateY(-1px);
-      opacity: 0.98;
-    }
-    .cta-btn.secondary{
       background: rgba(255,255,255,0.06);
       color: rgba(255,255,255,0.92);
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .cta:hover{
+      border-color: rgba(120,190,255,0.55);
+      transform: translateY(-1px);
+    }
+    .cta-primary{
+      background: rgba(255,255,255,0.92);
+      color: #0b0b0b;
+      border-color: rgba(255,255,255,0.22);
     }
 
-    /* ===== Footer ===== */
+    /* Footer */
     .footer{
       text-align: center;
       padding: 18px 12px;
@@ -364,13 +287,10 @@
 
     /* Responsive */
     @media (max-width: 980px){
-      .cards{ grid-template-columns: 1fr; }
-      .two-col{ grid-template-columns: 1fr; }
-      .why-hero{ min-height: 420px; }
+      .grid-3{ grid-template-columns: 1fr; }
     }
-
     @media (prefers-reduced-motion: reduce){
-      .nav-btn, .cta-btn{ transition: none; }
+      .nav-btn, .cta{ transition: none; }
     }
   </style>
 </head>
@@ -388,131 +308,128 @@
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="why-hero" aria-label="Why ocean acidification matters">
-    <div class="why-hero-inner">
-      <div class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Why this matters</div>
-      <h1>Why ocean acidification matters</h1>
-      <p>
-        Ocean acidification doesn’t “poison” the ocean — it changes the chemistry that many organisms rely on to build shells and skeletons,
-        and it can ripple through food webs, fisheries, and coastal economies.
-      </p>
-    </div>
-  </section>
-
-  <main class="page">
-    <!-- SECTION: Big picture -->
-    <section class="section">
-      <h2 class="section-title">It’s a chemistry shift with real-world consequences</h2>
-      <p class="section-subtitle">
-        When seawater absorbs CO₂, it forms carbonic acid and reduces the availability of carbonate ions —
-        a key ingredient for shell-building organisms. That chemistry shift can make it harder for some species to grow, survive,
-        and reproduce, especially in already-stressed coastal waters.
-      </p>
-
-      <div class="callout">
-        <p><strong>Key idea:</strong> Acidification is about <strong>lower pH</strong> and <strong>lower carbonate availability</strong> — not just “more acid.”</p>
-      </div>
-
-      <div class="pillrow" aria-label="Key themes">
-        <div class="pill"><span class="pill-dot" aria-hidden="true"></span>Shell-building stress</div>
-        <div class="pill"><span class="pill-dot" aria-hidden="true"></span>Food webs</div>
-        <div class="pill"><span class="pill-dot" aria-hidden="true"></span>Coastal economies</div>
-        <div class="pill"><span class="pill-dot" aria-hidden="true"></span>Compounding stressors</div>
-      </div>
-    </section>
-
-    <!-- SECTION: 3 cards -->
-    <section class="section">
-      <h2 class="section-title">Three reasons people notice it</h2>
-      <p class="section-subtitle">
-        Different audiences care for different reasons. These are the most common “why” explanations that land quickly.
-      </p>
-
-      <div class="cards">
-        <article class="card">
-          <h3>1) Shellfish and reefs</h3>
-          <p>
-            Oysters, clams, mussels, corals, and tiny plankton can be sensitive because they build calcium carbonate structures.
-            When carbonate becomes less available, building and maintaining those structures can get harder — especially for larvae.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>2) Fisheries and food chains</h3>
-          <p>
-            Even if a fish doesn’t build a shell, it depends on ecosystems that do. Changes at the base of the food web
-            can affect growth, habitat quality, and what species thrive where.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3>3) Coasts and local livelihoods</h3>
-          <p>
-            Coastal communities rely on healthy waters for aquaculture, tourism, recreation, and biodiversity.
-            Acidification can interact with warming, low oxygen, and pollution — making conditions more unstable.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- SECTION: What changes? -->
-    <section class="section">
-      <h2 class="section-title">What actually changes in the ocean?</h2>
-      <p class="section-subtitle">
-        These are simple, accurate statements you can use without overselling.
-      </p>
-
-      <div class="two-col">
-        <div class="box">
-          <h3>Chemistry (the core)</h3>
-          <ul>
-            <li>More CO₂ dissolved in seawater → more carbonic acid forms.</li>
-            <li>pH decreases (even small pH shifts matter for biology).</li>
-            <li>Carbonate ions can decrease, making shell-building harder.</li>
-            <li>Some regions are naturally more vulnerable (upwelling, estuaries, cold waters).</li>
-          </ul>
-        </div>
-
-        <div class="box">
-          <h3>Biology (the outcomes)</h3>
-          <ul>
-            <li>Early life stages of shellfish can be especially sensitive.</li>
-            <li>Species don’t respond equally; some cope better than others.</li>
-            <li>Impacts often depend on timing (season), local water flow, and other stressors.</li>
-            <li>Local “hotspots” can see effects earlier than the open ocean.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION: Local angle -->
-    <section class="section">
-      <h2 class="section-title">Why it can show up first near the coast</h2>
-      <p class="section-subtitle">
-        Coastal waters change quickly. They can experience larger swings in pH and carbonate chemistry than the open ocean due to
-        freshwater inputs, biology (photosynthesis and respiration), and mixing with deeper waters.
-      </p>
-
-      <div class="callout">
+  <main>
+    <!-- HERO -->
+    <section class="impact-hero" aria-label="Why ocean acidification matters">
+      <div class="impact-hero-inner">
+        <div class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Why ocean acidification matters</div>
+        <h1>When seawater chemistry shifts, marine life pays the price.</h1>
         <p>
-          <strong>Coastal takeaway:</strong> Acidification is global, but the most noticeable impacts can be <strong>local</strong> — and that’s why monitoring and local solutions matter.
+          Ocean acidification makes it harder for shell-building organisms to grow and survive. That stress can ripple through
+          food webs—changing habitats, weakening ecosystems, and threatening coastal economies.
         </p>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta-strip" aria-label="Continue learning">
-      <div class="txt">
-        <h3>Want the “what” and the “how” next?</h3>
-        <p>
-          Start with the basics of the chemistry, then explore solutions that can help — locally and at scale.
-        </p>
-      </div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="cta-btn" href="what-is-acidification.html">What is OA?</a>
-        <a class="cta-btn secondary" href="solutions.html">Solutions</a>
-      </div>
+    <section class="page">
+      <!-- SECTION 1: Shellfish -->
+      <section class="section">
+        <div class="block">
+          <h2 class="section-title">Shellfish are the early warning system</h2>
+          <p class="section-subtitle">
+            Oysters, clams, mussels, scallops, and many plankton species build shells from calcium carbonate.
+            When seawater becomes more acidic, carbonate ions become less available—so shell formation gets harder.
+          </p>
+
+          <div class="grid-3" role="list">
+            <div class="card" role="listitem">
+              <h3>Slower shell growth</h3>
+              <p>
+                Building and maintaining shells takes more energy, leaving less energy for growth and reproduction.
+              </p>
+            </div>
+            <div class="card" role="listitem">
+              <h3>Larvae are most vulnerable</h3>
+              <p>
+                Early life stages need to form shells quickly. Acidification can raise mortality and reduce survival rates.
+              </p>
+            </div>
+            <div class="card" role="listitem">
+              <h3>Weaker shells</h3>
+              <p>
+                Thinner shells can break more easily—making shellfish more vulnerable to predators and storms.
+              </p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>Why this matters:</strong> shellfish aren’t just food—reefs and beds also provide habitat, filter water, and protect shorelines.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: Marine life + ecosystems -->
+      <section class="section">
+        <div class="block">
+          <h2 class="section-title">Impacts spread through marine ecosystems</h2>
+          <p class="section-subtitle">
+            Even organisms without shells can be affected. Acidification can alter behavior, growth, and survival—especially when combined
+            with warming, low oxygen, and pollution.
+          </p>
+
+          <div class="grid-3" role="list">
+            <div class="card" role="listitem">
+              <h3>Food webs shift</h3>
+              <p>
+                If plankton and shellfish decline, predators have less to eat—affecting fish, seabirds, and marine mammals.
+              </p>
+            </div>
+            <div class="card" role="listitem">
+              <h3>Habitats weaken</h3>
+              <p>
+                Coral reefs and shellfish reefs support biodiversity. When they erode or fail to form, ecosystems lose complexity.
+              </p>
+            </div>
+            <div class="card" role="listitem">
+              <h3>Stress stacks</h3>
+              <p>
+                Acidification + heat + low oxygen can be worse than any one factor alone. Real oceans face multiple pressures at once.
+              </p>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>Key idea:</strong> acidification isn’t a distant future problem. It already shows up in sensitive regions and during seasonal events.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: Why people should care -->
+      <section class="section">
+        <div class="block">
+          <h2 class="section-title">Why humans should care</h2>
+          <p class="section-subtitle">
+            Ocean acidification threatens seafood supply, coastal jobs, and the natural systems that keep coastal waters healthy.
+            It also makes restoration harder—because organisms are trying to rebuild in more challenging chemistry.
+          </p>
+
+          <div class="grid-3" role="list">
+            <div class="card" role="listitem">
+              <h3>Seafood + aquaculture</h3>
+              <p>
+                Shellfish farms and hatcheries can experience losses when intake water becomes corrosive to larvae.
+              </p>
+            </div>
+            <div class="card" role="listitem">
+              <h3>Coastal protection</h3>
+              <p>
+                Reefs and beds reduce wave energy and erosion. Healthier ecosystems mean more resilient shorelines.
+              </p>
+            </div>
+            <div class="card" role="listitem">
+              <h3>Water quality</h3>
+              <p>
+                Filter-feeders like oysters remove particles from water. When populations decline, water can get murkier.
+              </p>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <a class="cta cta-primary" href="solutions.html">See solutions</a>
+            <a class="cta" href="take-action.html">Take action</a>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
 
