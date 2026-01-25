@@ -4,18 +4,292 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Solutions | Ocean Blueprint</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ===============================
+       THEME + GLOBAL (matches OA page)
+       =============================== */
+    :root{
+      --bg: #071018;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.78);
+      --muted2: rgba(255,255,255,0.70);
+      --line: rgba(255,255,255,0.12);
+      --accent: #78beff;
+      --accent2: rgba(120,190,255,0.18);
+      --shadow: 0 22px 70px rgba(0,0,0,0.45);
+      --shadow2: 0 10px 26px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 900px at 70% 10%, rgba(120,190,255,0.14), transparent 55%),
+        radial-gradient(900px 700px at 20% 80%, rgba(120,190,255,0.08), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a{ color:inherit; }
+    a:focus-visible{
+      outline: 3px solid rgba(120,190,255,0.55);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    /* ===== Topbar (shared across site) ===== */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      height: 72px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 18px;
+      background: rgba(7,16,24,0.74);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .brand{
+      font-weight: 750;
+      letter-spacing: 0.2px;
+      font-size: 16px;
+      white-space: nowrap;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .brand-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent2);
+    }
+
+    .nav{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-btn{
+      text-decoration:none;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.90);
+      font-size: 14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .nav-btn:hover{
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
+    }
+
+    /* ===== Page container (from OA page) ===== */
+    .page{
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 18px 0 42px;
+    }
+
+    /* ===============================
+       SOLUTIONS PAGE CSS (kept as-is, only aligned to theme)
+       =============================== */
+
+    /* ===== Solutions page ===== */
+    .solutions-hero {
+      height: 220px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("assets/images/solution_background.jpg");
+      background-size: cover;
+      background-position: center;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow2);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .solutions-hero-inner {
+      text-align: center;
+      padding: 14px 18px;
+    }
+
+    .solutions-hero h1 {
+      margin: 0;
+      font-size: clamp(32px, 4.5vw, 56px);
+      letter-spacing: -0.7px;
+    }
+
+    /* NOTE: you had font-size: 14px !important; which is too small.
+       To keep layout but improve readability, we only increase size. */
+    .solutions-hero p {
+      margin: 10px 0 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 900px;
+    }
+
+    .section {
+      margin-top: 10px;
+    }
+
+    .section-spaced {
+      margin-top: 38px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 26px;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: -0.2px;
+    }
+
+    .section-subtitle {
+      margin: 0 0 18px;
+      color: rgba(255,255,255,0.72);
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 900px;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .sol-card {
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: var(--shadow2);
+    }
+
+    .sol-img {
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .sol-body {
+      padding: 14px 14px 16px;
+    }
+
+    .sol-body h3 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: -0.1px;
+    }
+
+    .sol-tag {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .sol-body p {
+      margin: 0 0 12px;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.65;
+      font-size: 16.5px;
+    }
+
+    .sol-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sol-link {
+      display: inline-block;
+      text-decoration: none;
+      color: rgba(255,255,255,0.92);
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(0,0,0,0.22);
+      font-size: 14px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+
+    .sol-link:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.35);
+      transform: translateY(-1px);
+    }
+
+    .sources {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: rgba(255,255,255,0.75);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .sources a {
+      color: rgba(255,255,255,0.88);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .cards-3 {
+        grid-template-columns: 1fr;
+      }
+      .sol-img {
+        height: 170px;
+      }
+    }
+
+    /* ===== Footer (matches OA page) ===== */
+    .footer{
+      text-align: center;
+      padding: 18px 12px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.70);
+      background: rgba(7,16,24,0.5);
+      backdrop-filter: blur(8px);
+      margin-top: 10px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .nav-btn, .sol-link{ transition: none; }
+    }
+  </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand">Ocean Blueprint</div>
-    <nav class="nav">
+    <div class="brand"><span class="brand-dot" aria-hidden="true"></span>Ocean Blueprint</div>
+    <nav class="nav" aria-label="Primary navigation">
       <a class="nav-btn" href="index.html">Home</a>
       <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
       <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
-      <a class="nav-btn" href="solutions.html">Solutions</a>
+      <a class="nav-btn" href="solutions.html" aria-current="page">Solutions</a>
       <a class="nav-btn" href="take-action.html">Take action</a>
+      <a class="nav-btn" href="game.html">Game</a>
     </nav>
   </header>
 
@@ -29,7 +303,7 @@
     </section>
 
     <!-- SECTION 1 -->
-    <section class="section">
+    <section class="section" aria-label="Current, proven solutions">
       <h2 class="section-title">Current, proven solutions</h2>
       <p class="section-subtitle">
         Practical approaches that protect coastal ecosystems and reduce harm to shell-building species today.
@@ -87,7 +361,7 @@
     </section>
 
     <!-- SECTION 2 -->
-    <section class="section section-spaced">
+    <section class="section section-spaced" aria-label="Emerging innovations">
       <h2 class="section-title">Emerging, promising innovations</h2>
       <p class="section-subtitle">
         Bigger bets that may help at scale—worth watching, but not “magic fixes.”
@@ -140,8 +414,8 @@
         </article>
       </div>
     </section>
-    
   </main>
+
   <footer class="footer">
     <p>© <span id="year"></span> Ocean Blueprint</p>
   </footer>
