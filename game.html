@@ -133,14 +133,12 @@
       width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
-
       min-height: calc(100vh - 72px);
       display: grid;
       align-items: center;
       text-align: center;
       overflow: hidden;
       box-shadow: var(--shadow);
-
       background:
         linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.88) 82%),
         radial-gradient(1000px 520px at 70% 18%, rgba(120,190,255,0.18), transparent 60%),
@@ -246,60 +244,162 @@
       transition: width 220ms ease;
     }
 
-    /* Main card */
+    /* ===============================
+       AESTHETIC UPGRADE: QUESTION CARD
+       =============================== */
     .quiz-card{
       min-height: calc(100vh - 72px - 220px - 18px - 18px - 24px);
-      border-radius: 22px;
+      border-radius: 24px;
       border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.30);
+      background:
+        radial-gradient(900px 520px at 20% 10%, rgba(120,190,255,0.14), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.34));
       padding: clamp(18px, 3vw, 34px);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.45);
       display: grid;
       align-content: start;
       gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle corner sheen */
+    .quiz-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 260px at 10% 0%, rgba(255,255,255,0.10), transparent 60%),
+        radial-gradient(600px 260px at 90% 0%, rgba(120,190,255,0.10), transparent 60%);
+      pointer-events:none;
+      opacity: 0.9;
+    }
+
+    .q-head{
+      position: relative;
+      z-index: 1;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .q-pill{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.22);
+      color: rgba(255,255,255,0.88);
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      font-size: 14px;
+    }
+
+    .q-pill-dot{
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(120,190,255,0.95);
+      box-shadow: 0 0 0 4px rgba(120,190,255,0.14);
+    }
+
+    .q-counter{
+      color: rgba(255,255,255,0.70);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
     }
 
     .q-title{
+      position: relative;
+      z-index: 1;
       margin: 0;
-      font-size: clamp(20px, 2.2vw, 30px);
-      font-weight: 900;
-      letter-spacing: -0.4px;
+      font-size: clamp(22px, 2.3vw, 32px);
+      font-weight: 950;
+      letter-spacing: -0.5px;
       color: rgba(255,255,255,0.95);
-      line-height: 1.25;
+      line-height: 1.2;
     }
 
     .answers{
+      position: relative;
+      z-index: 1;
       display: grid;
       gap: 12px;
       margin-top: 6px;
     }
 
+    /* Answer tiles */
     .opt{
       display: grid;
-      grid-template-columns: 22px 1fr;
+      grid-template-columns: 40px 22px 1fr;
       gap: 12px;
       align-items: start;
       padding: 14px 14px;
-      border-radius: 16px;
+      border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.05);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.12));
       cursor: pointer;
       user-select: none;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
     }
+
     .opt:hover{
       border-color: rgba(120,190,255,0.55);
-      background: rgba(120,190,255,0.10);
+      background:
+        linear-gradient(180deg, rgba(120,190,255,0.12), rgba(0,0,0,0.10));
+      transform: translateY(-1px);
     }
+
     .opt input{
-      margin-top: 3px;
+      margin-top: 4px;
       accent-color: rgba(120,190,255,0.95);
     }
+
     .opt span{
-      font-size: clamp(15px, 1.2vw, 18px);
-      color: rgba(255,255,255,0.86);
+      font-size: clamp(16px, 1.2vw, 19px);
+      color: rgba(255,255,255,0.88);
       line-height: 1.45;
     }
 
+    /* Letter badge */
+    .opt-badge{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.86);
+      font-weight: 950;
+      letter-spacing: 0.6px;
+    }
+
+    /* Selected state: when input checked, style the whole card */
+    .opt:has(input:checked){
+      border-color: rgba(120,190,255,0.70);
+      background:
+        linear-gradient(180deg, rgba(120,190,255,0.16), rgba(0,0,0,0.12));
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    }
+    .opt:has(input:checked) .opt-badge{
+      background: rgba(120,190,255,0.16);
+      border-color: rgba(120,190,255,0.40);
+      color: rgba(255,255,255,0.95);
+    }
+
     .quiz-actions{
+      position: relative;
+      z-index: 1;
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -339,6 +439,8 @@
     }
 
     .inline-warn{
+      position: relative;
+      z-index: 1;
       margin-top: 6px;
       padding: 12px 14px;
       border-radius: 16px;
@@ -353,6 +455,8 @@
 
     /* Result screen */
     .result{
+      position: relative;
+      z-index: 1;
       margin-top: 6px;
       padding: 16px;
       border-radius: 18px;
@@ -420,10 +524,11 @@
     @media (max-width: 900px){
       .quiz-wrap{ padding: 14px; }
       .quiz-card{ min-height: calc(100vh - 72px - 220px - 14px - 14px - 24px); }
+      .opt{ grid-template-columns: 40px 22px 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce){
-      .nav-btn, .btn, .quiz-progress-fill{ transition: none; }
+      .nav-btn, .btn, .quiz-progress-fill, .opt{ transition: none; }
     }
   </style>
 </head>
@@ -473,6 +578,12 @@
           </div>
 
           <section class="quiz-card" aria-live="polite">
+            <!-- NEW: attractive header row -->
+            <div class="q-head">
+              <div class="q-pill"><span class="q-pill-dot" aria-hidden="true"></span><span id="qCatPill">—</span></div>
+              <div class="q-counter"><span id="qNumPill">1</span> / <span id="qTotalPill">10</span></div>
+            </div>
+
             <h3 class="q-title" id="questionText">—</h3>
             <div class="answers" id="answersWrap"></div>
 
@@ -513,14 +624,8 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // =========================================================
-    // 10 QUESTIONS — POINTS HIDDEN (labels show NO numbers)
-    // =========================================================
     const QUESTIONS = [
-      {
-        id: "q1",
-        cat: "Transportation",
-        text: "1. For most short trips (under ~3 miles), what do you usually do?",
+      { id: "q1", cat: "Transportation", text: "1. For most short trips (under ~3 miles), what do you usually do?",
         opts: [
           { label: "Walk or bike", pts: 0 },
           { label: "Public transit", pts: 1 },
@@ -528,10 +633,7 @@
           { label: "Drive alone", pts: 3 },
         ]
       },
-      {
-        id: "q2",
-        cat: "Transportation",
-        text: "2. About how many flights do you take in a typical year?",
+      { id: "q2", cat: "Transportation", text: "2. About how many flights do you take in a typical year?",
         opts: [
           { label: "0–1", pts: 0 },
           { label: "2–3", pts: 2 },
@@ -539,10 +641,7 @@
           { label: "7+", pts: 4 },
         ]
       },
-      {
-        id: "q3",
-        cat: "Home energy",
-        text: "3. What best describes your home electricity plan or source?",
+      { id: "q3", cat: "Home energy", text: "3. What best describes your home electricity plan or source?",
         opts: [
           { label: "Mostly renewable (or a green-energy plan)", pts: 0 },
           { label: "A mix (some renewables, not sure how much)", pts: 1 },
@@ -550,10 +649,7 @@
           { label: "I don’t know and haven’t checked", pts: 3 },
         ]
       },
-      {
-        id: "q4",
-        cat: "Home energy",
-        text: "4. In winter or summer, how do you handle heating/cooling most of the time?",
+      { id: "q4", cat: "Home energy", text: "4. In winter or summer, how do you handle heating/cooling most of the time?",
         opts: [
           { label: "I use efficient settings (layering, moderate thermostat, fans)", pts: 0 },
           { label: "Somewhat careful, but not consistent", pts: 1 },
@@ -561,10 +657,7 @@
           { label: "I rarely think about it at all", pts: 3 },
         ]
       },
-      {
-        id: "q5",
-        cat: "Food",
-        text: "5. How often do you eat beef or lamb (the highest-impact meats)?",
+      { id: "q5", cat: "Food", text: "5. How often do you eat beef or lamb (the highest-impact meats)?",
         opts: [
           { label: "Never or almost never", pts: 0 },
           { label: "1–2 times a week", pts: 1 },
@@ -572,10 +665,7 @@
           { label: "Most days", pts: 3 },
         ]
       },
-      {
-        id: "q6",
-        cat: "Food",
-        text: "6. How much food do you throw away in a normal week?",
+      { id: "q6", cat: "Food", text: "6. How much food do you throw away in a normal week?",
         opts: [
           { label: "Almost none (I plan meals / use leftovers)", pts: 0 },
           { label: "A little (some leftovers go bad)", pts: 1 },
@@ -583,10 +673,7 @@
           { label: "I don’t track it", pts: 3 },
         ]
       },
-      {
-        id: "q7",
-        cat: "Consumption",
-        text: "7. When you need something (clothes, tech, accessories), what do you usually do first?",
+      { id: "q7", cat: "Consumption", text: "7. When you need something (clothes, tech, accessories), what do you usually do first?",
         opts: [
           { label: "Repair / borrow / buy secondhand", pts: 0 },
           { label: "Mix of secondhand and new", pts: 1 },
@@ -594,10 +681,7 @@
           { label: "Buy new frequently", pts: 3 },
         ]
       },
-      {
-        id: "q8",
-        cat: "Waste",
-        text: "8. How often do you use single-use items (bottles, cups, bags, utensils)?",
+      { id: "q8", cat: "Waste", text: "8. How often do you use single-use items (bottles, cups, bags, utensils)?",
         opts: [
           { label: "Rarely (I carry reusables)", pts: 0 },
           { label: "Sometimes", pts: 1 },
@@ -605,10 +689,7 @@
           { label: "Most days", pts: 3 },
         ]
       },
-      {
-        id: "q9",
-        cat: "Water & chemicals",
-        text: "9. What happens to chemicals around your home (cleaners, paint, oil, fertilizer)?",
+      { id: "q9", cat: "Water & chemicals", text: "9. What happens to chemicals around your home (cleaners, paint, oil, fertilizer)?",
         opts: [
           { label: "Careful: proper disposal and minimal use", pts: 0 },
           { label: "I try to be careful, but I’m not always sure", pts: 1 },
@@ -616,10 +697,7 @@
           { label: "I don’t really think about it", pts: 3 },
         ]
       },
-      {
-        id: "q10",
-        cat: "Action",
-        text: "10. In the past 6 months, which best describes your climate/ocean action?",
+      { id: "q10", cat: "Action", text: "10. In the past 6 months, which best describes your climate/ocean action?",
         opts: [
           { label: "I made a concrete change and stuck with it", pts: 0 },
           { label: "I tried one change but it didn’t last", pts: 1 },
@@ -634,6 +712,10 @@
     const qTotalEl = document.getElementById("qTotal");
     const qCatEl = document.getElementById("qCat");
     const progressFill = document.getElementById("progressFill");
+
+    const qCatPill = document.getElementById("qCatPill");
+    const qNumPill = document.getElementById("qNumPill");
+    const qTotalPill = document.getElementById("qTotalPill");
 
     const questionText = document.getElementById("questionText");
     const answersWrap = document.getElementById("answersWrap");
@@ -656,34 +738,31 @@
     // ===== State =====
     let currentIndex = 0;
     const answers = {}; // { qid: pts }
+    const LETTERS = ["A","B","C","D","E","F"];
 
     qTotalEl.textContent = String(QUESTIONS.length);
+    qTotalPill.textContent = String(QUESTIONS.length);
 
     function rating(total){
-      // For 10 questions (max ~31), keep ranges simple and readable.
       if (total <= 8) {
-        return {
-          badge: "Low Impact",
+        return { badge: "Low Impact",
           text: "Your choices are already aligned with lower emissions. That matters for ocean chemistry.",
           step: "Next step: pick one lever to strengthen (transport, food, or energy) and make it consistent for 2 weeks."
         };
       }
       if (total <= 16) {
-        return {
-          badge: "Moderate Impact",
+        return { badge: "Moderate Impact",
           text: "You’re doing some good things, but there are a few high-impact upgrades available.",
           step: "Next step: choose two changes that are realistic to sustain (for example: fewer flights + less beef, or fewer solo drives + less new buying)."
         };
       }
       if (total <= 24) {
-        return {
-          badge: "High Impact",
+        return { badge: "High Impact",
           text: "Your habits likely contribute noticeably to emissions. The biggest wins come from a few major categories.",
           step: "Next step: choose ONE category to tackle first (transport, food, or home energy) and make a specific plan for this month."
         };
       }
-      return {
-        badge: "Very High Impact",
+      return { badge: "Very High Impact",
         text: "Your score suggests a higher footprint. If you want to lower it, focus on the biggest levers rather than small tweaks.",
         step: "Next step: start with one structural change you can maintain (e.g., fewer flights or less beef) and add a second once it becomes routine."
       };
@@ -698,6 +777,9 @@
       qNumEl.textContent = String(currentIndex + 1);
       qCatEl.textContent = q.cat;
 
+      qNumPill.textContent = String(currentIndex + 1);
+      qCatPill.textContent = q.cat;
+
       const pct = ((currentIndex) / QUESTIONS.length) * 100;
       progressFill.style.width = `${pct}%`;
 
@@ -711,15 +793,17 @@
         label.className = "opt";
         label.setAttribute("for", id);
 
+        const badge = document.createElement("div");
+        badge.className = "opt-badge";
+        badge.textContent = LETTERS[idx] ?? String(idx + 1);
+
         const input = document.createElement("input");
         input.type = "radio";
         input.name = q.id;
         input.id = id;
         input.value = String(opt.pts);
 
-        if (answers[q.id] !== undefined && Number(input.value) === answers[q.id]) {
-          input.checked = true;
-        }
+        if (answers[q.id] !== undefined && Number(input.value) === answers[q.id]) input.checked = true;
 
         input.addEventListener("change", () => {
           answers[q.id] = Number(input.value);
@@ -728,9 +812,9 @@
         });
 
         const span = document.createElement("span");
-        // IMPORTANT: label shows NO point values.
         span.textContent = opt.label;
 
+        label.appendChild(badge);
         label.appendChild(input);
         label.appendChild(span);
         answersWrap.appendChild(label);
