@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Community Raffle | Ocean Blueprint</title>
+
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#fff;background:#070b12}
+    .wrap{max-width:900px;margin:0 auto;padding:24px}
+    h1{margin:0 0 10px;font-size:34px}
+    p{color:rgba(255,255,255,.75);line-height:1.5}
+    .card{margin-top:14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.05);padding:16px}
+    label{display:block;margin:10px 0 6px;color:rgba(255,255,255,.75);font-size:13px}
+    input,select,textarea{width:100%;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.25);color:#fff;outline:none}
+    textarea{min-height:90px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:650px){.row{grid-template-columns:1fr}}
+    button{margin-top:12px;padding:10px 14px;border-radius:999px;border:1px solid rgba(107,182,255,.45);background:rgba(107,182,255,.18);color:#fff;font-weight:650;cursor:pointer}
+    button:disabled{opacity:.6;cursor:not-allowed}
+    .status{margin-top:10px;color:rgba(255,255,255,.75)}
+    .post{border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.04);padding:12px;margin-top:10px}
+    .meta{display:flex;justify-content:space-between;gap:10px;color:rgba(255,255,255,.6);font-size:12px}
+    .line{margin:6px 0;color:rgba(255,255,255,.78)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Enter the $100 raffle</h1>
+    <p>
+      To enter: post one fact about ocean acidification and one thing you can do to help.
+      Your post will be visible to others.
+    </p>
+
+    <div class="card">
+      <div class="row">
+        <div>
+          <label>Contact type</label>
+          <select id="contactType">
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+          </select>
+        </div>
+        <div>
+          <label>Email or phone</label>
+          <input id="contact" />
+        </div>
+      </div>
+
+      <label>1) One fact about ocean acidification</label>
+      <textarea id="fact"></textarea>
+
+      <label>2) One thing you can do to help</label>
+      <textarea id="action"></textarea>
+
+      <button id="submit">Post</button>
+      <div class="status" id="status"></div>
+    </div>
+
+    <div class="card">
+      <h2>Recent posts</h2>
+      <div id="feed"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    /* ---------- FIREBASE CONFIG (this part IS from Firebase) ---------- */
+    const firebaseConfig = {
+      apiKey: "AIzaSyBPC4gV_qJN_sgZlzt1s5XhI3DUOYpDrus",
+      authDomain: "ocean-blueprint.firebaseapp.com",
+      projectId: "ocean-blueprint",
+      storageBucket: "ocean-blueprint.firebasestorage.app",
+      messagingSenderId: "613311127660",
+      appId: "1:613311127660:web:3985ecf844877946c83849"
+    };
+
+    /* ---------- FIREBASE IMPORTS ---------- */
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, serverTimestamp,
+      query, orderBy, limit, onSnapshot
+    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const feed = document.getElementById("feed");
+    const status = document.getElementById("status");
+
+    const postsRef = collection(db, "raffle_posts");
+    const q = query(postsRef, orderBy("createdAt","desc"), limit(25));
+
+    onSnapshot(q, snap => {
+      feed.innerHTML = "";
+      snap.forEach(doc => {
+        const d = doc.data();
+        const div = document.createElement("div");
+        div.className = "post";
+        div.innerHTML = `
+          <div class="line"><b>Fact:</b> ${d.fact}</div>
+          <div class="line"><b>Action:</b> ${d.action}</div>
+        `;
+        feed.appendChild(div);
+      });
+    });
+
+    document.getElementById("submit").onclick = async () => {
+      const contactType = document.getElementById("contactType").value;
+      const contact = document.getElementById("contact").value.trim();
+      const fact = document.getElementById("fact").value.trim();
+      const action = document.getElementById("action").value.trim();
+
+      if (!contact || fact.length < 10 || action.length < 10) {
+        status.textContent = "Fill everything correctly.";
+        return;
+      }
+
+      await addDoc(postsRef,{
+        page:"context",
+        createdAt: serverTimestamp(),
+        contactType,
+        contact,
+        fact,
+        action
+      });
+
+      status.textContent = "Posted.";
+      document.getElementById("fact").value="";
+      document.getElementById("action").value="";
+    };
+  </script>
+</body>
+</html>
