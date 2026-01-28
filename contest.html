@@ -211,17 +211,8 @@
           Use a <b>display name</b> that is not identifying (example: “BlueWave17”). Do not post private info.
         </p>
 
-        <div class="twoCol">
-          <div>
-            <label for="displayName">Display name (optional)</label>
-            <input id="displayName" placeholder="BlueWave17" maxlength="24" />
-          </div>
-          <div>
-            <label for="topicTag">Pick a topic (optional)</label>
-            <input id="topicTag" placeholder="Shellfish / Chemistry / Local action" maxlength="24" />
-          </div>
-        </div>
-
+        
+        
         <label for="fact">1) One fact about ocean acidification</label>
         <textarea id="fact" maxlength="500" placeholder="Example: When CO₂ dissolves in seawater, it increases H⁺ and reduces carbonate ions, making it harder for shell-building organisms to calcify."></textarea>
 
@@ -254,6 +245,14 @@
       messagingSenderId: "613311127660",
       appId: "1:613311127660:web:3985ecf844877946c83849"
     };
+
+    function randomAlias() {
+  const words = ["Wave","Current","Tide","Reef","Shell","Coral","Blue","Ocean"];
+  const letters = Math.random().toString(36).substring(2, 6).toUpperCase();
+  const word = words[Math.floor(Math.random() * words.length)];
+  return `${word}-${letters}`;
+}
+
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
     import {
