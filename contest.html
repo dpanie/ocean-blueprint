@@ -323,6 +323,7 @@
 
       snap.forEach((doc) => {
         const d = doc.data();
+        const alias = d.alias || "Anonymous";
         const when = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleString() : "just now";
         const name = d.displayName || "Anonymous";
         const tag = d.topicTag ? ` • ${d.topicTag}` : "";
