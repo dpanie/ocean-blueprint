@@ -332,8 +332,8 @@
         post.className = "post";
         post.innerHTML = `
           <div class="meta">
-            <span>${escapeHtml(name)}${escapeHtml(tag)}</span>
-            <span>${escapeHtml(when)}</span>
+            <span>${alias}</span>
+            <span>${when}</span>
           </div>
           <div class="line"><b>Fact:</b> ${escapeHtml(d.fact || "")}</div>
           <div class="line"><b>Action:</b> ${escapeHtml(d.action || "")}</div>
