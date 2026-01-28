@@ -3,69 +3,249 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Community Raffle | Ocean Blueprint</title>
+  <title>Take Action Raffle | Ocean Blueprint</title>
 
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#fff;background:#070b12}
-    .wrap{max-width:900px;margin:0 auto;padding:24px}
-    h1{margin:0 0 10px;font-size:34px}
-    p{color:rgba(255,255,255,.75);line-height:1.5}
-    .card{margin-top:14px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.05);padding:16px}
-    label{display:block;margin:10px 0 6px;color:rgba(255,255,255,.75);font-size:13px}
-    input,select,textarea{width:100%;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.25);color:#fff;outline:none}
+    :root{
+      --bg:#070b12;
+      --card:rgba(255,255,255,.05);
+      --border:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --accent:rgba(107,182,255,.95);
+      --accentSoft:rgba(107,182,255,.18);
+      --danger:rgba(255,120,120,.9);
+    }
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 20% 10%, rgba(107,182,255,.10), transparent 50%),
+                  radial-gradient(900px 700px at 80% 0%, rgba(255,255,255,.06), transparent 60%),
+                  var(--bg);
+    }
+
+    .wrap{max-width:980px;margin:0 auto;padding:20px 16px 60px}
+
+    /* Top banner */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-radius:22px;
+      border:1px solid var(--border);
+      background: #0b1020;
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      margin-top:12px;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(7,11,18,.90), rgba(7,11,18,.55), rgba(7,11,18,.90)),
+        url("BANNER_IMAGE_URL_HERE") center/cover no-repeat;
+      filter:saturate(1.05);
+    }
+    .heroInner{
+      position:relative;
+      padding:26px 24px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      min-height:180px;
+    }
+    .hero h1{margin:0;font-size:40px;letter-spacing:-.02em}
+    .hero p{margin:8px 0 0;color:var(--muted);max-width:720px;line-height:1.5}
+    .pillRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .pill{
+      font-size:12px;
+      color:rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      padding:6px 10px;
+      border-radius:999px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Buttons */
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.22);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:650;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btnPrimary{
+      border:1px solid rgba(107,182,255,.45);
+      background:var(--accentSoft);
+    }
+    .btn:hover{filter:brightness(1.08)}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+
+    /* Sections */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    .card{
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:var(--card);
+      padding:16px;
+      backdrop-filter: blur(8px);
+    }
+    .card h2{margin:0 0 8px;font-size:18px}
+    .card p{margin:6px 0;color:var(--muted);line-height:1.5}
+
+    /* Form elements */
+    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:13px}
+    input, textarea{
+      width:100%;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      outline:none;
+    }
     textarea{min-height:90px;resize:vertical}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    @media(max-width:650px){.row{grid-template-columns:1fr}}
-    button{margin-top:12px;padding:10px 14px;border-radius:999px;border:1px solid rgba(107,182,255,.45);background:rgba(107,182,255,.18);color:#fff;font-weight:650;cursor:pointer}
-    button:disabled{opacity:.6;cursor:not-allowed}
-    .status{margin-top:10px;color:rgba(255,255,255,.75)}
-    .post{border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.04);padding:12px;margin-top:10px}
-    .meta{display:flex;justify-content:space-between;gap:10px;color:rgba(255,255,255,.6);font-size:12px}
-    .line{margin:6px 0;color:rgba(255,255,255,.78)}
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:760px){ .twoCol{grid-template-columns:1fr} .hero h1{font-size:34px;} }
+
+    .status{margin-top:10px;color:var(--muted);min-height:18px}
+    .status.bad{color:var(--danger)}
+
+    /* Posts */
+    .post{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:12px;
+      margin-top:10px;
+    }
+    .meta{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-size:12px;
+      color:rgba(255,255,255,.58);
+    }
+    .line{margin:6px 0;color:rgba(255,255,255,.82)}
+    .divider{height:1px;background:rgba(255,255,255,.10);margin:12px 0}
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <h1>Enter the $100 raffle</h1>
-    <p>
-      To enter: post one fact about ocean acidification and one thing you can do to help.
-      Your post will be visible to others.
-    </p>
 
-    <div class="card">
-      <div class="row">
+    <section class="hero">
+      <div class="heroInner">
         <div>
-          <label>Contact type</label>
-          <select id="contactType">
-            <option value="email">Email</option>
-            <option value="phone">Phone</option>
-          </select>
+          <h1>Take Action Raffle</h1>
+          <p>
+            Enter the $100 raffle by submitting your contact info (private) and posting one fact + one action (public).
+            Use info from this site or outside sources.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Contact info stays private</span>
+            <span class="pill">Public board uses a display name</span>
+            <span class="pill">Short, specific answers</span>
+          </div>
         </div>
-        <div>
-          <label>Email or phone</label>
-          <input id="contact" />
+
+        <div class="btnRow">
+          <a class="btn" href="index.html">Home</a>
+          <a class="btn" href="what-is-acidification.html">What is OA?</a>
+          <a class="btn" href="why-it-matters.html">Why it matters</a>
+          <a class="btn" href="solutions.html">Solutions</a>
         </div>
       </div>
+    </section>
 
-      <label>1) One fact about ocean acidification</label>
-      <textarea id="fact"></textarea>
+    <div class="grid">
 
-      <label>2) One thing you can do to help</label>
-      <textarea id="action"></textarea>
+      <!-- Step 1: Private raffle entry via Google Form -->
+      <section class="card">
+        <h2>Step 1 — Raffle entry (private)</h2>
+        <p>
+          Submit your email or phone using this Google Form. This information is <b>not</b> shown on the public board.
+        </p>
 
-      <button id="submit">Post</button>
-      <div class="status" id="status"></div>
-    </div>
+        <div class="btnRow" style="margin-top:10px;">
+          <a class="btn btnPrimary" href="GOOGLE_FORM_URL_HERE" target="_blank" rel="noopener noreferrer">
+            Open raffle form
+          </a>
+          <span style="color:rgba(255,255,255,.55);font-size:12px;">
+            (Opens in a new tab)
+          </span>
+        </div>
 
-    <div class="card">
-      <h2>Recent posts</h2>
-      <div id="feed"></div>
+        <!-- Optional: embed the form instead of just linking it
+        <div class="divider"></div>
+        <iframe
+          src="GOOGLE_FORM_URL_HERE"
+          width="100%"
+          height="900"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          style="border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(0,0,0,.2);"
+        >Loading…</iframe>
+        -->
+      </section>
+
+      <!-- Step 2: Public board -->
+      <section class="card">
+        <h2>Step 2 — Post on the community board (public)</h2>
+        <p>
+          Use a <b>display name</b> that is not identifying (example: “BlueWave17”). Do not post private info.
+        </p>
+
+        <div class="twoCol">
+          <div>
+            <label for="displayName">Display name (optional)</label>
+            <input id="displayName" placeholder="BlueWave17" maxlength="24" />
+          </div>
+          <div>
+            <label for="topicTag">Pick a topic (optional)</label>
+            <input id="topicTag" placeholder="Shellfish / Chemistry / Local action" maxlength="24" />
+          </div>
+        </div>
+
+        <label for="fact">1) One fact about ocean acidification</label>
+        <textarea id="fact" maxlength="500" placeholder="Example: When CO₂ dissolves in seawater, it increases H⁺ and reduces carbonate ions, making it harder for shell-building organisms to calcify."></textarea>
+
+        <label for="action">2) One thing you can do to help</label>
+        <textarea id="action" maxlength="500" placeholder="Example: Reduce personal CO₂ emissions + support local shellfish reef restoration projects."></textarea>
+
+        <div class="btnRow" style="margin-top:10px;">
+          <button class="btn btnPrimary" id="submitBtn">Post</button>
+          <button class="btn" id="clearBtn" type="button">Clear</button>
+        </div>
+
+        <div class="status" id="status"></div>
+      </section>
+
+      <section class="card">
+        <h2>Recent posts</h2>
+        <div id="feed"></div>
+      </section>
+
     </div>
   </div>
 
   <script type="module">
-    /* ---------- FIREBASE CONFIG (this part IS from Firebase) ---------- */
+    // Firebase config (public, client-side)
     const firebaseConfig = {
       apiKey: "AIzaSyBPC4gV_qJN_sgZlzt1s5XhI3DUOYpDrus",
       authDomain: "ocean-blueprint.firebaseapp.com",
@@ -75,7 +255,6 @@
       appId: "1:613311127660:web:3985ecf844877946c83849"
     };
 
-    /* ---------- FIREBASE IMPORTS ---------- */
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
     import {
       getFirestore, collection, addDoc, serverTimestamp,
@@ -85,50 +264,119 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const feed = document.getElementById("feed");
-    const status = document.getElementById("status");
+    const els = {
+      displayName: document.getElementById("displayName"),
+      topicTag: document.getElementById("topicTag"),
+      fact: document.getElementById("fact"),
+      action: document.getElementById("action"),
+      btn: document.getElementById("submitBtn"),
+      clear: document.getElementById("clearBtn"),
+      status: document.getElementById("status"),
+      feed: document.getElementById("feed"),
+    };
+
+    function trim(s){ return (s || "").trim(); }
+
+    // Prevent obvious private/identifying strings in displayName
+    function looksLikeEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
+    function looksLikePhone(s){ return /(\+?\d[\d\s().-]{7,})/.test(s); }
+
+    function safeDisplayName(raw){
+      const s = trim(raw);
+      if (!s) return "Anonymous";
+      if (looksLikeEmail(s) || looksLikePhone(s)) return "Anonymous";
+      // Keep it simple: alnum + _ - only
+      const cleaned = s.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 24);
+      return cleaned ? cleaned : "Anonymous";
+    }
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function setStatus(msg, bad=false){
+      els.status.textContent = msg || "";
+      els.status.className = bad ? "status bad" : "status";
+    }
+
+    function validate(){
+      const fact = trim(els.fact.value);
+      const action = trim(els.action.value);
+      if (fact.length < 10) return "Fact is too short (min 10 characters).";
+      if (action.length < 10) return "Action is too short (min 10 characters).";
+      return null;
+    }
 
     const postsRef = collection(db, "raffle_posts");
-    const q = query(postsRef, orderBy("createdAt","desc"), limit(25));
+    const q = query(postsRef, orderBy("createdAt", "desc"), limit(30));
 
-    onSnapshot(q, snap => {
-      feed.innerHTML = "";
-      snap.forEach(doc => {
-        const d = doc.data();
-        const div = document.createElement("div");
-        div.className = "post";
-        div.innerHTML = `
-          <div class="line"><b>Fact:</b> ${d.fact}</div>
-          <div class="line"><b>Action:</b> ${d.action}</div>
-        `;
-        feed.appendChild(div);
-      });
-    });
-
-    document.getElementById("submit").onclick = async () => {
-      const contactType = document.getElementById("contactType").value;
-      const contact = document.getElementById("contact").value.trim();
-      const fact = document.getElementById("fact").value.trim();
-      const action = document.getElementById("action").value.trim();
-
-      if (!contact || fact.length < 10 || action.length < 10) {
-        status.textContent = "Fill everything correctly.";
+    onSnapshot(q, (snap) => {
+      els.feed.innerHTML = "";
+      if (snap.empty){
+        els.feed.innerHTML = "<p style='color:rgba(255,255,255,.7)'>No posts yet.</p>";
         return;
       }
 
-      await addDoc(postsRef,{
-        page:"context",
-        createdAt: serverTimestamp(),
-        contactType,
-        contact,
-        fact,
-        action
-      });
+      snap.forEach((doc) => {
+        const d = doc.data();
+        const when = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleString() : "just now";
+        const name = d.displayName || "Anonymous";
+        const tag = d.topicTag ? ` • ${d.topicTag}` : "";
 
-      status.textContent = "Posted.";
-      document.getElementById("fact").value="";
-      document.getElementById("action").value="";
-    };
+        const post = document.createElement("div");
+        post.className = "post";
+        post.innerHTML = `
+          <div class="meta">
+            <span>${escapeHtml(name)}${escapeHtml(tag)}</span>
+            <span>${escapeHtml(when)}</span>
+          </div>
+          <div class="line"><b>Fact:</b> ${escapeHtml(d.fact || "")}</div>
+          <div class="line"><b>Action:</b> ${escapeHtml(d.action || "")}</div>
+        `;
+        els.feed.appendChild(post);
+      });
+    });
+
+    els.clear.addEventListener("click", () => {
+      els.displayName.value = "";
+      els.topicTag.value = "";
+      els.fact.value = "";
+      els.action.value = "";
+      setStatus("");
+    });
+
+    els.btn.addEventListener("click", async () => {
+      const err = validate();
+      if (err){ setStatus(err, true); return; }
+
+      els.btn.disabled = true;
+      setStatus("Posting...");
+
+      try{
+        await addDoc(postsRef, {
+          page: "context",
+          createdAt: serverTimestamp(),
+          displayName: safeDisplayName(els.displayName.value),
+          topicTag: trim(els.topicTag.value).slice(0,24),
+          fact: trim(els.fact.value).slice(0,500),
+          action: trim(els.action.value).slice(0,500)
+        });
+
+        els.fact.value = "";
+        els.action.value = "";
+        setStatus("Posted.");
+      } catch(e){
+        console.error(e);
+        setStatus("Post failed. Check Firestore Rules + domain-restricted API key.", true);
+      } finally{
+        els.btn.disabled = false;
+      }
+    });
   </script>
 </body>
 </html>
