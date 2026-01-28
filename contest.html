@@ -7,236 +7,470 @@
 
   <style>
     :root{
-      --bg:#070b12;
-      --card:rgba(255,255,255,.05);
-      --border:rgba(255,255,255,.12);
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.72);
-      --accent:rgba(107,182,255,.95);
-      --accentSoft:rgba(107,182,255,.18);
-      --danger:rgba(255,120,120,.9);
+      --bg: #071018;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(0,0,0,0.22);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.72);
+      --muted2: rgba(255,255,255,0.62);
+      --line: rgba(255,255,255,0.12);
+      --accent: #78beff;
+      --accent2: rgba(120,190,255,0.18);
+      --shadow: 0 22px 70px rgba(0,0,0,0.45);
+      --shadow2: 0 10px 26px rgba(0,0,0,0.35);
+      --radius: 18px;
     }
 
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      color:var(--text);
-      background: radial-gradient(1200px 800px at 20% 10%, rgba(107,182,255,.10), transparent 50%),
-                  radial-gradient(900px 700px at 80% 0%, rgba(255,255,255,.06), transparent 60%),
-                  var(--bg);
-    }
-
-    .wrap{max-width:980px;margin:0 auto;padding:20px 16px 60px}
-
-    /* Top banner */
-    .hero{
-      position:relative;
-      overflow:hidden;
-      border-radius:22px;
-      border:1px solid var(--border);
-      background: #0b1020;
-      box-shadow: 0 18px 45px rgba(0,0,0,.35);
-      margin-top:12px;
-    }
-    .hero::before{
-      content:"";
-      position:absolute; inset:0;
       background:
-        linear-gradient(90deg, rgba(7,11,18,.90), rgba(7,11,18,.55), rgba(7,11,18,.90)),
-        url("BANNER_IMAGE_URL_HERE") center/cover no-repeat;
-      filter:saturate(1.05);
+        radial-gradient(1200px 900px at 70% 10%, rgba(120,190,255,0.14), transparent 55%),
+        radial-gradient(900px 700px at 20% 80%, rgba(120,190,255,0.08), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-size: 19px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
-    .heroInner{
-      position:relative;
-      padding:26px 24px;
+
+    a{ color:inherit; }
+    a:focus-visible, button:focus-visible, textarea:focus-visible{
+      outline: 3px solid rgba(120,190,255,0.55);
+      outline-offset: 3px;
+      border-radius: 10px;
+    }
+
+    /* ===== Topbar ===== */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      height: 72px;
       display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:16px;
-      min-height:180px;
+      align-items:center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 18px;
+      background: rgba(7,16,24,0.74);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
     }
-    .hero h1{margin:0;font-size:40px;letter-spacing:-.02em}
-    .hero p{margin:8px 0 0;color:var(--muted);max-width:720px;line-height:1.5}
-    .pillRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .pill{
-      font-size:12px;
-      color:rgba(255,255,255,.78);
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.18);
-      padding:6px 10px;
-      border-radius:999px;
+    .brand{
+      font-weight: 750;
+      letter-spacing: 0.2px;
+      font-size: 16px;
+      white-space: nowrap;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .brand-mark{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent2);
+    }
+    .nav{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-btn{
+      text-decoration:none;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.90);
+      font-size: 15px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .nav-btn:hover{
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.26);
+      transform: translateY(-1px);
+    }
+
+    /* ===== Page container ===== */
+    .page{
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 18px 0 42px;
+    }
+
+    /* ===== Hero banner (same vibe as OA page) ===== */
+    .hero{
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.84) 78%),
+        radial-gradient(900px 420px at 70% 20%, rgba(120,190,255,0.18), transparent 60%),
+        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=80");
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow);
+    }
+    .hero-inner{
+      padding: 34px 22px 18px;
+      text-align: left;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color: rgba(255,255,255,0.82);
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .kicker-dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent2);
+    }
+    .h1{
+      margin: 10px 0 0;
+      font-size: clamp(34px, 4.2vw, 56px);
+      line-height: 1.06;
+      letter-spacing: -0.9px;
+    }
+    .p{
+      margin: 12px 0 0;
+      color: rgba(255,255,255,0.86);
+      font-size: 18px;
+      max-width: 900px;
+    }
+    .badge-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .badge{
+      font-size: 14px;
+      color: rgba(255,255,255,0.86);
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      padding: 7px 10px;
+      border-radius: 999px;
       backdrop-filter: blur(6px);
     }
 
-    /* Buttons */
-    .btnRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    /* ===== Cards ===== */
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      box-shadow: var(--shadow2);
+      padding: 16px;
+    }
+    .section{ margin-top: 16px; }
+
+    .section-title{
+      margin: 0 0 6px;
+      font-weight: 760;
+      letter-spacing: -0.2px;
+      font-size: 20px;
+      color: rgba(255,255,255,0.94);
+    }
+    .section-sub{
+      margin: 0;
+      color: rgba(255,255,255,0.72);
+      font-size: 15.5px;
+      line-height: 1.55;
+    }
+
+    /* ===== Form elements ===== */
+    label{
+      display:block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      color: rgba(255,255,255,0.86);
+      font-size: 14px;
+      font-weight: 650;
+    }
+    textarea{
+      width: 100%;
+      min-height: 110px;
+      resize: vertical;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.22);
+      color: rgba(255,255,255,0.92);
+      font-size: 15.5px;
+      line-height: 1.5;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    textarea::placeholder{ color: rgba(255,255,255,0.45); }
+
+    .hint{
+      margin: 6px 0 0;
+      color: rgba(255,255,255,0.62);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    /* ===== Buttons ===== */
+    .btn-row{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      align-items: center;
+    }
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.22);
-      color:var(--text);
-      text-decoration:none;
-      font-weight:650;
       cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(0,0,0,0.22);
+      color: rgba(255,255,255,0.92);
+      font-size: 14px;
+      font-weight: 650;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       user-select:none;
     }
-    .btnPrimary{
-      border:1px solid rgba(107,182,255,.45);
-      background:var(--accentSoft);
+    .btn:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.35);
+      transform: translateY(-1px);
     }
-    .btn:hover{filter:brightness(1.08)}
-    .btn:disabled{opacity:.6;cursor:not-allowed}
+    .btn-primary{
+      border-color: rgba(120,190,255,0.55);
+      background: rgba(120,190,255,0.14);
+    }
+    .btn-danger{
+      border-color: rgba(255,140,140,0.35);
+      background: rgba(255,140,140,0.10);
+    }
+    .status{
+      margin-left: auto;
+      color: rgba(255,255,255,0.70);
+      font-size: 13.5px;
+    }
 
-    /* Sections */
+    /* ===== Layout grid ===== */
     .grid{
       display:grid;
-      grid-template-columns: 1fr;
-      gap:14px;
-      margin-top:14px;
+      gap: 16px;
+      margin-top: 16px;
     }
-    .card{
-      border:1px solid var(--border);
-      border-radius:18px;
-      background:var(--card);
-      padding:16px;
-      backdrop-filter: blur(8px);
+    .grid-2{
+      grid-template-columns: 1fr 1fr;
     }
-    .card h2{margin:0 0 8px;font-size:18px}
-    .card p{margin:6px 0;color:var(--muted);line-height:1.5}
-
-    /* Form elements */
-    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:13px}
-    input, textarea{
-      width:100%;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(0,0,0,.25);
-      color:var(--text);
-      outline:none;
+    @media (max-width: 980px){
+      .grid-2{ grid-template-columns: 1fr; }
+      .status{ margin-left: 0; width: 100%; }
     }
-    textarea{min-height:90px;resize:vertical}
-    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:760px){ .twoCol{grid-template-columns:1fr} .hero h1{font-size:34px;} }
 
-    .status{margin-top:10px;color:var(--muted);min-height:18px}
-    .status.bad{color:var(--danger)}
+    /* ===== Google Form embed ===== */
+    .embed{
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(0,0,0,0.22);
+      box-shadow: var(--shadow2);
+    }
+    .embed iframe{
+      width: 100%;
+      height: 680px;
+      border: 0;
+      display:block;
+    }
+    .embed-note{
+      margin-top: 10px;
+      color: rgba(255,255,255,0.62);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
 
-    /* Posts */
+    /* ===== Posts ===== */
+    .posts{
+      display:grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
     .post{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      padding:12px;
-      margin-top:10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.22);
+      padding: 12px 12px 12px;
     }
-    .meta{
+    .post-top{
       display:flex;
-      justify-content:space-between;
-      gap:10px;
-      font-size:12px;
-      color:rgba(255,255,255,.58);
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      margin-bottom: 10px;
     }
-    .line{margin:6px 0;color:rgba(255,255,255,.82)}
-    .divider{height:1px;background:rgba(255,255,255,.10);margin:12px 0}
+    .alias{
+      font-weight: 750;
+      letter-spacing: 0.1px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.92);
+    }
+    .when{
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.60);
+      white-space: nowrap;
+    }
+    .qa{
+      display:grid;
+      gap: 10px;
+    }
+    .q{
+      font-size: 13px;
+      color: rgba(255,255,255,0.64);
+      text-transform: uppercase;
+      letter-spacing: 0.35px;
+      margin-bottom: 3px;
+    }
+    .a{
+      margin:0;
+      color: rgba(255,255,255,0.86);
+      font-size: 15.5px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .footer{
+      text-align: center;
+      padding: 18px 12px;
+      margin-top: 26px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.70);
+      font-size: 14px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .nav-btn, .btn{ transition: none; }
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Ocean Blueprint</span>
+    </a>
 
-    <section class="hero">
-      <div class="heroInner">
-        <div>
-          <h1>Take Action Raffle</h1>
-          <p>
-            Enter the $100 raffle by submitting your contact info (private) and posting one fact + one action (public).
-            Use info from this site or outside sources.
-          </p>
-          <div class="pillRow">
-            <span class="pill">Contact info stays private</span>
-            <span class="pill">Public board uses a display name</span>
-            <span class="pill">Short, specific answers</span>
-          </div>
-        </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-btn" href="index.html">Home</a>
+      <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
+      <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
+      <a class="nav-btn" href="solutions.html">Solutions</a>
+      <a class="nav-btn" href="take-action.html">Take action</a>
+      <a class="nav-btn" href="quiz.html">Game</a>
+    </nav>
+  </header>
 
-        <div class="btnRow">
-          <a class="btn" href="index.html">Home</a>
-          <a class="btn" href="what-is-acidification.html">What is OA?</a>
-          <a class="btn" href="why-it-matters.html">Why it matters</a>
-          <a class="btn" href="solutions.html">Solutions</a>
+  <main class="page">
+    <section class="hero" aria-label="Raffle banner">
+      <div class="hero-inner">
+        <div class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Community action</div>
+        <h1 class="h1">Take Action Raffle</h1>
+        <p class="p">
+          Enter the $100 raffle by submitting your contact info (private) and posting one ocean acidification fact + one action you can take (public).
+          Use information from this site and outside sources if you want.
+        </p>
+
+        <div class="badge-row" aria-label="Key notes">
+          <div class="badge">Contact info stays private (Google Form)</div>
+          <div class="badge">Public board shows only your answers</div>
+          <div class="badge">No names requested</div>
+          <div class="badge">Short, specific answers</div>
         </div>
       </div>
     </section>
 
-    <div class="grid">
-
-      <!-- Step 1: Private raffle entry via Google Form -->
-      <section class="card">
-        <h2>Step 1 — Raffle entry (private)</h2>
-        <p>
-          Submit your email or phone using this Google Form. This information is <b>not</b> shown on the public board.
+    <div class="grid grid-2">
+      <!-- Step 1 -->
+      <section class="card section" aria-label="Step 1">
+        <h2 class="section-title">Step 1 — Raffle entry (private)</h2>
+        <p class="section-sub">
+          Submit your email or phone using the embedded Google Form below. This is separate from the public board.
         </p>
 
-        <div class="btnRow" style="margin-top:10px;">
-          <a class="btn btnPrimary" href="GOOGLE_FORM_URL_HERE" target="_blank" rel="noopener noreferrer">
-            Open raffle form
-          </a>
-          <span style="color:rgba(255,255,255,.55);font-size:12px;">
-            (Opens in a new tab)
-          </span>
+        <div class="section embed" style="margin-top:12px;">
+          <!-- NOTE: using "embedded" form URL format -->
+          <iframe
+            title="Raffle entry form"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSc9RCl3cZRnytDUT1MmSC6tGajdDqAoqKBTADvWe_D-C9WgLA/viewform?embedded=true">
+          </iframe>
         </div>
-
-        <!-- Optional: embed the form instead of just linking it
-        <div class="divider"></div>
-        <iframe
-          src="GOOGLE_FORM_URL_HERE"
-          width="100%"
-          height="900"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          style="border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(0,0,0,.2);"
-        >Loading…</iframe>
-        -->
+        <p class="embed-note">
+          If the form does not load, make sure the form is published and accepts responses.
+        </p>
       </section>
 
-      <!-- Step 2: Public board -->
-      <section class="card">
-        <h2>Step 2 — Post on the community board (public)</h2>
-        <p>
-          Use a <b>display name</b> that is not identifying (example: “BlueWave17”). Do not post private info.
+      <!-- Step 2 -->
+      <section class="card section" aria-label="Step 2">
+        <h2 class="section-title">Step 2 — Post on the community board (public)</h2>
+        <p class="section-sub">
+          Post one fact and one action. Do not include private info. Your post will appear with a random alias (example: Wave-4839).
         </p>
 
-        
-        
         <label for="fact">1) One fact about ocean acidification</label>
         <textarea id="fact" maxlength="500" placeholder="Example: When CO₂ dissolves in seawater, it increases H⁺ and reduces carbonate ions, making it harder for shell-building organisms to calcify."></textarea>
+        <p class="hint"><span id="factCount">0</span>/500 characters (min 10)</p>
 
         <label for="action">2) One thing you can do to help</label>
-        <textarea id="action" maxlength="500" placeholder="Example: Reduce personal CO₂ emissions + support local shellfish reef restoration projects."></textarea>
+        <textarea id="action" maxlength="500" placeholder="Example: Reduce personal CO₂ emissions and support local shellfish reef restoration or seagrass projects."></textarea>
+        <p class="hint"><span id="actionCount">0</span>/500 characters (min 10)</p>
 
-        <div class="btnRow" style="margin-top:10px;">
-          <button class="btn btnPrimary" id="submitBtn">Post</button>
-          <button class="btn" id="clearBtn" type="button">Clear</button>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="postBtn" type="button">Post</button>
+          <button class="btn btn-danger" id="clearBtn" type="button">Clear</button>
+          <div class="status" id="status">Not posted yet.</div>
         </div>
 
-        <div class="status" id="status"></div>
+        <div class="section" style="margin-top:16px;">
+          <h3 class="section-title" style="font-size:18px;">Recent posts</h3>
+          <p class="section-sub" id="postsHint">Loading…</p>
+          <div class="posts" id="posts"></div>
+        </div>
       </section>
-
-      <section class="card">
-        <h2>Recent posts</h2>
-        <div id="feed"></div>
-      </section>
-
     </div>
-  </div>
 
+    <footer class="footer">
+      Ocean Blueprint • Community board posts are public. Do not post personal information.
+    </footer>
+  </main>
+
+  <!-- Firebase + Firestore (CDN, works fine inside HTML) -->
   <script type="module">
-    // Firebase config (public, client-side)
+    // ===== 1) Firebase imports (modular SDK) =====
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      query,
+      orderBy,
+      limit,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+    // ===== 2) Your Firebase config =====
+    // NOTE: This is safe to be public. Security comes from Firestore rules.
     const firebaseConfig = {
       apiKey: "AIzaSyBPC4gV_qJN_sgZlzt1s5XhI3DUOYpDrus",
       authDomain: "ocean-blueprint.firebaseapp.com",
@@ -246,136 +480,153 @@
       appId: "1:613311127660:web:3985ecf844877946c83849"
     };
 
-    function randomAlias() {
-  const words = ["Wave","Current","Tide","Reef","Shell","Coral","Blue","Ocean"];
-  const letters = Math.random().toString(36).substring(2, 6).toUpperCase();
-  const word = words[Math.floor(Math.random() * words.length)];
-  return `${word}-${letters}`;
-}
-
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-    import {
-      getFirestore, collection, addDoc, serverTimestamp,
-      query, orderBy, limit, onSnapshot
-    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-
+    // ===== 3) Init Firebase =====
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const els = {
-      displayName: document.getElementById("displayName"),
-      topicTag: document.getElementById("topicTag"),
-      fact: document.getElementById("fact"),
-      action: document.getElementById("action"),
-      btn: document.getElementById("submitBtn"),
-      clear: document.getElementById("clearBtn"),
-      status: document.getElementById("status"),
-      feed: document.getElementById("feed"),
-    };
+    // ===== 4) UI helpers =====
+    const factEl = document.getElementById("fact");
+    const actionEl = document.getElementById("action");
+    const factCountEl = document.getElementById("factCount");
+    const actionCountEl = document.getElementById("actionCount");
+    const postBtn = document.getElementById("postBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const statusEl = document.getElementById("status");
+    const postsEl = document.getElementById("posts");
+    const postsHintEl = document.getElementById("postsHint");
 
-    function trim(s){ return (s || "").trim(); }
-
-    // Prevent obvious private/identifying strings in displayName
-    function looksLikeEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
-    function looksLikePhone(s){ return /(\+?\d[\d\s().-]{7,})/.test(s); }
-
-    function safeDisplayName(raw){
-      const s = trim(raw);
-      if (!s) return "Anonymous";
-      if (looksLikeEmail(s) || looksLikePhone(s)) return "Anonymous";
-      // Keep it simple: alnum + _ - only
-      const cleaned = s.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 24);
-      return cleaned ? cleaned : "Anonymous";
+    function setStatus(msg) {
+      statusEl.textContent = msg;
     }
 
-    function escapeHtml(str){
-      return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+    function updateCounts() {
+      factCountEl.textContent = String(factEl.value.length);
+      actionCountEl.textContent = String(actionEl.value.length);
     }
 
-    function setStatus(msg, bad=false){
-      els.status.textContent = msg || "";
-      els.status.className = bad ? "status bad" : "status";
+    factEl.addEventListener("input", updateCounts);
+    actionEl.addEventListener("input", updateCounts);
+    updateCounts();
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#039;"
+      }[c]));
     }
 
-    function validate(){
-      const fact = trim(els.fact.value);
-      const action = trim(els.action.value);
-      if (fact.length < 10) return "Fact is too short (min 10 characters).";
-      if (action.length < 10) return "Action is too short (min 10 characters).";
-      return null;
+    // Random, non-identifying alias (no user input)
+    function randomAlias() {
+      const words = ["Wave", "Tide", "Reef", "Shell", "Current", "Blue", "Ocean", "Coral"];
+      const w = words[Math.floor(Math.random() * words.length)];
+      const n = Math.floor(1000 + Math.random() * 9000);
+      return `${w}-${n}`;
     }
 
-    const postsRef = collection(db, "raffle_posts");
-    const q = query(postsRef, orderBy("createdAt", "desc"), limit(30));
+    // Firestore timestamp isn't required by your rules, so we skip it.
+    // (If you want time displayed reliably, you’d need serverTimestamp + rules allowing it.)
+    function approxTimeLabel() {
+      const d = new Date();
+      return d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+    }
 
-    onSnapshot(q, (snap) => {
-      els.feed.innerHTML = "";
-      if (snap.empty){
-        els.feed.innerHTML = "<p style='color:rgba(255,255,255,.7)'>No posts yet.</p>";
+    // ===== 5) Post handler (MUST match your rules exactly) =====
+    postBtn.addEventListener("click", async () => {
+      const fact = factEl.value.trim();
+      const action = actionEl.value.trim();
+
+      if (fact.length < 10 || action.length < 10) {
+        setStatus("Both answers must be at least 10 characters.");
+        return;
+      }
+      if (fact.length > 500 || action.length > 500) {
+        setStatus("Max 500 characters per answer.");
         return;
       }
 
-      snap.forEach((doc) => {
-        const d = doc.data();
-        const alias = d.alias || "Anonymous";
-        const when = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleString() : "just now";
-        const name = d.displayName || "Anonymous";
-        const tag = d.topicTag ? ` • ${d.topicTag}` : "";
+      postBtn.disabled = true;
+      postBtn.textContent = "Posting…";
+      setStatus("Posting…");
 
-        const post = document.createElement("div");
-        post.className = "post";
-        post.innerHTML = `
-          <div class="meta">
-            <span>${alias}</span>
-            <span>${when}</span>
-          </div>
-          <div class="line"><b>Fact:</b> ${escapeHtml(d.fact || "")}</div>
-          <div class="line"><b>Action:</b> ${escapeHtml(d.action || "")}</div>
-        `;
-        els.feed.appendChild(post);
-      });
-    });
-
-    els.clear.addEventListener("click", () => {
-      els.displayName.value = "";
-      els.topicTag.value = "";
-      els.fact.value = "";
-      els.action.value = "";
-      setStatus("");
-    });
-
-    els.btn.addEventListener("click", async () => {
-      const err = validate();
-      if (err){ setStatus(err, true); return; }
-
-      els.btn.disabled = true;
-      setStatus("Posting...");
-
-      try{
-        await addDoc(postsRef, {
+      try {
+        await addDoc(collection(db, "raffle_posts"), {
           page: "context",
-          createdAt: serverTimestamp(),
           alias: randomAlias(),
-          fact: trim(els.fact.value).slice(0, 500),
-          action: trim(els.action.value).slice(0, 500)
+          fact,
+          action
         });
 
-
-        els.fact.value = "";
-        els.action.value = "";
+        factEl.value = "";
+        actionEl.value = "";
+        updateCounts();
         setStatus("Posted.");
-      } catch(e){
+      } catch (e) {
         console.error(e);
-        setStatus("Post failed. Check Firestore Rules + domain-restricted API key.", true);
-      } finally{
-        els.btn.disabled = false;
+        setStatus("Post failed. Open DevTools → Console to see the error.");
+      } finally {
+        postBtn.disabled = false;
+        postBtn.textContent = "Post";
       }
+    });
+
+    clearBtn.addEventListener("click", () => {
+      factEl.value = "";
+      actionEl.value = "";
+      updateCounts();
+      setStatus("Cleared.");
+    });
+
+    // ===== 6) Live feed =====
+    // NOTE: Because you didn’t store timestamps, ordering isn’t perfect.
+    // We’ll still try: Firestore can’t orderBy a field that doesn’t exist.
+    // So we will just listen to the whole collection and render the newest docs as Firestore returns them.
+    // Better solution: add createdAt: serverTimestamp() and allow it in rules.
+    function renderPosts(docs) {
+      if (!docs.length) {
+        postsHintEl.textContent = "No posts yet.";
+        postsEl.innerHTML = "";
+        return;
+      }
+
+      postsHintEl.textContent = "Showing recent activity.";
+      postsEl.innerHTML = docs.map((d) => {
+        const data = d.data();
+        const alias = typeof data.alias === "string" ? data.alias : "Wave-0000";
+        const fact = typeof data.fact === "string" ? data.fact : "";
+        const action = typeof data.action === "string" ? data.action : "";
+        return `
+          <div class="post">
+            <div class="post-top">
+              <div class="alias">${escapeHtml(alias)}</div>
+              <div class="when">${escapeHtml(approxTimeLabel())}</div>
+            </div>
+            <div class="qa">
+              <div>
+                <div class="q">Fact</div>
+                <p class="a">${escapeHtml(fact)}</p>
+              </div>
+              <div>
+                <div class="q">Action</div>
+                <p class="a">${escapeHtml(action)}</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Listener (simple)
+    // If your collection grows large, you must change this to a limited query using a createdAt field.
+    onSnapshot(collection(db, "raffle_posts"), (snapshot) => {
+      // Render last ~20 docs from snapshot order (not guaranteed chronological).
+      const docs = snapshot.docs.slice(-20).reverse();
+      renderPosts(docs);
+    }, (err) => {
+      console.error(err);
+      postsHintEl.textContent = "Could not load posts. Check Firestore rules + console.";
     });
   </script>
 </body>
