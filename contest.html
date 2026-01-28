@@ -360,11 +360,11 @@
         await addDoc(postsRef, {
           page: "context",
           createdAt: serverTimestamp(),
-          displayName: safeDisplayName(els.displayName.value),
-          topicTag: trim(els.topicTag.value).slice(0,24),
-          fact: trim(els.fact.value).slice(0,500),
-          action: trim(els.action.value).slice(0,500)
+          alias: randomAlias(),
+          fact: trim(els.fact.value).slice(0, 500),
+          action: trim(els.action.value).slice(0, 500)
         });
+
 
         els.fact.value = "";
         els.action.value = "";
