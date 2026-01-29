@@ -360,6 +360,24 @@
     @media (prefers-reduced-motion: reduce){
       .nav-btn, .cta-wide, .sol-link{ transition: none; }
     }
+
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column; /* Stacks Brand logo on top of buttons */
+        padding: 15px 10px;
+        gap: 15px;
+      }
+
+      .nav {
+        justify-content: center; /* Centers buttons on mobile */
+        width: 100%;
+      }
+
+      .nav-btn {
+        font-size: 13px; /* Slightly smaller text for mobile */
+        padding: 6px 10px;
+      }
+    }
   </style>
 </head>
 
