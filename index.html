@@ -128,6 +128,25 @@
       background: rgba(7,16,24,0.5);
       backdrop-filter: blur(8px);
     }
+
+@media (max-width: 768px) {
+      .topbar {
+        flex-direction: column; /* Stacks Brand logo on top of buttons */
+        padding: 15px 10px;
+        gap: 15px;
+      }
+
+      .nav {
+        justify-content: center; /* Centers buttons on mobile */
+        width: 100%;
+      }
+
+      .nav-btn {
+        font-size: 13px; /* Slightly smaller text for mobile */
+        padding: 6px 10px;
+      }
+    }
+    
   </style>
 </head>
 
