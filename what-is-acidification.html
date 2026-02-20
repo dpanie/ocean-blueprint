@@ -9,15 +9,12 @@
     :root{
       --bg: #071018;
       --panel: rgba(255,255,255,0.06);
-      --panel2: rgba(0,0,0,0.22);
       --text: rgba(255,255,255,0.92);
       --muted: rgba(255,255,255,0.72);
-      --muted2: rgba(255,255,255,0.62);
       --line: rgba(255,255,255,0.12);
       --accent: #78beff;
       --accent2: rgba(120,190,255,0.18);
       --shadow: 0 22px 70px rgba(0,0,0,0.45);
-      --shadow2: 0 10px 26px rgba(0,0,0,0.35);
       --radius: 18px;
     }
 
@@ -25,599 +22,203 @@
     html,body{ height:100%; }
     body{
       margin:0;
-      background:
-        radial-gradient(1200px 900px at 70% 10%, rgba(120,190,255,0.14), transparent 55%),
-        radial-gradient(900px 700px at 20% 80%, rgba(120,190,255,0.08), transparent 55%),
-        var(--bg);
+      background: radial-gradient(1200px 900px at 70% 10%, rgba(120,190,255,0.14), transparent 55%), var(--bg);
       color: var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      font-size: 19px;      /* ↑ from default 16px */
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
     }
 
-    a{ color:inherit; }
-    a:focus-visible, button:focus-visible{
-      outline: 3px solid rgba(120,190,255,0.55);
-      outline-offset: 3px;
-      border-radius: 10px;
-    }
-
-    /* ===== Topbar ===== */
+    /* ===== Expanding Topbar (Mobile Fix) ===== */
     .topbar{
       position: sticky;
       top: 0;
-      z-index: 30;
-      height: 72px;
+      z-index: 100;
+      min-height: 72px;
+      height: auto; 
       display:flex;
+      flex-wrap: wrap; 
       align-items:center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 0 18px;
-      background: rgba(7,16,24,0.74);
+      padding: 10px 18px;
+      background: rgba(7,16,24,0.95);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.10);
+      border-bottom: 1px solid var(--line);
+      gap: 12px;
     }
+
     .brand{
-      font-weight: 750;
-      letter-spacing: 0.2px;
-      font-size: 16px;
-      white-space: nowrap;
+      font-weight: 800;
+      font-size: 18px;
       display:flex;
       align-items:center;
       gap: 10px;
+      color: #ffffff !important; /* Forced White */
+      text-decoration: none;
     }
-    .brand-mark{
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent2);
-    }
+
+    .brand-mark{ width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent2); }
+    
     .nav{
       display:flex;
       gap: 8px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
+
     .nav-btn{
       text-decoration:none;
-      padding: 9px 12px;
+      padding: 8px 12px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.90);
-      font-size: 15px;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .nav-btn:hover{
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,255,255,0.26);
-      transform: translateY(-1px);
-    }
-
-    /* ===== Page container ===== */
-    .page{
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 18px 0 42px;
-    }
-
-    /* Type */
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      color: rgba(255,255,255,0.82);
-      font-size: 13px;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-    }
-    .kicker-dot{
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent2);
-    }
-    .h1{
-      margin: 10px 0 0;
-      font-size: clamp(34px, 4.8vw, 62px);
-      line-height: 1.06;
-      letter-spacing: -0.9px;
-    }
-    .h2{
-      margin: 0;
-      font-size: 26px;
-      line-height: 1.25;
-      letter-spacing: -0.2px;
-      color: rgba(255,255,255,0.94);
-    }
-    .p{
-      margin: 10px 0 0;
-      color: rgba(255,255,255,0.78);
-      font-size: 18px;
-      max-width: 920px;
-    }
-    .accent{ color: var(--accent); }
-
-    /* ===== Cards / Layout ===== */
-    .card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.06);
-      box-shadow: var(--shadow2);
-      padding: 14px 14px 16px;
-    }
-    .card-title{
-      margin: 0 0 8px;
-      color: rgba(255,255,255,0.92);
-      font-weight: 700;
+      color: #fff;
       font-size: 14px;
-      letter-spacing: 0.1px;
-    }
-    .card-text{
-      margin: 0;
-      color: rgba(255,255,255,0.78);
-      font-size: 17px;
-      line-height: 1.65;
+      white-space: nowrap;
     }
 
-    .section{ margin-top: 18px; }
-    .section-spaced{ margin-top: 40px; }
-
-    .grid{ display:grid; gap: 16px; }
-    .grid-2{ grid-template-columns: 1.1fr 0.9fr; }
-    @media (max-width: 980px){
-      .grid-2{ grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
+      .topbar { justify-content: center; }
+      .nav { justify-content: center; width: 100%; }
     }
 
-    /* ===== FULL-BLEED HERO ===== */
+    /* ===== Hero Section ===== */
     .oa-hero{
       width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
-
-      min-height: calc(100vh - 72px);
-      display: grid;
-      align-items: center;
-
-      border-radius: 0;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.86) 78%),
-        radial-gradient(1000px 520px at 70% 20%, rgba(120,190,255,0.18), transparent 60%),
-        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=80");
-      background-size: cover;
-      background-position: center;
-    }
-
-    .oa-hero-inner{
-      padding: 46px 22px 18px;
+      padding: 60px 20px;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=80") center/cover;
       text-align: center;
-      max-width: 980px;
-      margin: 0 auto;
     }
 
-    .oa-hero-sub{
-      margin: 18px auto 0;
-      max-width: 980px;
-      color: rgba(255,255,255,0.90);
-      font-size: clamp(20px, 2.4vw, 28px);
-      line-height: 1.7;
-      font-weight: 520;
-    }
+    .h1{ font-size: clamp(34px, 5vw, 64px); margin: 0; line-height: 1.1; letter-spacing: -1px; }
+    .accent{ color: var(--accent); }
+    .oa-hero-sub{ max-width: 800px; margin: 20px auto; font-size: 1.2rem; color: rgba(255,255,255,0.8); }
 
-    .badge-row{
-      display:flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 14px;
-    }
-    .badge{
-      font-size: 14px;
-      color: rgba(255,255,255,0.86);
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.06);
-      padding: 7px 10px;
-      border-radius: 999px;
-      backdrop-filter: blur(6px);
-    }
-    .badge strong{ color: rgba(255,255,255,0.95); }
+    .page{ width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding-bottom: 50px; }
 
-    .oa-quick{
-      margin: 18px auto 0;
-      max-width: 980px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      padding: 0 18px 28px;
-    }
+    /* ===== Grid Layouts ===== */
+    .grid{ display:grid; gap: 20px; margin-top: 40px; }
+    .grid-2{ grid-template-columns: 1fr 1fr; }
+    .grid-3{ grid-template-columns: repeat(3, 1fr); }
+    
     @media (max-width: 900px){
-      .oa-quick{ grid-template-columns: 1fr; padding: 0 18px 22px; }
+      .grid-2, .grid-3{ grid-template-columns: 1fr; }
     }
 
-    /* ===== Visual block ===== */
-    .figure{
-      border-radius: 22px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.22);
-      box-shadow: var(--shadow2);
+    .card{
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 24px;
+      border-radius: var(--radius);
     }
-    .figure img{
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      display: block;
-    }
-    .figure-cap{
-      padding: 10px 12px 12px;
-      border-top: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.65);
-      font-size: 14px;
-      line-height: 1.5;
-    }
+    .card-title{ margin: 0 0 10px; font-weight: 800; color: var(--accent); font-size: 1.1rem; text-transform: uppercase; }
 
     /* ===== Equations ===== */
-    .eq-stack{ display: grid; gap: 10px; margin-top: 12px; }
+    .eq-stack{ display: grid; gap: 12px; margin: 20px 0; }
     .eq{
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.22);
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      border-radius: 12px;
       text-align: center;
-      font-size: 18px;
-      color: rgba(255,255,255,0.92);
+      font-size: 1.2rem;
     }
-    .eq small{
-      display: block;
-      margin-top: 6px;
-      color: rgba(255,255,255,0.65);
-      font-size: 14px;
-      line-height: 1.45;
-    }
+    .eq small { display: block; margin-top: 8px; font-size: 0.9rem; color: var(--muted); }
 
-    /* ===== Callout ===== */
     .callout{
-      margin-top: 14px;
-      padding: 14px 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(120,190,255,0.25);
-      background: rgba(120,190,255,0.10);
-      color: rgba(255,255,255,0.88);
-      line-height: 1.65;
-      font-size: 15px;
+      background: rgba(120,190,255,0.1);
+      border-left: 4px solid var(--accent);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 30px 0;
     }
 
-    /* ===== Buttons ===== */
-    .btn-row{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-    }
-    .btn{
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.20);
-      background: rgba(0,0,0,0.22);
-      color: rgba(255,255,255,0.92);
-      font-size: 13px;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .btn:hover{
-      background: rgba(255,255,255,0.10);
-      border-color: rgba(255,255,255,0.35);
-      transform: translateY(-1px);
-    }
-    .btn-primary{
-      border-color: rgba(120,190,255,0.45);
-      background: rgba(120,190,255,0.14);
-    }
-
-    /* ===== Video block ===== */
-    .video-wrap{
-      border-radius: 22px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.22);
-      box-shadow: var(--shadow2);
-    }
-    .video-grid{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 12px;
-    }
-    @media (max-width: 900px){
-      .video-grid{ grid-template-columns: 1fr; }
-    }
-
-    .video{
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.35);
-    }
-    .video iframe{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-    }
-    .video-cap{
-      padding: 10px 12px 12px;
-      border-top: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.70);
-      font-size: 15px;
-      line-height: 1.55;
-    }
-
-    /* ===== Lists ===== */
-    .bullets{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: rgba(255,255,255,0.80);
-      font-size: 16.5px;
-      line-height: 1.6;
-    }
-    .bullets li{ margin: 6px 0; }
-
-    /* ===== Footer ===== */
-    .footer{
-      text-align: center;
-      padding: 18px 12px;
-      margin-top: 26px;
-      border-top: 1px solid rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.70);
-    }
-
-    /* ===== Reduced motion ===== */
-    @media (prefers-reduced-motion: reduce){
-      .nav-btn, .btn{ transition: none; }
-    }
-
-    @media (max-width: 768px) {
-      .topbar {
-        flex-direction: column; /* Stacks Brand logo on top of buttons */
-        padding: 15px 10px;
-        gap: 15px;
-      }
-
-      .nav {
-        justify-content: center; /* Centers buttons on mobile */
-        width: 100%;
-      }
-
-      .nav-btn {
-        font-size: 13px; /* Slightly smaller text for mobile */
-        padding: 6px 10px;
-      }
-    }
+    .footer{ text-align: center; padding: 40px 20px; border-top: 1px solid var(--line); opacity: 0.6; font-size: 0.9rem; }
   </style>
+  
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Ocean Blueprint</div>
-    <nav class="nav" aria-label="Primary navigation">
+    <a href="index.html" class="brand"><div class="brand-mark"></div>Ocean Blueprint</a>
+    <nav class="nav">
       <a class="nav-btn" href="index.html">Home</a>
-      <a class="nav-btn" href="what-is-acidification.html" aria-current="page">What is OA?</a>
+      <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
       <a class="nav-btn" href="why-it-matters.html">Why it matters</a>
       <a class="nav-btn" href="solutions.html">Solutions</a>
       <a class="nav-btn" href="take-action.html">Take action</a>
+      <a class="nav-btn" href="marine-organisms.html">Endangered Species</a>
       <a class="nav-btn" href="game.html">Game</a>
+      <a class="nav-btn" href="contest.html" style="border-color: var(--accent); color: var(--accent);">Enter the Raffle!</a>
     </nav>
   </header>
 
+  <section class="oa-hero">
+    <h1 class="h1">What is <span class="accent">Ocean Acidification</span>?</h1>
+    <p class="oa-hero-sub">It’s often called "climate change's equally evil twin." It is a fundamental shift in the chemistry of our oceans caused by our own carbon footprint.</p>
+  </section>
+
   <main class="page">
-
-    <!-- Cinematic hero -->
-    <section class="oa-hero" aria-label="What is ocean acidification">
-      <div class="oa-hero-inner">
-        <div class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Ocean chemistry</div>
-        <h1 class="h1" style="margin-top: 14px;">
-          What is <span class="accent">Ocean Acidification</span>?
-        </h1>
-
-        <p class="oa-hero-sub">
-          Ocean acidification is a <strong>change in seawater chemistry</strong> linked to additional atmospheric CO₂.
-          When CO₂ dissolves in seawater, it increases hydrogen ions (H⁺), which lowers pH and shifts inorganic carbon
-          from carbonate (CO₃²⁻) toward bicarbonate (HCO₃⁻).
-        </p>
-
-        <div class="badge-row" aria-label="Key terms">
-          <div class="badge"><strong>pH</strong> reflects H⁺ on a log scale</div>
-          <div class="badge"><strong>Carbonate system</strong>: CO₂ / H₂CO₃ / HCO₃⁻ / CO₃²⁻</div>
-          <div class="badge"><strong>Acidification</strong> ≠ “turning acidic”</div>
-        </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <p class="card-title">The Simple Definition</p>
+        <p>Ocean acidification is the ongoing decrease in the pH of the Earth's oceans, caused by the uptake of carbon dioxide ($CO_2$) from the atmosphere.</p>
+        <p>Think of the ocean as a giant sponge. It has absorbed about 30% of all the $CO_2$ we've released into the air since the Industrial Revolution.</p>
       </div>
+      <div class="card">
+        <p class="card-title">What Causes It?</p>
+        <p>The primary driver is the burning of <strong>fossil fuels</strong> (coal, oil, and gas) and land-use changes like <strong>deforestation</strong>. When we release $CO_2$, it doesn't just stay in the sky; it dissolves into the water, triggering a chemical chain reaction.</p>
+      </div>
+    </div>
 
-      <!-- quick cards inside the hero -->
-      <div class="oa-quick" aria-label="Quick overview">
-        <div class="card">
-          <p class="card-title">1) CO₂ enters seawater</p>
-          <p class="card-text">
-            CO₂ moves between air and sea. Wind and waves can speed up this exchange at the surface.
-          </p>
+    <section style="margin-top: 60px;">
+      <h2 style="text-align: center;">The Chemistry of Change</h2>
+      <p style="text-align: center; color: var(--muted);">When $CO_2$ mixes with seawater, it creates a series of reactions that increase acidity ($H^+$ ions) and decrease the carbonate needed for shells.</p>
+      
+      <div class="eq-stack">
+        <div class="eq">
+          $$CO_2 + H_2O \rightleftharpoons H_2CO_3$$
+          <small>Carbon dioxide mixes with water to form <strong>Carbonic Acid</strong>.</small>
         </div>
-        <div class="card">
-          <p class="card-title">2) H⁺ increases → pH decreases</p>
-          <p class="card-text">
-            Dissolved CO₂ forms carbonic acid, which partially dissociates and increases H⁺. That change lowers pH.
-          </p>
-        </div>
-        <div class="card">
-          <p class="card-title">3) Carbonate shifts toward bicarbonate</p>
-          <p class="card-text">
-            Higher H⁺ pushes the carbonate system away from CO₃²⁻ and toward HCO₃⁻ at equilibrium.
-          </p>
+        <div class="eq">
+          $$H_2CO_3 \rightleftharpoons H^+ + HCO_3^-$$
+          <small>The acid breaks apart, releasing <strong>Hydrogen ions ($H^+$)</strong> which lowers the pH.</small>
         </div>
       </div>
     </section>
 
-    <!-- Videos: side-by-side -->
-    <section class="section-spaced" aria-label="Ocean acidification videos">
-      <h2 class="h2">Learn Alongside Experts</h2>
+    <div class="callout">
+      <strong>Wait, is the ocean becoming "acid"?</strong> <br>
+      Not exactly. The ocean is currently slightly basic (around pH 8.1). "Acidification" means the pH is moving <em>toward</em> the acidic side of the scale. Even a small drop is huge because the pH scale is logarithmic—a 0.1 drop represents a <strong>30% increase in acidity</strong>.
+    </div>
 
-      <div class="video-wrap" role="group" aria-label="Embedded videos">
-        <div class="video-grid">
-          <div class="video" aria-label="Video 1">
-            <iframe
-              src="https://www.youtube.com/embed/Nof54u0v-e8?rel=0&modestbranding=1"
-              title="Ocean acidification video 1"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-
-          <div class="video" aria-label="Video 2">
-            <iframe
-              src="https://www.youtube.com/embed/lWEvBLlUa2E?rel=0&modestbranding=1"
-              title="Ocean acidification video 2"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
+    <h2 style="margin-top: 60px;">Common Misconceptions</h2>
+    <div class="grid grid-3">
+      <div class="card">
+        <p class="card-title">Misconception #1</p>
+        <p><em>"The ocean will turn into a pool of acid."</em><br><br>The ocean will remain basic, but the <strong>chemical balance</strong> is shifting so fast that marine life can't keep up.</p>
       </div>
-    </section>
-
-    <!-- Explainer / Visual + Definition -->
-    <section class="section-spaced" aria-label="Ocean acidification explanation">
-      <div class="grid grid-2">
-        <div class="figure">
-          <img
-            src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1600&q=80"
-            alt="Underwater ocean scene" />
-          <div class="figure-cap">
-            Ocean acidification is a chemistry shift: CO₂ uptake changes the balance of dissolved inorganic carbon.
-          </div>
-        </div>
-
-        <div class="grid" style="align-content: start;">
-          <div class="card">
-            <p class="card-title">Definition</p>
-            <p class="card-text">
-              <strong>Ocean acidification</strong> is an increase in seawater <strong>H⁺</strong> (hydrogen ions)
-              driven by uptake of atmospheric <strong>CO₂</strong>. This lowers pH and changes how inorganic carbon is distributed
-              among CO₂(aq), H₂CO₃, HCO₃⁻, and CO₃²⁻.
-            </p>
-          </div>
-
-          <div class="card">
-            <p class="card-title">What pH tells you</p>
-            <p class="card-text">
-              pH is a <strong>log scale</strong>, so even a small shift can correspond to a meaningful change in H⁺.
-              Ocean acidification can occur even when seawater remains above pH 7 (still basic).
-            </p>
-            <ul class="bullets">
-              <li>pH = −log₁₀[H⁺]</li>
-              <li>Lower pH ⟹ higher [H⁺]</li>
-              <li>“Acidification” describes direction (lower pH), not necessarily crossing pH 7.</li>
-            </ul>
-          </div>
-
-          <div class="callout">
-            <strong>Core idea:</strong> Ocean acidification is a predictable equilibrium shift in the carbonate system.
-            The “why it matters” story comes next—this page is the foundation.
-          </div>
-
-          <div class="btn-row">
-            <a class="btn btn-primary" href="why-it-matters.html">Why it matters</a>
-            <a class="btn" href="solutions.html">Solutions</a>
-          </div>
-        </div>
+      <div class="card">
+        <p class="card-title">Misconception #2</p>
+        <p><em>"It’s just part of a natural cycle."</em><br><br>While pH has changed in the past, it is currently changing <strong>10 times faster</strong> than at any point in the last 50 million years.</p>
       </div>
-    </section>
-
-    <!-- Key reactions -->
-    <section class="section-spaced" aria-label="Key reactions">
-      <h2 class="h2">The key reactions</h2>
-      <p class="p">
-        Read this as a chain: CO₂ enters → carbonic acid forms → H⁺ increases → the carbonate balance shifts.
-        You don’t need to memorize every line—focus on what changes and in which direction.
-      </p>
-
-      <div class="eq-stack" aria-label="Carbonate chemistry equations">
-        <div class="eq">CO₂ + H₂O ⇌ H₂CO₃
-          <small>CO₂ hydrates to carbonic acid (often grouped with CO₂(aq) in seawater chemistry)</small>
-        </div>
-        <div class="eq">H₂CO₃ ⇌ H⁺ + HCO₃⁻
-          <small>carbonic acid dissociates, increasing H⁺ and producing bicarbonate</small>
-        </div>
-        <div class="eq">HCO₃⁻ ⇌ H⁺ + CO₃²⁻
-          <small>more H⁺ shifts equilibrium away from carbonate (CO₃²⁻)</small>
-        </div>
+      <div class="card">
+        <p class="card-title">Misconception #3</p>
+        <p><em>"It only affects the water."</em><br><br>It affects the entire global food web. If the base of the food chain (like plankton) can't survive, the whole system collapses.</p>
       </div>
+    </div>
 
-      <div class="grid" style="margin-top: 16px;">
-        <div class="card">
-          <p class="card-title">What “carbonate system” means in practice</p>
-          <p class="card-text">
-            Seawater stores dissolved inorganic carbon mostly as <strong>bicarbonate</strong>, with smaller fractions as dissolved CO₂/carbonic acid and
-            <strong>carbonate</strong>. When CO₂ increases, the system re-partitions: HCO₃⁻ rises and CO₃²⁻ declines.
-          </p>
-          <ul class="bullets">
-            <li><strong>DIC</strong> (dissolved inorganic carbon) = CO₂(aq) + H₂CO₃ + HCO₃⁻ + CO₃²⁻</li>
-            <li>Ocean acidification changes the <strong>relative proportions</strong> of these species at equilibrium.</li>
-            <li>Those shifts are the definition; biological and economic impacts are downstream.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- What it is NOT -->
-    <section class="section-spaced" aria-label="Common misconceptions">
-      <h2 class="h2">Common misconceptions</h2>
-
-      <div class="grid" style="grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;">
-        <div class="card">
-          <p class="card-title">Not “the ocean turning into acid”</p>
-          <p class="card-text">
-            Acidification means <strong>moving toward lower pH</strong>, not necessarily dropping below pH 7.
-          </p>
-        </div>
-        <div class="card">
-          <p class="card-title">Not only about pH</p>
-          <p class="card-text">
-            pH is one indicator. The central chemistry is the <strong>carbonate-system shift</strong>.
-          </p>
-        </div>
-        <div class="card">
-          <p class="card-title">Not a one-step reaction</p>
-          <p class="card-text">
-            It involves multiple equilibria, so conditions like mixing and temperature can influence the outcome.
-          </p>
-        </div>
-      </div>
-
-      <div class="callout" style="margin-top: 14px;">
-        <strong>Quick self-check:</strong> Try summarizing ocean acidification in one sentence using “CO₂,” “H⁺,” and “carbonate system.”
-      </div>
-    </section>
-
-    <script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="JGv06pTBxFPIEEiT-DpID";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
-
+    <div style="text-align: center; margin-top: 50px;">
+      <a href="why-it-matters.html" class="nav-btn" style="padding: 15px 30px; font-size: 1.1rem; background: var(--accent); color: #071018; font-weight: 800;">Next: Why does this matter? →</a>
+    </div>
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Ocean Blueprint</p>
+    <p>© <span id="year"></span> Ocean Blueprint | A student-led awareness campaign</p>
   </footer>
 
   <script>
