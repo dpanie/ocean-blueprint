@@ -31,27 +31,33 @@
       line-height: 1.65;
     }
 
-    /* ===== Topbar (shared with OA page) ===== */
+    /* ===== Topbar (Updated for Mobile) ===== */
     .topbar{
       position: sticky;
       top: 0;
-      z-index: 30;
-      height: 72px;
+      z-index: 100;
+      /* Changed from 72px to auto so it expands on phones */
+      min-height: 72px;
+      height: auto; 
       display:flex;
+      flex-wrap: wrap; /* Allows buttons to wrap to next line */
       align-items:center;
       justify-content: space-between;
-      padding: 0 18px;
-      background: rgba(7,16,24,0.74);
+      padding: 10px 18px;
+      background: rgba(7,16,24,0.95); /* Darker background for better text contrast */
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
+      gap: 12px;
     }
 
     .brand{
       font-weight: 750;
-      font-size: 16px;
+      font-size: 18px;
       display:flex;
       align-items:center;
       gap: 10px;
+      color: #ffffff !important; /* Forced to white */
+      text-decoration: none;
     }
 
     .brand-dot{
@@ -65,29 +71,31 @@
     .nav{
       display:flex;
       gap: 8px;
-      flex-wrap: wrap;
+      flex-wrap: wrap; /* Ensures buttons don't fall off the screen */
+      justify-content: flex-end;
     }
 
     .nav-btn{
       text-decoration:none;
       color: var(--text);
       font-size: 14px;
-      padding: 9px 12px;
+      padding: 8px 14px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.04);
+      white-space: nowrap;
     }
 
     .nav-btn:hover{
       background: rgba(255,255,255,0.10);
     }
 
-    /* ===== Minimal Home Hero ===== */
+    /* ===== Home Hero ===== */
     .home-hero{
       width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
-      min-height: calc(100vh - 72px);
+      min-height: 80vh; /* Better for mobile flexibility */
       display: grid;
       place-items: center;
       text-align: center;
@@ -101,12 +109,12 @@
 
     .home-inner{
       max-width: 900px;
-      padding: 40px 22px;
+      padding: 60px 22px;
     }
 
     .home-title{
       margin: 0;
-      font-size: clamp(56px, 7vw, 110px);
+      font-size: clamp(48px, 8vw, 110px); /* Slightly smaller start for small screens */
       font-weight: 900;
       line-height: 0.95;
       letter-spacing: -1px;
@@ -114,48 +122,41 @@
 
     .home-subtitle{
       margin-top: 18px;
-      font-size: clamp(22px, 2.4vw, 30px);
+      font-size: clamp(18px, 2.4vw, 30px);
       color: var(--muted);
       line-height: 1.7;
+    }
+
+    /* ===== Mobile Specific Layout ===== */
+    @media (max-width: 768px) {
+      .topbar {
+        justify-content: center; /* Center logo and buttons on phones */
+        text-align: center;
+      }
+      .nav {
+        justify-content: center;
+        width: 100%;
+      }
     }
 
     /* ===== Footer ===== */
     .footer{
       text-align: center;
-      padding: 18px 12px;
+      padding: 24px 12px;
       border-top: 1px solid var(--line);
       color: rgba(255,255,255,0.70);
       background: rgba(7,16,24,0.5);
       backdrop-filter: blur(8px);
     }
-
-@media (max-width: 768px) {
-      .topbar {
-        flex-direction: column; /* Stacks Brand logo on top of buttons */
-        padding: 15px 10px;
-        gap: 15px;
-      }
-
-      .nav {
-        justify-content: center; /* Centers buttons on mobile */
-        width: 100%;
-      }
-
-      .nav-btn {
-        font-size: 13px; /* Slightly smaller text for mobile */
-        padding: 6px 10px;
-      }
-    }
-    
   </style>
 </head>
 
 <body>
   <header class="topbar">
-    <div class="brand">
+    <a href="index.html" class="brand">
       <span class="brand-dot"></span>
       Ocean Blueprint
-    </div>
+    </a>
     <nav class="nav">
       <a class="nav-btn" href="index.html">Home</a>
       <a class="nav-btn" href="what-is-acidification.html">What is OA?</a>
@@ -164,8 +165,7 @@
       <a class="nav-btn" href="take-action.html">Take action</a>
       <a class="nav-btn" href="marine-organisms.html">Endangered Species</a>
       <a class="nav-btn" href="game.html">Game</a>
-      <a class="nav-btn" href="contest.html"> Enter the Raffle!</a>
-
+      <a class="nav-btn" href="contest.html" style="border-color: var(--accent); color: var(--accent);">Enter the Raffle!</a>
     </nav>
   </header>
 
@@ -189,7 +189,7 @@
   </script>
 
   <script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="JGv06pTBxFPIEEiT-DpID";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="JGv06pTBxFPIEEiT-DpID";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+  </script>
 </body>
 </html>
