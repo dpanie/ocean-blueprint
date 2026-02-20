@@ -26,55 +26,62 @@
       line-height: 1.6;
     }
 
-    /* ===== Fixed Topbar ===== */
+    /* ===== Fixed & Expanding Topbar ===== */
     .topbar{
       position: sticky;
       top: 0;
       z-index: 100;
-      height: 72px;
-      display:flex;
-      align-items:center;
+      /* Changed height to auto so it expands to fit buttons on phone */
+      min-height: 72px; 
+      height: auto; 
+      display: flex;
+      flex-wrap: wrap; /* Allows items to wrap to next line if screen is small */
+      align-items: center;
       justify-content: space-between;
-      padding: 0 18px;
-      background: rgba(7,16,24,0.9);
+      padding: 10px 18px;
+      background: rgba(7,16,24,0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
+      gap: 12px;
     }
 
-    /* THE EDIT IS HERE: Forced color to white */
     .brand{
       font-weight: 800;
-      font-size: 16px;
-      display:flex;
-      align-items:center;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
       gap: 10px;
       text-decoration: none;
       white-space: nowrap;
-      color: #ffffff !important; /* This makes the text white */
+      color: #ffffff !important; /* Forces brand text to white */
     }
 
-    .brand-mark{ width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent2); }
+    .brand-mark{ width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent2); }
     
     .nav{
-      display:flex;
+      display: flex;
       gap: 8px;
-      overflow-x: auto; 
-      flex-wrap: nowrap; 
-      padding: 5px 0;
-      scrollbar-width: none;
+      flex-wrap: wrap; /* Buttons wrap instead of side-scrolling */
+      justify-content: flex-end;
     }
-    .nav::-webkit-scrollbar { display: none; }
+
+    @media (max-width: 600px) {
+      .topbar { justify-content: center; } /* Centers everything on small phones */
+      .nav { justify-content: center; width: 100%; }
+    }
 
     .nav-btn{
-      text-decoration:none;
+      text-decoration: none;
       padding: 8px 14px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.15);
       background: rgba(255,255,255,0.05);
       color: #fff;
-      font-size: 14px;
+      font-size: 13px;
       white-space: nowrap;
+      transition: background 0.2s;
     }
+    .nav-btn:hover { background: rgba(255,255,255,0.15); }
 
     /* ===== Hero Section ===== */
     .hero{
@@ -83,59 +90,60 @@
       width: min(1120px, calc(100% - 40px));
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.12);
-      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=80") center/cover;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2400&q=80") center/cover;
       padding: 40px 24px;
       box-shadow: var(--shadow);
     }
     .prize-tag {
-      background: var(--accent);
+      background: #fff;
       color: #071018;
       display: inline-block;
-      padding: 4px 12px;
+      padding: 6px 14px;
       border-radius: 8px;
       font-weight: 800;
       font-size: 14px;
       margin-bottom: 15px;
+      text-transform: uppercase;
     }
-    .h1 { font-size: clamp(28px, 5vw, 48px); margin: 0; line-height: 1.1; }
-    .hero p { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 800px; }
+    .h1 { font-size: clamp(30px, 6vw, 52px); margin: 0; line-height: 1.1; letter-spacing: -1px; }
 
     /* ===== Instructions Box ===== */
     .must-do {
-      background: rgba(120,190,255,0.1);
-      border: 1px solid var(--accent);
-      padding: 15px;
-      border-radius: 12px;
-      margin: 20px 0;
+      background: rgba(120,190,255,0.15);
+      border: 2px solid var(--accent);
+      padding: 20px;
+      border-radius: 14px;
+      margin: 25px 0;
     }
 
     .page{ width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
-    .grid{ display:grid; gap: 20px; grid-template-columns: 1fr 1fr; margin-bottom: 50px; }
+    .grid{ display: grid; gap: 24px; grid-template-columns: 1fr 1fr; margin-bottom: 60px; }
     @media (max-width: 900px){ .grid{ grid-template-columns: 1fr; } }
 
     .card{
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.1);
       padding: 24px;
       border-radius: var(--radius);
     }
-    .step-num { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 14px; display: block; margin-bottom: 5px; }
+    .step-label { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 13px; letter-spacing: 1px; }
 
-    .embed-container { height: 600px; border-radius: 12px; overflow: hidden; background: #fff; margin-top: 15px; }
+    .embed-container { height: 650px; border-radius: 12px; overflow: hidden; background: #fff; margin-top: 15px; }
     iframe { width: 100%; height: 100%; border: none; }
     
+    label { display: block; margin-top: 20px; font-weight: 700; font-size: 15px; }
     textarea {
-      width: 100%; min-height: 100px; padding: 12px; border-radius: 12px;
-      background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);
-      color: #fff; margin: 10px 0; font-family: inherit;
+      width: 100%; min-height: 110px; padding: 14px; border-radius: 12px;
+      background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; margin: 8px 0; font-family: inherit; font-size: 15px;
     }
     .btn-post {
-      background: var(--accent); color: #071018; border: none;
-      padding: 12px 24px; border-radius: 12px; font-weight: 800; cursor: pointer;
+      background: var(--accent); color: #071018; border: none; width: 100%;
+      padding: 14px; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 16px;
     }
-    .posts { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
-    .post { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
-    .post b { color: var(--accent); }
+    .posts { margin-top: 25px; display: flex; flex-direction: column; gap: 12px; }
+    .post { background: rgba(255,255,255,0.03); padding: 18px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); }
+    .post b { color: var(--accent); font-size: 14px; }
   </style>
 </head>
 
@@ -157,48 +165,54 @@
 
   <main class="page">
     <section class="hero">
-      <div class="prize-tag">RAFFLE: WIN $100</div>
-      <h1 class="h1">Give Back to the Ocean</h1>
-      <p>Enter our raffle to win <b>$25 for yourself</b> and <b>$75 for an ocean-related non-profit of YOUR choice.</b></p>
+      <div class="prize-tag">$100 Raffle Entry</div>
+      <h1 class="h1">Take Action & Give Back</h1>
+      <p>If you win, you get <b>$25</b> and we donate <b>$75</b> to the ocean non-profit of <b>YOUR CHOICE!</b></p>
       
       <div class="must-do">
-        <b style="color: var(--accent);">⚠️ YOU MUST DO BOTH STEPS TO WIN:</b><br>
-        1. Fill out the Google Form (Private) <br>
-        2. Post on the Community Board (Public)
+        <h3 style="margin:0 0 10px 0;">📋 ENTRY REQUIREMENTS:</h3>
+        <p style="margin:0; font-size:16px;">
+          To be eligible, you must: <br>
+          <b>1. Fill out the Google Form</b> (Step 1) <br>
+          <b>2. Scroll down and post on the board</b> (Step 2)
+        </p>
       </div>
     </section>
 
     <div class="grid">
       <section class="card">
-        <span class="step-num">Step 1</span>
-        <h2 style="margin: 0 0 10px;">Contact Information</h2>
-        <p style="font-size: 15px; opacity: 0.8;">Fill this out so we can contact you if you win. Your info stays private.</p>
+        <span class="step-label">Step 1 — Private</span>
+        <h2 style="margin: 5px 0 10px;">Raffle Contact Form</h2>
+        <p style="font-size: 15px; opacity: 0.8;">Submit your email/phone so we can notify you if you win.</p>
         
         <div class="embed-container">
           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfSu8xkk7Nb-C-0afV3mv4cz_t2J2_ZfzQOeq51Byf_ouj3-g/viewform?embedded=true">Loading…</iframe>
         </div>
         
-        <p style="text-align: center; margin-top: 15px; font-weight: 700; color: var(--accent);">
-          ⬇️ Finished? Scroll down to Step 2 ⬇️
-        </p>
+        <div style="text-align: center; margin-top: 20px; background: rgba(120,190,255,0.1); padding: 10px; border-radius: 10px;">
+          <p style="font-weight: 800; color: var(--accent); margin:0;">
+            ✅ Done with the form? <br>
+            Scroll down to finalize your entry! ⬇️
+          </p>
+        </div>
       </section>
 
       <section class="card">
-        <span class="step-num">Step 2</span>
-        <h2 style="margin: 0 0 10px;">Community Board</h2>
-        <p style="font-size: 15px; opacity: 0.8;">Post your entry here to finalize your raffle spot!</p>
+        <span class="step-label">Step 2 — Public</span>
+        <h2 style="margin: 5px 0 10px;">Discussion Board</h2>
+        <p style="font-size: 15px; opacity: 0.8;">Share a fact and pick your organization to complete your entry!</p>
 
-        <label style="font-size: 14px; font-weight: 700;">1. Share one ocean acidification fact:</label>
-        <textarea id="fact" placeholder="Example: Shellfish struggle to build shells in acidic water..."></textarea>
+        <label>1. Share one fact about ocean acidification:</label>
+        <textarea id="fact" placeholder="e.g. It impacts coral reef growth..."></textarea>
 
-        <label style="font-size: 14px; font-weight: 700;">2. Which Ocean Non-Profit should get the $75?</label>
-        <textarea id="action" placeholder="Name the organization and why you chose them..."></textarea>
+        <label>2. Which ocean non-profit should get the $75?</label>
+        <textarea id="action" placeholder="Name the non-profit you want us to support if you win..."></textarea>
 
-        <button class="btn-post" id="postBtn">Post My Entry</button>
-        <div id="status" style="margin-top:10px; font-size:14px; color:var(--accent);"></div>
+        <button class="btn-post" id="postBtn">Submit My Entry</button>
+        <div id="status" style="margin-top:10px; font-size:14px; text-align:center;"></div>
 
-        <div style="margin-top: 30px;">
-          <h3 style="font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Recent Entries</h3>
+        <div style="margin-top: 40px;">
+          <h3 style="font-size: 18px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">Recent Raffle Entries</h3>
           <div class="posts" id="posts"></div>
         </div>
       </section>
@@ -229,32 +243,34 @@
     postBtn.addEventListener("click", async () => {
       const fact = factEl.value.trim();
       const action = actionEl.value.trim();
-      if (fact.length < 5 || action.length < 5) {
-        document.getElementById("status").textContent = "Please fill out both fields!";
+      if (fact.length < 3 || action.length < 3) {
+        document.getElementById("status").style.color = "#ff8c8c";
+        document.getElementById("status").textContent = "Please answer both questions to enter!";
         return;
       }
       postBtn.disabled = true;
       try {
         await addDoc(collection(db, "raffle_posts"), { 
-            alias: "Member-" + Math.floor(1000 + Math.random() * 9000), 
+            alias: "OceanGuard-" + Math.floor(1000 + Math.random() * 9000), 
             fact, 
             action, 
             timestamp: Date.now() 
         });
         factEl.value = ""; actionEl.value = "";
-        document.getElementById("status").textContent = "Entry Posted! Good luck!";
+        document.getElementById("status").style.color = "#78beff";
+        document.getElementById("status").textContent = "Entry Submitted! Good luck!";
       } catch (e) {
-        document.getElementById("status").textContent = "Error. Try again!";
+        document.getElementById("status").textContent = "Error. Please try again!";
       } finally { postBtn.disabled = false; }
     });
 
     onSnapshot(collection(db, "raffle_posts"), (snap) => {
-      const docs = snap.docs.sort((a,b) => (b.data().timestamp || 0) - (a.data().timestamp || 0)).slice(0, 10);
+      const docs = snap.docs.sort((a,b) => (b.data().timestamp || 0) - (a.data().timestamp || 0)).slice(0, 15);
       postsEl.innerHTML = docs.map(d => `
         <div class="post">
           <b>${d.data().alias}</b>
-          <div style="font-size:14px; margin-top:5px;">Fact: ${d.data().fact}</div>
-          <div style="font-size:14px; margin-top:5px; color:var(--accent);">Choice: ${d.data().action}</div>
+          <div style="font-size:14px; margin-top:8px;"><b>Fact:</b> ${d.data().fact}</div>
+          <div style="font-size:14px; margin-top:8px; color:var(--accent);"><b>Their Non-Profit:</b> ${d.data().action}</div>
         </div>
       `).join('');
     });
